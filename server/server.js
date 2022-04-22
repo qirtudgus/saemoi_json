@@ -10,7 +10,11 @@ db.connect((err) => {
   console.log('MySQL Connected!!!');
 }); // 오류해결 https://www.inflearn.com/questions/3637
 
-app.use(cors());
+app.use(
+  cors({
+    credentials: true,
+  }),
+);
 app.use(express.json());
 
 //머스트잇 router
@@ -25,7 +29,7 @@ app.use('/api/oliveyoungApiData', oliveyoung);
 const aland = require('./routes/aland_router');
 app.use('/api/alandApiData', aland);
 
-//통합 댓글 비밀번호와 브랜드명 확인 후 삭제 api
+//공통api 댓글 비밀번호와 브랜드명 확인 후 삭제진행
 app.post('/api/comment_password_check', (req, res) => {
   const idx = req.body.idx;
   const password = req.body.hash;
