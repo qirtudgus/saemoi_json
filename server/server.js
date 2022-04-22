@@ -13,36 +13,9 @@ db.connect((err) => {
 app.use(cors());
 app.use(express.json());
 
-// const mustit = require('./mustit/mustit_router');
-// app.use('/api/mustitApiData', mustit);
-
-//머스트잇 댓글 가져오기
-app.get('/api/mustitApiData/comment', function (req, res) {
-  const sqlQuery = 'SELECT * FROM mustit_comment;';
-  db.query(sqlQuery, (err, result) => {
-    res.send(result);
-  });
-});
-
-//머스트잇 댓글 api 전송하기
-app.post('/api/mustitApiData/comment/post', function (req, res) {
-  const date = req.body.submitDate;
-  const content = req.body.value;
-  const password = req.body.hashPassword;
-  // console.log(content);
-  // console.log(date);
-  const sqlQuery =
-    'INSERT INTO mustit_comment ( date, content, password) VALUES (?,?,?)';
-  db.query(sqlQuery, [date, content, password], (err, result) => {});
-});
-
-//test api
-app.get('/api', (req, res) => {
-  const sqlQuery = 'SELECT * FROM test_table;';
-  db.query(sqlQuery, (err, result) => {
-    res.send(result);
-  });
-});
+//머스트잇 router
+const mustit = require('./mustit/mustit_router');
+app.use('/api/mustitApiData', mustit);
 
 //올리브영 받은 배열을 마이쿼리 테이블에 전송
 app.post('/api/oliveApiData/get', function (req, res) {
