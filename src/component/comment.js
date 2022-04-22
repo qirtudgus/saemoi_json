@@ -64,7 +64,9 @@ const Comment = ({ getCommentApi, postCommentApi, brandName }) => {
     const hash = sha256(delConfirm).words.join('');
     const passwordCheckValue = { idx, hash, brandName };
     axios
-      .get(`https://sungtt.com/api/comment_password_check_${brandName}`)
+      .get(
+        `https://sungtt.com/api/${brandName}ApiData/comment_password_check_${brandName}`,
+      )
       .then((res) => {
         let userInfo = res.data;
         let password = userInfo.find((i) => i.idx === idx).password;

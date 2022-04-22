@@ -22,4 +22,14 @@ router.post('/comment/post', function (req, res) {
   db.query(sqlQuery, [date, content, password], (err, result) => {});
 });
 
+//머스트잇 댓글 비밀번호 비교용 get api
+router.get('/comment_password_check_mustit', (req, res) => {
+  const idx = req.body.idx;
+  const password = req.body.hash;
+  const sqlQuery = 'SELECT * FROM mustit_comment;';
+  db.query(sqlQuery, [idx, password], (err, result) => {
+    res.send(result);
+  });
+});
+
 module.exports = router;
