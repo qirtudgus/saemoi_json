@@ -1,0 +1,81 @@
+/* https://velog.io/@dosilv/React-mountunmount-%EC%8B%9C-%EC%95%A0%EB%8B%88%EB%A9%94%EC%9D%B4%EC%85%98-%EC%A3%BC%EA%B8%B0 */
+@keyframes smoothAppear {
+  from {
+    opacity: 0;
+    transform: translateY(5%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.homeBox {
+  z-index: 1;
+  top: 0;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background-color: #fff;
+  display: flex;
+  justify-content: center;
+}
+
+.textBox {
+  animation: smoothAppear 1s;
+  position: absolute;
+  top: 200px;
+  width: 90%;
+}
+
+.textTitle {
+  color: #3e55ff;
+  font-size: 3rem;
+  font-weight: bold;
+  text-align: left;
+  padding-top: 15px;
+}
+
+.textSub {
+  font-size: 16px;
+  font-weight: bold;
+  line-height: 20px;
+  color: #333;
+  padding-top: 30px;
+  padding-bottom: 50px;
+}
+
+.textGo {
+  position: relative;
+  bottom: -50px;
+  border-radius: 10px;
+
+  font-size: 20px;
+  width: 100%;
+  max-width: 550px;
+  height: 45px;
+  background-color: #3e55ff;
+  text-align: center;
+  line-height: 45px;
+  font-weight: bold;
+  color: #fff;
+  margin-bottom: 10px;
+}
+
+.goBtn {
+  font-size: 25px;
+  font-weight: bold;
+  cursor: pointer;
+  width: 100px;
+  height: 100px;
+  border-radius: 100px;
+  border: none;
+  background-color: greenyellow;
+  top: 500px;
+  position: fixed;
+  z-index: 2;
+}
+.Link_a {
+  display: block;
+  color: #fff;
+}

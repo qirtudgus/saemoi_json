@@ -1,0 +1,289 @@
+
+header {
+    width: 100%;
+    height: 60px;
+    display: block;
+    color: #333;
+    
+}
+
+.headerWrap {
+    height: 60px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 10;
+    width: 100%;
+    transition:top 0.3s ease;
+    background-color: #fff;
+    box-shadow: 0px 5px 3px rgba(0,0,0, 0.1);
+    font-size: 40px;
+    font-weight: bold;
+    letter-spacing: -3px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+.headerWrap.hide {
+    top:-60px;
+    /* pointer-events : none; 메뉴바 숨겨질 시 커서방지해서 서브메뉴 사라지게 */
+    /* transform: translateY(-60px); */
+}
+
+
+.headerContent{
+    width: calc(100% - 11rem);
+    margin: 0 auto 0 auto;
+}
+
+.logoBtnBox{
+    display: flex;
+    align-items: center;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    width: 100%;
+    height: 60px;
+}
+
+
+.btnHome {
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+
+}
+.btnHome img{
+    width: 100%;
+    height: 100%;
+}
+
+
+.logo img {
+    width: 100%;
+}
+.logo {
+    display: flex;
+    width: 100px;
+}
+
+.pcMenu{
+    position: relative;
+    font-size: 1rem;
+    letter-spacing: -0.05rem;
+    flex-grow: 0.9;
+
+
+
+}
+.pcMenuBox{
+    display: flex;
+}
+
+.pcMainMenu{
+    position: relative;;
+}
+
+.pcMainMenu a.active{
+    color: #3e55ff;
+    font-weight: bold;
+}
+
+
+.pcMenuBox > li {
+    text-align: center;
+    padding-left: 30px;
+    height: 60px;
+    line-height: 60px;
+}
+
+.pcMenuBox > li:hover{
+    color: #3e55ff;
+}
+
+.pcMenuBox > li:hover .pcSubMenu{
+    display: block;
+    color: #333;
+}
+
+.pcSubMenu{
+    width: 300px;
+    height: 300px;
+    background-color: #fff;
+    display: none;
+    width: 300px;
+    position: absolute;
+    left: 0;
+    padding-top: 1rem;
+    border-radius: 10px;
+
+    box-shadow: 0 0 10px #bbb;
+
+}
+
+
+
+.pcSubMenu img{
+    width: 23px;
+    position: absolute;
+    top: -13px;
+    left: 35px;
+    filter: drop-shadow(0px -8px 4px #ddd);
+
+}
+
+
+.pcSubMenu li{
+    padding: 0 0 0 30px;
+    text-align: left;
+    font-weight: normal;
+    
+}
+
+.pcSubMenu li:hover{
+    color: #3e55ff;
+    font-size: 1.1rem;
+    font-weight: bold;
+}
+
+
+
+.headerSlide {    
+    overflow-y: scroll;
+    font-size: 20px;
+    font-weight: bold;
+    touch-action: none;
+    position: fixed;
+    padding-top: 50px;
+    right: 0;
+    z-index: 2;
+    width: 58%;
+    height: 100%;
+    background-color: #FFFAFA;
+}
+
+.headerSlide a {
+    display: block;
+}
+.headerSlide.active {
+    right: 0%;
+    transition: right 0.4s;
+}
+
+.headerSlide.hide {
+    right: -58%;
+    transition: right 0.4s;
+}
+
+.headerSlide > ul{
+
+    cursor: pointer;
+    padding: 50px 0 0 0;
+}
+.headerSlide > ul li {
+
+    line-height: 50px;
+    padding-left: 20px;
+}
+
+.MsubMenu.active{
+    display: block;
+}
+
+.MsubMenu.hide{
+    display: none;
+}
+
+
+.MsubMenu li{
+    cursor: pointer;
+padding-left: 1rem !important;
+background-color: #FFFAFA;
+color:#3e55ff ;
+font-size: 1.1rem;
+}
+
+.menuArrow{
+    width: 25px;
+    position: relative;
+    top: 4px;
+    margin-left: 5px;
+}
+
+.headerSubSlide {
+    touch-action: none;
+    width: 58%;
+    height: 60px;
+    background-color: #3e55ff;
+    display: block;
+    position: fixed;
+    right: 0;
+    top: 0;
+    z-index: 10;
+
+}
+
+
+.headerSubSlide.active {
+    right: 0%;
+    transition: right 0.4s;
+}
+.headerSubSlide.hide{
+    right: -58%;
+    transition: right 0.4s;
+}
+
+.viewEvent {
+    font-size: 17px;
+    padding: 8px;
+    border-radius: 5px;
+    position: fixed;
+    z-index:100;
+    background-color: #143ce2;
+    color: white;
+    bottom: 10px;
+    right: 10px;
+}
+
+@media (min-width:768px){
+    .btnHome{display: none;}
+    .headerSlide{display: none;}
+
+}
+
+@media (max-width:1919px) {
+    .headerContent {
+        width: 1376px;
+    }
+    .headerSlide{
+        width: 35%;
+    }
+}
+
+@media  (max-width:1440px) {
+    .headerContent {
+        width: 1024px;
+    }
+    
+}
+
+
+@media (max-width:1056px) {
+
+    .headerContent {
+        width: calc(100% - 2rem);
+    }
+
+
+}
+
+@media (max-width:767px){
+    .pcMenuBox{
+        display: none;
+    }
+    .headerSlide{
+        width: 58%;
+    }
+    .btnHome{
+        display: block;
+    }
+    
+}

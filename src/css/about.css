@@ -1,0 +1,21 @@
+.aboutBox {
+    width: 100%;
+    margin: 0 auto;
+    max-width: 700px;
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+.aboutBox h1 {
+    padding: 1rem 2rem 0 2rem;
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.aboutBox img {
+    margin-top: 10%;
+    width: 70%;
+}
