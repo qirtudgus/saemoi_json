@@ -81,4 +81,14 @@ router.post('/end', (req, res) => {
   });
 });
 
+//에이랜드 댓글 비밀번호 비교용 get api
+router.get('/comment_password_check_aland', (req, res) => {
+  const idx = req.body.idx;
+  const password = req.body.hash;
+  const sqlQuery = 'SELECT * FROM aland_comment;';
+  db.query(sqlQuery, [idx, password], (err, result) => {
+    res.send(result);
+  });
+});
+
 module.exports = router;
