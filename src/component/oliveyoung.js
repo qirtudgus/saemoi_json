@@ -21,54 +21,45 @@ const Oliveyoung = () => {
   }
 
   //올리브영의 새로운 배열을 생성하여 리턴
-  function getNewOliveData() {
-    return Axios.get(
+  async function getNewOliveData() {
+    const html = await Axios.get(
       'https://www.oliveyoung.co.kr/store/main/getEventList.do',
-    ).then((html) => {
-      let titleList = [];
-      let dateList = [];
-      let imgList = [];
-      let linkList = [];
-      let eventList = [];
-
-      const $ = cheerio.load(html.data);
-      const title = $('div.event_tab_cont ul.event_thumb_list li p.evt_tit');
-      const date = $('div.event_tab_cont ul.event_thumb_list li p.evt_date');
-      const img = $('ul.event_thumb_list li a').children('img');
-      const link = $('ul.event_thumb_list li input[name=urlInfo]');
-
-      title.each(function (i) {
-        titleList[i] = {
-          title: $(this).text(),
-        };
-      });
-
-      date.each(function (i) {
-        dateList[i] = {
-          date: $(this).text(),
-        };
-      });
-
-      img.each(function (i) {
-        imgList[i] = {
-          img: $(this).attr('data-original'),
-        };
-      });
-
-      link.each(function (i) {
-        linkList[i] = {
-          link: 'https://www.oliveyoung.co.kr/store/' + $(this).attr('value'),
-        };
-      });
-
-      eventList = titleList
-        .map((item, i) => ({ ...item, ...dateList[i] }))
-        .map((item, i) => ({ ...item, ...imgList[i] }))
-        .map((item, i) => ({ ...item, ...linkList[i] }));
-
-      // setEventData([...eventList]);
-      return eventList;
+    );
+    let titleList = [];
+    let dateList = [];
+    let imgList = [];
+    let linkList = [];
+    let eventList = [];
+    const $ = cheerio.load(html.data);
+    const title = $('div.event_tab_cont ul.event_thumb_list li p.evt_tit');
+    const date = $('div.event_tab_cont ul.event_thumb_list li p.evt_date');
+    const img = $('ul.event_thumb_list li a').children('img');
+    const link = $('ul.event_thumb_list li input[name=urlInfo]');
+    title.each(function (i) {
+      titleList[i] = {
+        title: $(this).text(),
+      };
     });
+    date.each(function (i_1) {
+      dateList[i_1] = {
+        date: $(this).text(),
+      };
+    });
+    img.each(function (i_2) {
+      imgList[i_2] = {
+        img: $(this).attr('data-original'),
+      };
+    });
+    link.each(function (i_3) {
+      linkList[i_3] = {
+        link: 'https://www.oliveyoung.co.kr/store/' + $(this).attr('value'),
+      };
+    });
+    eventList = titleList
+      .map((item, i_4) => ({ ...item, ...dateList[i_4] }))
+      .map((item_1, i_5) => ({ ...item_1, ...imgList[i_5] }))
+      .map((item_2, i_6) => ({ ...item_2, ...linkList[i_6] }));
+    return eventList;
   }
 
   useEffect(() => {

@@ -1,5 +1,6 @@
 import axios from 'axios';
 import sha256 from 'crypto-js/sha256';
+import Footer from './footer';
 // import cryptoJs from "crypto-js";
 import React, { useEffect, useState, useRef } from 'react';
 
@@ -116,7 +117,7 @@ const Comment = ({ getCommentApi, postCommentApi, brandName }) => {
           <textarea
             maxLength={60}
             className='comm_area'
-            placeholder='댓글을 입력해주세요.'
+            placeholder='댓글을 입력해주세요.(최대60자)'
             ref={commentContent}
           />
           <div className='input_inbox'>
@@ -135,6 +136,7 @@ const Comment = ({ getCommentApi, postCommentApi, brandName }) => {
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 };

@@ -1,0 +1,122 @@
+.categoryBox {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  background-color: #eee;
+  list-style-type: none;
+}
+
+.categoryArea {
+  position: relative;
+  height: 100%;
+  background-color: #fff;
+}
+
+.mainList {
+  overflow: hidden auto;
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  bottom: 0px;
+  width: 100px;
+  height: 100%;
+  text-align: center;
+  scroll-behavior: smooth;
+  background-color: rgb(238, 238, 238);
+}
+.mainList ul {
+  display: block;
+  padding-bottom: 200px;
+}
+
+.mainList > ul > li {
+  display: block;
+  cursor: pointer;
+  width: 100%;
+  height: 100px;
+  padding: 20px 0px 0px;
+  font-size: 0.9rem;
+  text-align: center;
+  border-radius: 0px;
+  line-height: normal;
+  background-color: rgb(238, 238, 238);
+}
+
+.mainList > ul > li.active {
+  background-color: #fff;
+}
+
+.mainList > ul > a {
+  display: block;
+  width: 100%;
+  height: 100px;
+  padding: 20px 0px 0px;
+  font-size: 13px;
+  text-align: center;
+  border-radius: 0px;
+  line-height: normal;
+  background-color: rgb(238, 238, 238);
+}
+
+.categoryBox > ul > li {
+  height: 100px;
+}
+
+.categoryBox > ul > a {
+  display: block;
+  height: 100px !important;
+}
+
+.categoryMenu {
+  display: block;
+}
+
+.categoryMenu.active {
+  display: block;
+}
+.mainListIcon img {
+  width: 35px;
+}
+.categoryMap {
+  overflow: hidden auto;
+  position: absolute;
+  inset: 0px 0px 0px 100px;
+  padding: 8px 20px 10px;
+}
+.subMenuList {
+  height: 50px;
+  line-height: 50px;
+  font-size: 1.2rem;
+}
+.categoryMapHeader {
+  position: relative;
+  font-size: 2rem;
+  font-weight: bold;
+  text-align: center;
+  color: #fff;
+  background-color: #3e55ff;
+  width: 100%;
+  height: 100px;
+}
+.categoryMapHeader span {
+  display: block;
+  padding-top: 30px;
+}
+.categoryContainer {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+}
+
+.goback {
+  position: fixed;
+  z-index: 10000;
+  border-radius: 50px;
+  width: 50px;
+  height: 50px;
+  background-color: rgba(0, 0, 0, 0.2);
+  bottom: 10%;
+  left: 2%;
+}

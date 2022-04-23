@@ -1,0 +1,118 @@
+.footerBox {
+  border-top: 1px solid rgb(238, 238, 238);
+  background: rgb(249, 250, 251);
+  position: fixed;
+  bottom: 0;
+  left: 0px;
+  right: 0px;
+  z-index: 10000;
+}
+.footerBar {
+  display: flex;
+  justify-content: space-around;
+}
+.footerBar > a {
+  position: relative;
+  display: block;
+  flex: 1 1 0%;
+  padding: 10px 0px;
+  height: 60px;
+  color: rgb(68, 68, 68);
+  text-align: center;
+  font-size: 0.8rem;
+}
+
+.footerBar > a.active::before {
+  content: '';
+  position: absolute;
+  left: 0px;
+  top: -1px;
+  right: 0px;
+  height: 4px;
+  border-radius: 1px;
+  background-color: #3e55ff;
+}
+
+.footerBar p {
+  margin-top: 7px;
+}
+
+.footerBar .navCategory .navIcon {
+  display: block;
+  margin: 0 auto;
+  background: url('../img/footerSprite.png') no-repeat -24px -29px;
+  width: 26px;
+  height: 26px;
+}
+
+.footerBar .navCategory.active .navIcon {
+  display: block;
+  margin: 0 auto;
+  background: url('../img/footerSprite.png') no-repeat -65px -29px;
+  width: 26px;
+  height: 26px;
+}
+
+.footerBar .navHome .navIcon {
+  display: block;
+  margin: 0 auto;
+  background: url('../img/footerSprite.png') no-repeat -108px -82px;
+  width: 26px;
+  height: 26px;
+}
+
+.footerBar .navHome.active .navIcon {
+  display: block;
+  margin: 0 auto;
+  background: url('../img/footerSprite.png') no-repeat -145px -82px;
+  width: 26px;
+  height: 26px;
+}
+
+.footerBar .navComment .navIcon {
+  display: block;
+  margin: 0 auto;
+  background: url('../img/footerSprite.png') no-repeat -25px -78px;
+  width: 26px;
+  height: 26px;
+}
+
+.footerBar .navComment.active .navIcon {
+  display: block;
+  margin: 0 auto;
+  background: url('../img/footerSprite.png') no-repeat -66px -79px;
+  width: 26px;
+  height: 26px;
+}
+
+.footerBar .navWrite .navIcon {
+  display: block;
+  margin: 0 auto;
+  background: url('../img/footerSprite.png') no-repeat -106px -31px;
+  width: 26px;
+  height: 26px;
+}
+
+.footerBar .navWrite.active .navIcon {
+  display: block;
+  margin: 0 auto;
+  background: url('../img/footerSprite.png') no-repeat -143px -32px;
+  width: 26px;
+  height: 26px;
+}
+
+.footerBar .navMyPage .navIcon {
+  display: block;
+  margin: 0 auto;
+  background: url('../img/footerSprite.png') no-repeat -24px -123px;
+  width: 26px;
+  height: 26px;
+}
+
+.footerBar .navMyPage.active .navIcon {
+  display: block;
+  margin: 0 auto;
+  background: url('../img/footerSprite.png') no-repeat -67px -124px;
+  width: 26px;
+  height: 26px;
+}

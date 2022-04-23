@@ -41,5 +41,5 @@ app.post('/api/comment_password_check', (req, res) => {
 });
 
 app.listen(PORT, () => {
-  console.log(`3001 열림`);
+  console.log(`${PORT}열림`);
 });
