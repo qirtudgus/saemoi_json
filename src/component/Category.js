@@ -1,5 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import React, { useState } from 'react';
 import '../css/Category.css';
 import drugStore from '../img/drugStore.svg';
 import clothes from '../img/clothes.svg';

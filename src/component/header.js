@@ -2,11 +2,11 @@ import React, { useState, useEffect, useRef } from 'react';
 import logoSVG from '../img/saemoiSVG2.svg';
 import { Link, NavLink, Outlet } from 'react-router-dom';
 import '../css/header.css';
-import menu from '../img/menu_black.svg';
-import close from '../img/close_black.svg';
+// import menu from '../img/menu_black.svg';
+// import close from '../img/close_black.svg';
 import triangle from '../img/whiteArrow0.svg';
-import downArrow from '../img/downArrow.png';
-import upArrow from '../img/upArrow.png';
+// import downArrow from '../img/downArrow.png';
+// import upArrow from '../img/upArrow.png';
 const throttle = function (callback, waitTime) {
   let timerId = null;
   return (e) => {
@@ -20,10 +20,10 @@ const throttle = function (callback, waitTime) {
 
 const Header = () => {
   const [visible, setVisible] = useState(false);
-  const [activeSubMenu1, setActiveSubMenu1] = useState(false);
-  const [activeSubMenu2, setActiveSubMenu2] = useState(false);
-  const [activeSubMenu3, setActiveSubMenu3] = useState(false);
-  const [activeSubMenu4, setActiveSubMenu4] = useState(false);
+  // const [activeSubMenu1, setActiveSubMenu1] = useState(false);
+  // const [activeSubMenu2, setActiveSubMenu2] = useState(false);
+  // const [activeSubMenu3, setActiveSubMenu3] = useState(false);
+  // const [activeSubMenu4, setActiveSubMenu4] = useState(false);
 
   const [hide, setHide] = useState(false);
   const [pageY, setPageY] = useState(0);
@@ -48,34 +48,34 @@ const Header = () => {
       documentRef.current.removeEventListener('scroll', throttleScroll);
   }, [pageY]);
 
-  const toggleMenu = () => {
-    setVisible((visible) => !visible);
-  };
+  // const toggleMenu = () => {
+  //   setVisible((visible) => !visible);
+  // };
 
-  const changeMenu = (e) => {
-    setVisible(false);
-  };
+  // const changeMenu = (e) => {
+  //   setVisible(false);
+  // };
 
-  const subMenuClick1 = (e) => {
-    setActiveSubMenu1((activeSubMenu1) => !activeSubMenu1);
-  };
-  const subMenuClick2 = (e) => {
-    setActiveSubMenu2((activeSubMenu2) => !activeSubMenu2);
-  };
-  const subMenuClick3 = (e) => {
-    setActiveSubMenu3((activeSubMenu3) => !activeSubMenu3);
-  };
-  const subMenuClick4 = (e) => {
-    setActiveSubMenu4((activeSubMenu3) => !activeSubMenu3);
-  };
+  // const subMenuClick1 = (e) => {
+  //   setActiveSubMenu1((activeSubMenu1) => !activeSubMenu1);
+  // };
+  // const subMenuClick2 = (e) => {
+  //   setActiveSubMenu2((activeSubMenu2) => !activeSubMenu2);
+  // };
+  // const subMenuClick3 = (e) => {
+  //   setActiveSubMenu3((activeSubMenu3) => !activeSubMenu3);
+  // };
+  // const subMenuClick4 = (e) => {
+  //   setActiveSubMenu4((activeSubMenu3) => !activeSubMenu3);
+  // };
 
-  const joinSubMenu = (e) => {
-    setVisible(false);
-    setActiveSubMenu1(false);
-    setActiveSubMenu2(false);
-    setActiveSubMenu3(false);
-    setActiveSubMenu4(false);
-  };
+  // const joinSubMenu = (e) => {
+  //   setVisible(false);
+  //   setActiveSubMenu1(false);
+  //   setActiveSubMenu2(false);
+  //   setActiveSubMenu3(false);
+  //   setActiveSubMenu4(false);
+  // };
 
   return (
     <>

@@ -1,7 +1,5 @@
 import sae from '../img/sae.svg';
 import '../css/about.css';
-import axios from 'axios';
-import { useEffect, useState } from 'react';
 import Footer from './footer';
 
 const About = () => {

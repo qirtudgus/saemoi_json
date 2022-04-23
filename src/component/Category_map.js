@@ -1,7 +1,5 @@
 import { Link } from 'react-router-dom';
-import CategoryClother from './CategoryClother';
 import '../css/Category.css';
-import CategoryDrugStore from './CategoryDrugStore';
 
 const Category_map = ({ subMenu }) => {
   return (
