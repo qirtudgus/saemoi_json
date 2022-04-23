@@ -162,7 +162,7 @@ const Header = () => {
                     <ul className='pcSubMenu'>
                       <div className='triangle'></div>
                       <img src={triangle} alt='menu'></img>
-                      <Link to='/sorry'>
+                      <Link to='/store/lotteon'>
                         <li>롯데백화점</li>
                       </Link>
                       <Link to='/sorry'>

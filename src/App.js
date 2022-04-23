@@ -10,6 +10,7 @@ import NotReady from './component/notReady';
 import Aland from './component/aland';
 import Footerbar from './component/Footerbar';
 import Category from './component/Category';
+import LotteOn from './component/LotteOn';
 import Layout from './component/Layout';
 import Footer from './component/footer';
 function App() {
@@ -24,6 +25,7 @@ function App() {
           <Route path='/clothes/mustit' element={<Mustit />} />
           <Route path='/about' element={<About />} />
           <Route path='/sorry' element={<NotReady />} />
+          <Route path='/store/lotteon' element={<LotteOn />} />
         </Route>
         <Route path='/category' element={<Category />} />
       </Routes>
