@@ -307,3 +307,10 @@ body {
 .main {
   min-height: calc(100vh - 180px);
 }
+
+.login {
+  width: 500px;
+  height: 50px;
+  position: fixed;
+  z-index: 40000;
+}
