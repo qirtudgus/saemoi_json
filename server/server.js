@@ -104,6 +104,10 @@ app.post("/api/middlewere", (req, res) => {
   res.send(req.authorization);
 });
 
+app.post("/tokenCheck", (req, res) => {
+  res.send(req.authorization);
+});
+
 app.listen(PORT, () => {
   console.log(`${PORT}열림`);
 });

@@ -96,8 +96,6 @@ router.post("/login", (req, res) => {
   db.query(loginQuery, [id, password], function (err, rows, fields) {
     let user = {};
     user.auth = false;
-    user.falseMessage = "없는 아이디입니다. 아이디를 확인해 주세요!";
-    user.trueMessage = "계정 확인 완료 로그인 성공!";
     // db조회값이 없을 시
     if (rows[0] === undefined) {
       console.log("없는 계정으로 로그인 시도");
