@@ -45,6 +45,11 @@ function App() {
       console.log(res.data);
     });
   };
+  const middlewere2 = () => {
+    axios.post('http://localhost:3001/api/authApiData/middle').then((res) => {
+      console.log(res.data);
+    });
+  };
 
   return (
     <>
@@ -69,6 +74,9 @@ function App() {
       </button>
       <button className='login2' onClick={middlewere}>
         미들웨어
+      </button>
+      <button className='login3' onClick={middlewere2}>
+        라우팅 미들웨어
       </button>
       <Footerbar />
     </>

@@ -42,6 +42,11 @@ const SECRET_TOKEN = process.env.SECRET_TOKEN;
 //   tokenCheck();
 // });
 
+//라우팅 미들웨어
+router.post('/middle', (req, res) => {
+  console.log(`라우팅한 미들웨어 확인 ${jwtDecode(req.authorization).userId}`);
+});
+
 //회원가입
 router.post('/join', (req, res) => {
   console.log('회원가입 정상 통신');
