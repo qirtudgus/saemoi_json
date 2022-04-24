@@ -65,5 +65,4 @@ const tokenVerify = async (targetToken) => {
     }
   });
 };
-
 module.exports = tokenVerify;

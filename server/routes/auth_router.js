@@ -5,21 +5,42 @@ const jwt = require('jsonwebtoken');
 const { default: jwtDecode } = require('jwt-decode');
 const crypto = require('crypto-js');
 const SECRET_TOKEN = process.env.SECRET_TOKEN;
-const tokenVerify = require('../../src/component/auth/tokenVerify');
 
-//토큰 유효성 검사
-router.post('/tokenVerify', (req, res) => {
-  const token = req.headers.authorization;
-  const newToken = tokenVerify(token);
-
-  console.log('===server// 3단계 유효성 검사를 하고 받아온 토큰입니다. ===');
-  console.log(newToken); // undifined
-  // res에 새로 발급한 토큰을 넣어야한다....
-  tokenVerify(token).then((token) => {
-    console.log(token);
-  });
-  //   res.send(newToken); // undifined
-});
+// 토큰 유효성 검사
+// router.post('/tokenVerify', (req, res) => {
+//   const tokenCheck = async () => {
+//     if (req.headers.authorization) {
+//       const token = jwtDecode(req.headers.authorization);
+//       const accessToken = token.accessToken;
+//       const { userId } = token;
+//       try {
+//         jwt.verify(accessToken, SECRET_TOKEN, (error, decoded) => {
+//           if (error) {
+//             console.log('만료된 액세스토큰입니다. 토큰을 재발급합니다.');
+//             let user = {};
+//             const accessToken = jwt.sign({ userId: userId }, SECRET_TOKEN, {
+//               expiresIn: '10s',
+//             });
+//             const refreshToken = jwt.sign(
+//               { userId: userId, accessToken },
+//               SECRET_TOKEN,
+//               { expiresIn: '1d' },
+//             );
+//             user.refreshToken = refreshToken;
+//             user.auth = true;
+//             res.send(user);
+//           }
+//           if (decoded) {
+//             console.log('유효한 액세스토큰');
+//           }
+//         });
+//       } catch (err) {
+//         console.log(err);
+//       }
+//     }
+//   };
+//   tokenCheck();
+// });
 
 //회원가입
 router.post('/join', (req, res) => {

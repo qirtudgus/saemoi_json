@@ -314,3 +314,10 @@ body {
   position: fixed;
   z-index: 40000;
 }
+.login2 {
+  top: 150px;
+  width: 500px;
+  height: 50px;
+  position: fixed;
+  z-index: 40000;
+}

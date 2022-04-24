@@ -20,7 +20,12 @@ const Login = () => {
     axios
       .post('http://localhost:3001/api/authApiData/tokenVerify')
       .then((res) => {
-        console.log(res);
+        console.log(res.data);
+        console.log(jwtDecode(res.data.refreshToken));
+        const token = res.data.refreshToken;
+        localStorage.removeItem('token');
+        localStorage.setItem('token', res.data.refreshToken);
+        axios.defaults.headers.common['Authorization'] = `${token}`; //앞으로 api통신에 토큰이 들어가있음
       });
   }, []);
 

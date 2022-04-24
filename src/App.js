@@ -32,8 +32,18 @@ function App() {
     }
   }, []);
 
+  // useEffect(() => {
+  //   axios.post('http://localhost:3001/api/tokenCheck');
+  // }, []);
+
   const goLogin = () => {
     navigate('/login');
+  };
+
+  const middlewere = () => {
+    axios.post('http://localhost:3001/api/middlewere').then((res) => {
+      console.log(res.data);
+    });
   };
 
   return (
@@ -56,6 +66,9 @@ function App() {
       {/* <Footer /> */}
       <button className='login' onClick={goLogin}>
         로그인
+      </button>
+      <button className='login2' onClick={middlewere}>
+        미들웨어
       </button>
       <Footerbar />
     </>
