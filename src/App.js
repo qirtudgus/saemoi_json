@@ -17,6 +17,7 @@ import React, { useEffect, useState } from "react";
 import jwtDecode from "jwt-decode";
 import axios from "axios";
 import MyPage from "./component/MyPage";
+import PasswordChange from "./component/auth/PasswordChange";
 
 export const UserInfo = React.createContext();
 
@@ -98,6 +99,7 @@ function App() {
           <Route path="/category" element={<Category />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/auth/passwordchange" element={<PasswordChange />} />
           <Route path="/mypage" element={<MyPage />} />
         </Routes>
         {/* <Footer /> */}

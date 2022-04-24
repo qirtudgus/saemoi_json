@@ -138,4 +138,28 @@ router.post("/login", (req, res) => {
   });
 });
 
+//비밀번호 변경
+router.post("/passwordChange", (req, res) => {
+  const { id, newPassword, newPasswordCheck } = req.body;
+  console.log(id);
+  console.log(newPassword);
+  console.log(newPasswordCheck);
+  const salt = crypto.lib.WordArray.random(128 / 8).toString(crypto.enc.Hex);
+  const hashPassword = crypto.HmacSHA256(newPassword, salt).toString();
+
+  const sqlQuery = ` UPDATE users SET password = ? , salt = ? WHERE id = ?`;
+  db.query(sqlQuery, [hashPassword, salt, id], function (err, rows, fields) {
+    console.log(rows);
+  });
+
+  // const sqlQuery = `SELECT * FROM users WHERE id =?`;
+  // db.query(sqlQuery, [id], function (err, rows, fields) {
+  //   const dbSalt = rows[0].salt;
+
+  //   console.log(rows);
+  // });
+
+  res.send("통신");
+});
+
 module.exports = router;

@@ -28,6 +28,10 @@ const MyPage = () => {
     setUserAuth({ ...userAuth, id: "hahaha" });
   };
 
+  const passwordChange = () => {
+    navigate("/auth/passwordChange");
+  };
+
   return (
     <>
       {userAuth.auth ? (
@@ -37,6 +41,7 @@ const MyPage = () => {
           <button onClick={contextSetState}>
             콘텍스트로 받은 세터함수로 변경
           </button>
+          <button onClick={passwordChange}>비밀번호 변경하기</button>
           <p>지금 당신의 토큰은! {userAuth.refreshToken}</p>
         </>
       ) : (
