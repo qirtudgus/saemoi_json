@@ -8,13 +8,13 @@ import Board from '../img/Board.svg';
 import About from '../img/About.svg';
 import { useNavigate } from 'react-router-dom';
 import CategoryMap from './Category_map';
-import { UserInfo, goLogOut } from '../App';
+import { UserInfo } from '../App';
 
 const Category = () => {
   const [currentTab, setCurrentTab] = useState(0);
   const [subMenu, setSubMenu] = useState('DrugStore');
   const navigate = useNavigate();
-  const { userAuth } = useContext(UserInfo);
+  const { userAuth, goLogOut } = useContext(UserInfo);
 
   const tabMenu = [
     { name: '드럭스토어', func: 'subMenuClick1', img: drugStore },

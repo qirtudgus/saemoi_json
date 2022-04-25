@@ -132,6 +132,7 @@ const Register = () => {
             <p>{idAuthText.text}</p>
             <p>비밀번호</p>
             <input
+              type='password'
               autocomplete='off'
               maxLength={15}
               name='password'
@@ -141,6 +142,7 @@ const Register = () => {
             <p>{passwordAuthText}</p>
             <p>비밀번호 확인</p>
             <input
+              type='password'
               autocomplete='off'
               maxLength={15}
               name='password_check'

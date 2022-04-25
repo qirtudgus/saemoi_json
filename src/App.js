@@ -19,11 +19,6 @@ import axios from 'axios';
 import MyPage from './component/MyPage';
 import PasswordChange from './component/auth/PasswordChange';
 
-export const goLogOut = () => {
-  localStorage.removeItem('token');
-  window.location.replace('/');
-};
-
 export const UserInfo = React.createContext();
 
 function App() {
@@ -32,7 +27,12 @@ function App() {
     auth: false,
     refreshToken: '',
   });
-  const userAuthContext = { userAuth, setUserAuth };
+  const goLogOut = () => {
+    localStorage.removeItem('token');
+    window.location.replace('/');
+    setUserAuth({ ...userAuth, id: '', auth: false, refreshToken: '' });
+  };
+  const userAuthContext = { userAuth, setUserAuth, goLogOut };
   const href = useLocation();
   console.log(href);
   const navigate = useNavigate();

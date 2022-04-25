@@ -2,10 +2,10 @@ import axios from 'axios';
 import jwtDecode from 'jwt-decode';
 import { useEffect, useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { UserInfo, goLogOut } from '../App';
+import { UserInfo } from '../App';
 const MyPage = () => {
   const navigate = useNavigate();
-  const { userAuth, setUserAuth } = useContext(UserInfo);
+  const { userAuth, setUserAuth, goLogOut } = useContext(UserInfo);
   const goHome = () => {
     navigate('/');
   };
@@ -38,8 +38,7 @@ const MyPage = () => {
     <>
       {userAuth.auth ? (
         <>
-          {' '}
-          <div> {userAuth.id}안녕하세요!</div>
+          <div> {userAuth.id}님</div>
           <button onClick={contextSetState}>
             콘텍스트로 받은 세터함수로 변경
           </button>

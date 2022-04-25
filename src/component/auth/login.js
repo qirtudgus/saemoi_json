@@ -15,6 +15,7 @@ const Login = () => {
 
   const [id, setId] = useState('');
   const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
 
   // useEffect(() => {
   //   axios
@@ -84,6 +85,7 @@ const Login = () => {
             <input name='id' value={id} onChange={onChangeId}></input>
             <p>비밀번호</p>
             <input
+              type='password'
               autocomplete='off'
               name='password'
               value={password}

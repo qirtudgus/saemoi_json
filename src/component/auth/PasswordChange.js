@@ -15,6 +15,12 @@ const PasswordChange = () => {
   const [isPassword, setIsPassword] = useState(false);
   const [isPasswordCheck, setIsPasswordCheck] = useState(false);
 
+  const [showPassword, setShowPassword] = useState(false);
+
+  const showPasswords = () => {
+    setShowPassword(!showPassword);
+  };
+
   const newPasswordCurrent = useRef();
 
   const onChangeInput = (e) => {
@@ -56,8 +62,9 @@ const PasswordChange = () => {
 
   return (
     <div>
-      패스워드 변겅
+      패스워드 변경
       <input
+        type={showPassword ? 'text' : 'password'}
         autocomplete='off'
         maxLength={15}
         ref={newPasswordCurrent}
@@ -67,6 +74,7 @@ const PasswordChange = () => {
       ></input>
       <p>{passwordMsg}</p>
       <input
+        type={showPassword ? 'text' : 'password'}
         autocomplete='off'
         maxLength={15}
         name='newPasswordCheck'
@@ -76,6 +84,7 @@ const PasswordChange = () => {
       <p>{passwordCheckMsg}</p>
       <p>{newPassword}</p>
       <p>{newPasswordCheck}</p>
+      <button onClick={showPasswords}>작성된 비밀번호 확인</button>
       <button
         disabled={!(isPassword && isPasswordCheck)}
         onClick={passwordChanger}
