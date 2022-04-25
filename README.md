@@ -10,6 +10,7 @@
 - Node.js express
 - AWS
 - nginx
+- Let’s Encrypt ( Socket Secure Layer 인증서)
 
 ### 데이터베이스
 - MySql
