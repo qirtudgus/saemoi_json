@@ -1,5 +1,5 @@
 import "../../css/auth.css";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import jwtDecode from "jwt-decode";
@@ -82,11 +82,17 @@ const Login = () => {
 
   const resetId = () => {
     setId("");
+    focusId.current.focus();
   };
 
   const resetPassword = () => {
     setPassword("");
+    focusPassword.current.focus();
   };
+
+  const focusId = useRef();
+  const focusPassword = useRef();
+
   return (
     <>
       <div className="login_wrap">
@@ -99,6 +105,7 @@ const Login = () => {
                   <img src={loginId} alt="id" />
                 </div>
                 <input
+                  ref={focusId}
                   name="id"
                   value={id}
                   onChange={onChangeId}
@@ -113,6 +120,7 @@ const Login = () => {
                   <img src={loginPassword} alt="id" />
                 </div>
                 <input
+                  ref={focusPassword}
                   placeholder="비밀번호"
                   type="password"
                   autocomplete="off"
