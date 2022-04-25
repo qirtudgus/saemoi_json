@@ -16,7 +16,7 @@ const Register = () => {
   const [passwordCheck, setPasswordCheck] = useState("");
 
   const [idAuthText, setIdAuthText] = useState({
-    text: "아이디는 영문과 숫자만 사용 가능합니다.(최대15자)",
+    text: "5~15자의 영문,숫자만 사용 가능합니다.",
     idAuth: null,
   });
   const [passwordAuthText, setPasswordAuthText] = useState("");
@@ -25,10 +25,10 @@ const Register = () => {
   const [isId, setIsId] = useState();
   const [isPassword, setIsPassword] = useState();
   const [isPasswordCheck, setIsPasswordCheck] = useState();
+  const regExp = /[\s|ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/g; // 영문과 숫자만 입력 가능
 
   const onChangeId = async (e) => {
-    const regExp = /[\s|ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/g; // 영문과 숫자만 입력 가능
-    e.target.value = e.target.value.replace(regExp, "");
+    // e.target.value = e.target.value.replace(regExp, "");
     setId(e.target.value);
     console.log(id);
   };
@@ -38,7 +38,13 @@ const Register = () => {
     if (id === "") {
       setIdAuthText({
         ...idAuthText,
-        text: "아이디는 영문과 숫자만 사용 가능합니다.(최대15자)",
+
+        idAuth: false,
+      });
+    } else if (regExp.test(id)) {
+      setIdAuthText({
+        ...idAuthText,
+        text: "5~15자의 영문,숫자만 사용 가능합니다.",
         idAuth: false,
       });
     } else {
@@ -77,7 +83,7 @@ const Register = () => {
     console.log(password);
 
     if (!passwordRegex.test(passwordCurrent)) {
-      setPasswordAuthText("영문,숫자 포함 최소 6글자 최대 15글자입니다.");
+      setPasswordAuthText("5~20자의 영문,숫자를 사용하세요.");
       setIsPassword(false);
     } else {
       setPasswordAuthText("올바른패스워드입니다.");
@@ -95,7 +101,7 @@ const Register = () => {
     if (passwordCheck === "") {
       console.log("아무것도없음");
       setPasswordCheckText("");
-    } else {
+    } else if (isPassword) {
       console.log("텍스트작성");
       if (password === passwordCheck) {
         setPasswordCheckText("패스워드가 일치합니다.");
@@ -136,6 +142,7 @@ const Register = () => {
                   <img src={loginId} alt="id" />
                 </div>
                 <input
+                  maxLength={15}
                   placeholder="아이디"
                   name="id"
                   onChange={onChangeId}
