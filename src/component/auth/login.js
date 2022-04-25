@@ -3,6 +3,10 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import jwtDecode from 'jwt-decode';
+import cancel from '../../img/cancel_fill.svg';
+import loginId from '../../img/login_id.svg';
+import loginPassword from '../../img/login_password.svg';
+import logoSVG from '../../img/saemoiSVG2.svg';
 
 const Login = () => {
   const navigate = useNavigate();
@@ -76,30 +80,62 @@ const Login = () => {
       });
   };
 
+  const resetId = () => {
+    setId('');
+  };
+
+  const resetPassword = () => {
+    setPassword('');
+  };
   return (
     <>
-      <div className='login_container auth'>
-        <div className='login_box'>
-          <div className='login_input'>
-            <p>아이디</p>
-            <input name='id' value={id} onChange={onChangeId}></input>
-            <p>비밀번호</p>
-            <input
-              type='password'
-              autocomplete='off'
-              name='password'
-              value={password}
-              onChange={onChangePassword}
-            ></input>
-          </div>
-          <div>
-            <button onClick={login}>로그인</button>
-            <p>
-              계정이 없으신가요?
-              <a href='#' onClick={goRegister}>
-                회원가입
-              </a>
-            </p>
+      <div className='login_wrap'>
+        <div className='login_container auth'>
+          <div className='login_box'>
+            <img className='login_logo' src={logoSVG} alt='logo' />
+            <div className='login_input'>
+              <div className='input_border input_top_border input_top_border_none'>
+                <div>
+                  <img src={loginId} alt='id' />
+                </div>
+                <input
+                  name='id'
+                  value={id}
+                  onChange={onChangeId}
+                  placeholder='아이디'
+                ></input>
+                <div className='input_cancel ' onClick={resetId}>
+                  <img src={cancel} alt={'cancel'} />
+                </div>
+              </div>
+              <div className='input_border  input_bottom_border'>
+                <div>
+                  <img src={loginPassword} alt='id' />
+                </div>
+                <input
+                  placeholder='비밀번호'
+                  type='password'
+                  autocomplete='off'
+                  name='password'
+                  value={password}
+                  onChange={onChangePassword}
+                ></input>
+                <div className='input_cancel' onClick={resetPassword}>
+                  <img src={cancel} alt={'cancel'} />
+                </div>
+              </div>
+            </div>
+            <div>
+              <button className='loginBtn mainBgColor' onClick={login}>
+                로그인
+              </button>
+              <p className='register_p'>
+                계정이 없으신가요?
+                <a href='#' onClick={goRegister}>
+                  회원가입
+                </a>
+              </p>
+            </div>
           </div>
         </div>
       </div>

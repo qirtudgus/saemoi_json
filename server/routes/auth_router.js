@@ -141,7 +141,7 @@ router.post('/login', (req, res) => {
 });
 
 //비밀번호 변경
-router.post("/passwordChange", (req, res) => {
+router.post('/passwordChange', (req, res) => {
   const { id, newPassword, newPasswordCheck } = req.body;
   console.log(id);
   console.log(newPassword);
@@ -152,7 +152,7 @@ router.post("/passwordChange", (req, res) => {
   const sqlQuery = ` UPDATE users SET password = ? , salt = ? WHERE id = ?`;
   db.query(sqlQuery, [hashPassword, salt, id], function (err, rows, fields) {});
 
-  res.send("통신");
+  res.send('통신');
 });
 
 module.exports = router;

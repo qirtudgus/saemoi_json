@@ -335,3 +335,7 @@ body {
   position: fixed;
   z-index: 40000;
 }
+
+.mainBgColor {
+  background-color: #3e55ff;
+}

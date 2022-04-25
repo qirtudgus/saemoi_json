@@ -32,11 +32,17 @@ function App() {
     window.location.replace('/');
     setUserAuth({ ...userAuth, id: '', auth: false, refreshToken: '' });
   };
-  const userAuthContext = { userAuth, setUserAuth, goLogOut };
+
+  const goLogin = () => {
+    navigate('/login');
+  };
+
+  const userAuthContext = { userAuth, setUserAuth, goLogOut, goLogin };
   const href = useLocation();
   console.log(href);
   const navigate = useNavigate();
 
+  //useLocation의 path.name을 의존성 배열로 사용
   //주소가 바뀔때마다 토큰을 유무를 확인 후, userAuth 세팅
   useEffect(() => {
     if (localStorage.getItem('token')) {
@@ -64,26 +70,6 @@ function App() {
     }
   }, [href.pathname]);
 
-  const goLogin = () => {
-    navigate('/login');
-  };
-
-  const middlewere = () => {
-    axios.post('http://localhost:3001/api/middlewere').then((res) => {
-      console.log(res.data);
-      if (res.data === true) return;
-      const token = res.data;
-      // localStorage.setItem("token", token);
-      axios.defaults.headers.common['Authorization'] = `${token}`; //앞으로 api통신에 토큰이 들어가있음
-    });
-  };
-  const middlewere2 = () => {
-    axios.post('http://localhost:3001/api/authApiData/middle').then((res) => {
-      console.log(res.data);
-      axios.defaults.headers.common['Authorization'] = `${res.data}`; //앞으로 api통신에 토큰이 들어가있음
-    });
-  };
-
   return (
     <>
       {/* <Header /> */}
@@ -96,26 +82,15 @@ function App() {
             <Route path='/clothes/mustit' element={<Mustit />} />
             <Route path='/about' element={<About />} />
             <Route path='/sorry' element={<NotReady />} />
+            <Route path='/mypage' element={<MyPage />} />
           </Route>
           <Route path='/category' element={<Category />} />
           <Route path='/login' element={<Login />} />
           <Route path='/register' element={<Register />} />
           <Route path='/auth/passwordchange' element={<PasswordChange />} />
-          <Route path='/mypage' element={<MyPage />} />
         </Routes>
         {/* <Footer /> */}
-        <button className='login' onClick={goLogin}>
-          로그인
-        </button>
-        <button className='login4' onClick={goLogOut}>
-          로그아웃
-        </button>
-        <button className='login2' onClick={middlewere}>
-          미들웨어
-        </button>
-        <button className='login3' onClick={middlewere2}>
-          라우팅 미들웨어
-        </button>
+
         <Footerbar />
       </UserInfo.Provider>
     </>
