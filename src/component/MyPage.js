@@ -3,6 +3,7 @@ import jwtDecode from 'jwt-decode';
 import { useEffect, useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { UserInfo } from '../App';
+import '../css/myPage.css';
 
 const MyPage = () => {
   const navigate = useNavigate();
@@ -52,24 +53,36 @@ const MyPage = () => {
     <>
       {userAuth.auth ? (
         <>
-          <div> {userAuth.id}님</div>
-          <button onClick={contextSetState}>
-            콘텍스트로 받은 세터함수로 변경
-          </button>
-          <button onClick={check_Direct_MiddlewereToken}>
-            서버api 토큰 체크
-          </button>
-          <button onClick={check_Router_MiddlewereToken}>
-            라우팅api 토큰 체크
-          </button>
-          <button onClick={passwordChange}>비밀번호 변경하기</button>
-          <button onClick={goLogOut}>로그아웃</button>
-          {/* <p>지금 당신의 토큰은! {userAuth.refreshToken}</p> */}
+          <div className='mypage_wrap'>
+            <p className='mypage_title'>내 프로필</p>
+            <div className='mypage_container'>
+              <div> {userAuth.id}님</div>
+              <button onClick={contextSetState}>
+                콘텍스트로 받은 세터함수로 변경
+              </button>
+              <button onClick={check_Direct_MiddlewereToken}>
+                서버api 토큰 체크
+              </button>
+              <button onClick={check_Router_MiddlewereToken}>
+                라우팅api 토큰 체크
+              </button>
+              <button onClick={passwordChange}>비밀번호 변경하기</button>
+              <button className='logOutBtn' onClick={goLogOut}>
+                로그아웃
+              </button>
+              {/* <p>지금 당신의 토큰은! {userAuth.refreshToken}</p> */}
+            </div>
+          </div>
         </>
       ) : (
-        <div>
-          <p>비회원이시네요! 로그인 하시겠어요?</p>
-          <button onClick={goLogin}>로그인</button>
+        <div className='mypage_wrap'>
+          <p className='mypage_title'>내 프로필</p>
+          <div className='mypage_container'>
+            <p>아직 비회원이시네요! 로그인 하시겠어요?</p>
+            <button className='loginBtn mainBgColor' onClick={goLogin}>
+              로그인
+            </button>
+          </div>
         </div>
       )}
     </>

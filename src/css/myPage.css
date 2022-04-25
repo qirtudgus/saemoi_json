@@ -1,0 +1,49 @@
+.mypage_wrap {
+  width: 100%;
+  height: calc(100% - 10rem);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  flex-direction: column;
+}
+
+.mypage_container {
+  display: flex;
+  width: 20rem;
+  height: 20rem;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 1px 1px 10px 2px rgba(0, 0, 0, 0.2);
+}
+
+.loginBtn {
+  margin-top: 1rem;
+  font-weight: bold;
+  font-size: 1.2rem;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  width: 285px;
+  height: 40px;
+}
+
+.logOutBtn {
+  margin-top: 1rem;
+  font-weight: bold;
+  font-size: 1.2rem;
+  color: #3e55ff;
+  background-color: #fff;
+  border: 1.5px solid #3e55ff;
+
+  border-radius: 5px;
+  width: 285px;
+  height: 40px;
+}
+
+.mypage_title {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 2rem;
+}
