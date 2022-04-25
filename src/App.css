@@ -339,3 +339,16 @@ body {
 .mainBgColor {
   background-color: #3e55ff;
 }
+
+.pt {
+  cursor: pointer;
+}
+
+.font-size-13{
+font-size: 13px;
+}
+
+.loginBtn:disabled{
+  background-color: #c5c5c5;
+
+}

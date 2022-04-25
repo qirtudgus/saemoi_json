@@ -11,6 +11,9 @@ const MyPage = () => {
   const goHome = () => {
     navigate("/");
   };
+  const goRegister = () => {
+    navigate("/register");
+  };
 
   //토큰이 없으면 아웃,
   // useEffect(() => {
@@ -78,10 +81,16 @@ const MyPage = () => {
         <div className="mypage_wrap">
           <p className="mypage_title">내 프로필</p>
           <div className="mypage_container">
-            <p>아직 비회원이시네요! 로그인 하시겠어요?</p>
+            <p>비회원입니다.</p>
             <button className="loginBtn mainBgColor" onClick={goLogin}>
               로그인
             </button>
+            <p>
+              계정이 없으신가요?{" "}
+              <span className="pt" onClick={goRegister}>
+                회원가입
+              </span>
+            </p>
           </div>
         </div>
       )}

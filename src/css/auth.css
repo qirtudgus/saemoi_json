@@ -33,6 +33,11 @@
   align-items: center;
 }
 
+.input_false {
+  border:1px solid rgb(255, 0, 0)
+}
+
+
 .input_top_border {
   border-radius: 5px 5px 0 0;
 }
@@ -87,4 +92,8 @@
 
 .register_p {
   margin-top: 1rem;
+}
+.loginBtn:disabled{
+  background-color: #c5c5c5;
+
 }

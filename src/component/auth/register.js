@@ -16,15 +16,15 @@ const Register = () => {
   const [passwordCheck, setPasswordCheck] = useState("");
 
   const [idAuthText, setIdAuthText] = useState({
-    text: "영문과 숫자만 입력 가능합니다.",
+    text: "아이디는 영문과 숫자만 사용 가능합니다.(최대15자)",
     idAuth: null,
   });
   const [passwordAuthText, setPasswordAuthText] = useState("");
   const [passwordCheckText, setPasswordCheckText] = useState("");
 
-  const [isId, setIsId] = useState(false);
-  const [isPassword, setIsPassword] = useState(false);
-  const [isPasswordCheck, setIsPasswordCheck] = useState(false);
+  const [isId, setIsId] = useState();
+  const [isPassword, setIsPassword] = useState();
+  const [isPasswordCheck, setIsPasswordCheck] = useState();
 
   const onChangeId = async (e) => {
     const regExp = /[\s|ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/g; // 영문과 숫자만 입력 가능
@@ -38,7 +38,7 @@ const Register = () => {
     if (id === "") {
       setIdAuthText({
         ...idAuthText,
-        text: "아이디를 입력해주세요!",
+        text: "아이디는 영문과 숫자만 사용 가능합니다.(최대15자)",
         idAuth: false,
       });
     } else {
@@ -95,7 +95,6 @@ const Register = () => {
     if (passwordCheck === "") {
       console.log("아무것도없음");
       setPasswordCheckText("");
-      setIsPasswordCheck(false);
     } else {
       console.log("텍스트작성");
       if (password === passwordCheck) {
@@ -128,7 +127,11 @@ const Register = () => {
             <img className="login_logo" src={logoSVG} alt="logo" />
 
             <div className="login_input">
-              <div className="input_border">
+              <div
+                className={
+                  "input_border " + (isId === false ? "input_false" : null)
+                }
+              >
                 <div>
                   <img src={loginId} alt="id" />
                 </div>
@@ -140,9 +143,14 @@ const Register = () => {
                   value={id}
                 ></input>
               </div>
-              <p>{idAuthText.text}</p>
+              <p className="font-size-13">{idAuthText.text}</p>
 
-              <div className="input_border">
+              <div
+                className={
+                  "input_border " +
+                  (isPassword === false ? "input_false" : null)
+                }
+              >
                 <div>
                   <img src={loginPassword} alt="id" />
                 </div>
@@ -156,8 +164,13 @@ const Register = () => {
                   value={password}
                 ></input>
               </div>
-              <p>{passwordAuthText}</p>
-              <div className="input_border">
+              <p className="font-size-13">{passwordAuthText}</p>
+              <div
+                className={
+                  "input_border " +
+                  (isPasswordCheck === false ? "input_false" : null)
+                }
+              >
                 <div>
                   <img src={loginPassword} alt="id" />
                 </div>
@@ -171,11 +184,11 @@ const Register = () => {
                   value={passwordCheck}
                 ></input>
               </div>
-              <p>{passwordCheckText}</p>
+              <p className="font-size-13">{passwordCheckText}</p>
             </div>
             <div>
               <button
-                className="loginBtn mainBgColor"
+                className="loginBtn mainBgColor pt"
                 disabled={!(isId && isPassword && isPasswordCheck)}
                 onClick={join}
               >
