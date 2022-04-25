@@ -148,16 +148,7 @@ router.post("/passwordChange", (req, res) => {
   const hashPassword = crypto.HmacSHA256(newPassword, salt).toString();
 
   const sqlQuery = ` UPDATE users SET password = ? , salt = ? WHERE id = ?`;
-  db.query(sqlQuery, [hashPassword, salt, id], function (err, rows, fields) {
-    console.log(rows);
-  });
-
-  // const sqlQuery = `SELECT * FROM users WHERE id =?`;
-  // db.query(sqlQuery, [id], function (err, rows, fields) {
-  //   const dbSalt = rows[0].salt;
-
-  //   console.log(rows);
-  // });
+  db.query(sqlQuery, [hashPassword, salt, id], function (err, rows, fields) {});
 
   res.send("통신");
 });

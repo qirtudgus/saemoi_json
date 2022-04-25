@@ -13,6 +13,7 @@ const MyPage = () => {
     navigate("/login");
   };
 
+  //토큰이 없으면 아웃,
   useEffect(() => {
     if (localStorage.getItem("token")) {
       setUserAuth({ ...userAuth });
@@ -24,6 +25,7 @@ const MyPage = () => {
     }
   }, [setUserAuth]);
 
+  //setState도 context로 받아와서 상태값을 변경시킬 수 있다.
   const contextSetState = () => {
     setUserAuth({ ...userAuth, id: "hahaha" });
   };

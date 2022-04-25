@@ -38,10 +38,10 @@ const PasswordChange = () => {
 
   useEffect(() => {
     if (newPassword === newPasswordCheck) {
-      setPasswordCheckMsg("일치합니다");
+      setPasswordCheckMsg("비밀번호가 일치합니다");
       setIsPasswordCheck(true);
     } else {
-      setPasswordCheckMsg("비밀번호가 트렬요");
+      setPasswordCheckMsg("비밀번호가 일치하지 않습니다.");
       setIsPasswordCheck(false);
     }
   }, [newPasswordCheck]);
