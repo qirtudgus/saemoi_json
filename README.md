@@ -1,70 +1,31 @@
-# Getting Started with Create React App
+# 세상의 모든 이벤트 '세모이'
+> 온라인에서 진행되고있는 다양한 이벤트들을 보기 쉽게 정리하여 공유하는것이 목적입니다.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+## 사용된 스택
+### 프론트
+- React create-react-app
 
-In the project directory, you can run:
+### 백
+- Node.js express
+- AWS
+- nginx
+- Let’s Encrypt ( Socket Secure Layer 인증서)
 
-### `npm start`
+### 데이터베이스
+- MySql
+- MySql WorkBench
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### 암호화
+- crypto-js
+- jwt (json web token)
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### library
+사용된 library는 pakage.json을 확인해주세요!
 
-### `npm test`
+### 웹크롤링에 대하여
+> 우선 세모이에서는 사용되는 데이터들은 상업적인 목적이 전혀 없습니다.
+사이트의 이벤트 정보 및 이미지 등 데이터를 획득하기 위해 웹 크롤링을 하고 있습니다.
+이로 인해 타 사이트 트래픽에 악영향을 끼치게 된다면 바로 중단하도록 하겠습니다.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+> 현재는 올리브 영과 에이랜드에서 크롤링을 하고 있습니다.  정적인 사이트에서는 간단하게 크롤링이 됩니다. 하지만 동적인 사이트에서는 크롤링이 어려운 점과 억지로 셀레을 사용하면 가능하지만 운영서버에 부담이 큰 점을 감안하여, 위 두 사이트를 제외한 이벤트 데이터들은 크롤링이 아닌 정적인 데이터를 통해 보여주기식으로 마무리할 예정입니다.
