@@ -109,14 +109,14 @@ const Header = () => {
                       <Link to="/drugstore/olive">
                         <li>올리브영</li>
                       </Link>
-                      <Link to="/sorry">
+                      {/* <Link to="/sorry">
                         {" "}
                         <li>랄라블라</li>
                       </Link>
                       <Link to="/sorry">
                         {" "}
                         <li>롭스</li>
-                      </Link>
+                      </Link> */}
                     </ul>
                   </li>
                   <li className="pcMainMenu">
@@ -138,9 +138,9 @@ const Header = () => {
                         {" "}
                         <li>에이랜드</li>
                       </Link>
-                      <Link to="/sorry">
+                      {/* <Link to="/sorry">
                         <li>무신사</li>
-                      </Link>
+                      </Link> */}
                       <Link to="/clothes/mustit">
                         {" "}
                         <li>머스트잇</li>
@@ -162,7 +162,7 @@ const Header = () => {
                     <ul className="pcSubMenu">
                       <div className="triangle"></div>
                       <img src={triangle} alt="menu"></img>
-                      <Link to="/store/lotteon">
+                      {/* <Link to="/store/lotteon">
                         <li>롯데백화점</li>
                       </Link>
                       <Link to="/sorry">
@@ -172,7 +172,7 @@ const Header = () => {
                       <Link to="/sorry">
                         {" "}
                         <li>두타</li>
-                      </Link>
+                      </Link> */}
                     </ul>
                   </li>
                   <li className="pcMainMenu">
@@ -190,7 +190,7 @@ const Header = () => {
                     <ul className="pcSubMenu">
                       <div className="triangle"></div>
                       <img src={triangle} alt="menu"></img>
-                      <Link to="/sorry">
+                      {/* <Link to="/sorry">
                         <li>랭킹닭컴</li>
                       </Link>
                       <Link to="/sorry">
@@ -200,7 +200,7 @@ const Header = () => {
                       <Link to="/vips">
                         {" "}
                         <li>VIPS</li>
-                      </Link>
+                      </Link> */}
                     </ul>
                   </li>
                   <li>
