@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import '../css/Category.css';
 import drugStore from '../img/drugStore.svg';
 import clothes from '../img/clothes.svg';
@@ -8,11 +8,13 @@ import Board from '../img/Board.svg';
 import About from '../img/About.svg';
 import { useNavigate } from 'react-router-dom';
 import CategoryMap from './Category_map';
+import { UserInfo, goLogOut } from '../App';
 
 const Category = () => {
   const [currentTab, setCurrentTab] = useState(0);
   const [subMenu, setSubMenu] = useState('DrugStore');
   const navigate = useNavigate();
+  const { userAuth } = useContext(UserInfo);
 
   const tabMenu = [
     { name: '드럭스토어', func: 'subMenuClick1', img: drugStore },
@@ -44,6 +46,10 @@ const Category = () => {
   };
   const goAbout = () => {
     navigate('/about');
+  };
+
+  const goLogin = () => {
+    navigate('/login');
   };
 
   const selectMenuHandler = (e) => {
@@ -79,9 +85,17 @@ const Category = () => {
         <div className='goback' onClick={goBack}>
           뒤로가기
         </div>
-        <div className='categoryMapHeader'>
-          <span>세상의 모든 이벤트!</span>
-        </div>
+        {userAuth.auth ? (
+          <div className='categoryMapHeader'>
+            <p>{userAuth.id}님 세모이에 오신걸 환영해요!</p>
+            <button onClick={goLogOut}>로그아웃 </button>
+          </div>
+        ) : (
+          <div className='categoryMapHeader'>
+            <p>{userAuth.id}님 세모이에 오신걸 환영해요!</p>
+            <button onClick={goLogin}>로그인 </button>
+          </div>
+        )}
 
         <nav className='categoryBox'>
           <div className='categoryArea'>
