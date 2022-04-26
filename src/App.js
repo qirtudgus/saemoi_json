@@ -21,6 +21,15 @@ import PasswordChange from "./component/auth/PasswordChange";
 
 export const UserInfo = React.createContext();
 
+let vh = window.innerHeight * 0.01;
+document.documentElement.style.setProperty("--vh", `${vh}px`);
+
+window.addEventListener("resize", () => {
+  console.log("resize");
+  let vh = window.innerHeight * 0.01;
+  document.documentElement.style.setProperty("--vh", `${vh}px`);
+});
+
 function App() {
   const [userAuth, setUserAuth] = useState({
     id: "",

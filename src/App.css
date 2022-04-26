@@ -147,7 +147,8 @@ a {
 }
 
 #root {
-  height: 100%;
+  height: calc(var(--vh, 1vh) * 100);
+
 }
 
 body {
@@ -348,7 +349,3 @@ body {
 font-size: 13px;
 }
 
-.loginBtn:disabled{
-  background-color: #c5c5c5;
-
-}
