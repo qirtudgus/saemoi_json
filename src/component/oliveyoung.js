@@ -66,55 +66,67 @@ const Oliveyoung = () => {
   }
 
   useEffect(() => {
-    Axios.get('https://sungtt.com/api/oliveyoungApiData').then((res) => {
-      setEventData([...res.data]);
-    });
+    Axios.get('https://sungtt.com/api/oliveyoungApiData')
+      .then((res) => {
+        setEventData([...res.data]);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
 
-    Axios.all([getOliveData(), getNewOliveData()]).then(
-      Axios.spread(function (tableData, newData) {
-        const tableDataTitle = tableData.data.map((i) => i.title);
-        const newDataTitle = newData.map((i) => i.title);
-        const pareTitle = tableDataTitle.filter(
-          (i) => !newDataTitle.includes(i),
-        );
-        console.log(pareTitle);
-
-        if (pareTitle.length === 0) {
-          console.log('이벤트가 최신입니다.');
-          setEventData([...tableData.data]);
-        } else {
-          // 새로 받아온 이벤트의 타이틀과 compare2의 차집합 배열
-          const compareNewData = newData.filter((i) => {
-            const title = i.title;
-            return !tableDataTitle.includes(title);
-          });
-          const NewDataNum = compareNewData.length;
-
-          // 없는 타이틀의 배열을 전송
-          Axios.post(
-            'https://sungtt.com/api/oliveyoungApiData/get',
-            compareNewData,
+    Axios.all([getOliveData(), getNewOliveData()])
+      .then(
+        Axios.spread(function (tableData, newData) {
+          const tableDataTitle = tableData.data.map((i) => i.title);
+          const newDataTitle = newData.map((i) => i.title);
+          const pareTitle = tableDataTitle.filter(
+            (i) => !newDataTitle.includes(i),
           );
+          console.log(pareTitle);
 
-          // 진행중인 이벤트엔없고, 기존엔 가지고있는 삭제해야할 배열 생성
-          const delData = tableData.data.filter((i) => {
-            const title = i.title;
-            return !newDataTitle.includes(title);
-          });
-          console.log(delData);
+          if (pareTitle.length === 0) {
+            console.log('이벤트가 최신입니다.');
+            setEventData([...tableData.data]);
+          } else {
+            // 새로 받아온 이벤트의 타이틀과 compare2의 차집합 배열
+            const compareNewData = newData.filter((i) => {
+              const title = i.title;
+              return !tableDataTitle.includes(title);
+            });
+            const NewDataNum = compareNewData.length;
 
-          // 종료된 타이틀의 배열을 전송
-          Axios.post('https://sungtt.com/api/oliveyoungApiData/end', delData);
+            // 없는 타이틀의 배열을 전송
+            Axios.post(
+              'https://sungtt.com/api/oliveyoungApiData/get',
+              compareNewData,
+            );
 
-          // 새로운 데이터를 받아와서, 렌더링
-          Axios.get('https://sungtt.com/api/oliveyoungApiData').then((res) => {
-            setEventData([...res.data]);
-            console.log(`${NewDataNum}개가 갱신되었습니다.`);
-          });
-        }
-        setLoading(true);
-      }),
-    );
+            // 진행중인 이벤트엔없고, 기존엔 가지고있는 삭제해야할 배열 생성
+            const delData = tableData.data.filter((i) => {
+              const title = i.title;
+              return !newDataTitle.includes(title);
+            });
+            console.log(delData);
+
+            // 종료된 타이틀의 배열을 전송
+            Axios.post('https://sungtt.com/api/oliveyoungApiData/end', delData);
+
+            // 새로운 데이터를 받아와서, 렌더링
+            Axios.get('https://sungtt.com/api/oliveyoungApiData').then(
+              (res) => {
+                setEventData([...res.data]);
+                console.log(`${NewDataNum}개가 갱신되었습니다.`);
+              },
+            );
+          }
+          setLoading(true);
+        }),
+      )
+      .catch((err) => {
+        // cors 오류로 인한 첫 렌더링 시 나오는 에러를 새로고침으로 해결..
+        window.location.reload();
+        console.log(err);
+      });
   }, []);
   // window.location.reload();
   return (
