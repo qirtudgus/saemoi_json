@@ -1,3 +1,7 @@
+body {
+  image-rendering: -webkit-optimize-contrast;
+}
+
 @import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
 
 body,
