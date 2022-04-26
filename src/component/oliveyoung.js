@@ -42,94 +42,85 @@ const Oliveyoung = () => {
         title: $(this).text(),
       };
     });
-    date.each(function (i_1) {
-      dateList[i_1] = {
+    date.each(function (i) {
+      dateList[i] = {
         date: $(this).text(),
       };
     });
-    img.each(function (i_2) {
-      imgList[i_2] = {
+    img.each(function (i) {
+      imgList[i] = {
         img: $(this).attr('data-original'),
       };
     });
-    link.each(function (i_3) {
-      linkList[i_3] = {
+    link.each(function (i) {
+      linkList[i] = {
         link: 'https://www.oliveyoung.co.kr/store/' + $(this).attr('value'),
       };
     });
     eventList = titleList
-      .map((item, i_4) => ({ ...item, ...dateList[i_4] }))
-      .map((item_1, i_5) => ({ ...item_1, ...imgList[i_5] }))
-      .map((item_2, i_6) => ({ ...item_2, ...linkList[i_6] }));
+      .map((item, i) => ({ ...item, ...dateList[i] }))
+      .map((item, i) => ({ ...item, ...imgList[i] }))
+      .map((item, i) => ({ ...item, ...linkList[i] }));
     console.log(eventList);
     return eventList;
   }
 
   useEffect(() => {
-    async function goOlive() {
-      await Axios.get('https://sungtt.com/api/oliveyoungApiData').then(
-        (res) => {
-          setEventData([...res.data]);
-        },
-      );
+    Axios.get('https://sungtt.com/api/oliveyoungApiData').then((res) => {
+      setEventData([...res.data]);
+    });
 
-      Axios.all([getOliveData(), getNewOliveData()]).then(
-        Axios.spread(function (tableData, newData) {
-          const tableDataTitle = tableData.data.map((i) => i.title);
-          const newDataTitle = newData.map((i) => i.title);
-          const pareTitle = tableDataTitle.filter(
-            (i) => !newDataTitle.includes(i),
+    Axios.all([getOliveData(), getNewOliveData()]).then(
+      Axios.spread(function (tableData, newData) {
+        const tableDataTitle = tableData.data.map((i) => i.title);
+        const newDataTitle = newData.map((i) => i.title);
+        const pareTitle = tableDataTitle.filter(
+          (i) => !newDataTitle.includes(i),
+        );
+        console.log(pareTitle);
+
+        if (pareTitle.length === 0) {
+          console.log('이벤트가 최신입니다.');
+          setEventData([...tableData.data]);
+        } else {
+          // 새로 받아온 이벤트의 타이틀과 compare2의 차집합 배열
+          const compareNewData = newData.filter((i) => {
+            const title = i.title;
+            return !tableDataTitle.includes(title);
+          });
+          const NewDataNum = compareNewData.length;
+
+          // 없는 타이틀의 배열을 전송
+          Axios.post(
+            'https://sungtt.com/api/oliveyoungApiData/get',
+            compareNewData,
           );
-          console.log(pareTitle);
 
-          if (pareTitle.length === 0) {
-            console.log('이벤트가 최신입니다.');
-            setEventData([...tableData.data]);
-          } else {
-            // 새로 받아온 이벤트의 타이틀과 compare2의 차집합 배열
-            const compareNewData = newData.filter((i) => {
-              const title = i.title;
-              return !tableDataTitle.includes(title);
-            });
-            const NewDataNum = compareNewData.length;
+          // 진행중인 이벤트엔없고, 기존엔 가지고있는 삭제해야할 배열 생성
+          const delData = tableData.data.filter((i) => {
+            const title = i.title;
+            return !newDataTitle.includes(title);
+          });
+          console.log(delData);
 
-            // 없는 타이틀의 배열을 전송
-            Axios.post(
-              'https://sungtt.com/api/oliveyoungApiData/get',
-              compareNewData,
-            );
+          // 종료된 타이틀의 배열을 전송
+          Axios.post('https://sungtt.com/api/oliveyoungApiData/end', delData);
 
-            // 진행중인 이벤트엔없고, 기존엔 가지고있는 삭제해야할 배열 생성
-            const delData = tableData.data.filter((i) => {
-              const title = i.title;
-              return !newDataTitle.includes(title);
-            });
-            console.log(delData);
-
-            // 종료된 타이틀의 배열을 전송
-            Axios.post('https://sungtt.com/api/oliveyoungApiData/end', delData);
-
-            // 새로운 데이터를 받아와서, 렌더링
-            Axios.get('https://sungtt.com/api/oliveyoungApiData').then(
-              (res) => {
-                setEventData([...res.data]);
-                console.log(`${NewDataNum}개가 갱신되었습니다.`);
-              },
-            );
-          }
-          setLoading(true);
-        }),
-      );
-    }
-
-    goOlive();
-  }, [href.pathname]);
-
+          // 새로운 데이터를 받아와서, 렌더링
+          Axios.get('https://sungtt.com/api/oliveyoungApiData').then((res) => {
+            setEventData([...res.data]);
+            console.log(`${NewDataNum}개가 갱신되었습니다.`);
+          });
+        }
+        setLoading(true);
+      }),
+    );
+  }, []);
+  // window.location.reload();
   return (
     <>
       {loading ? (
         <>
-          {' '}
           <EventForm
             Data={eventData}
             setData={setEventData}
