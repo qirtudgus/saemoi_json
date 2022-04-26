@@ -24,7 +24,6 @@ const Oliveyoung = () => {
   async function getNewOliveData() {
     const html = await Axios.get(
       'https://www.oliveyoung.co.kr/store/main/getEventList.do',
-      { withCredentials: true },
     );
     let titleList = [];
     let dateList = [];
