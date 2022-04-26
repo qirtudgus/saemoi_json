@@ -1620,6 +1620,27 @@
   dependencies:
     "@babel/runtime" "^7.12.5"
 
+"@toast-ui/editor@^3.1.5":
+  "integrity" "sha512-epcZIcoJ5x7TI8mCvDXEvmAHEjPAyGVfqZDrjx9QpSOYlyW4ZAZfQ36QG4QbWVXVdJrwUoh4w9pMjOThYSSbLQ=="
+  "resolved" "https://registry.npmjs.org/@toast-ui/editor/-/editor-3.1.5.tgz"
+  "version" "3.1.5"
+  dependencies:
+    "dompurify" "^2.3.3"
+    "prosemirror-commands" "^1.1.9"
+    "prosemirror-history" "^1.1.3"
+    "prosemirror-inputrules" "^1.1.3"
+    "prosemirror-keymap" "^1.1.4"
+    "prosemirror-model" "^1.14.1"
+    "prosemirror-state" "^1.3.4"
+    "prosemirror-view" "^1.18.7"
+
+"@toast-ui/react-editor@^3.1.5":
+  "integrity" "sha512-CD8jQ385gtR2XsJExk7J3A9g8X+kabY71MVVim7NVaBrOut+Kl0tZUZFC3LeViggMVWgc4qE/DEtEqX2pIKG8A=="
+  "resolved" "https://registry.npmjs.org/@toast-ui/react-editor/-/react-editor-3.1.5.tgz"
+  "version" "3.1.5"
+  dependencies:
+    "@toast-ui/editor" "^3.1.5"
+
 "@tootallnate/once@1":
   "integrity" "sha512-RbzJvlNzmRq5c3O09UipeuXno4tA1FE6ikOjxZK0tuxVv3412l64l5t1W5pj4+rJq9vpkm/kwiR07aZXnsKPxw=="
   "resolved" "https://registry.npmjs.org/@tootallnate/once/-/once-1.1.2.tgz"
@@ -3727,6 +3748,11 @@
   "version" "4.3.0"
   dependencies:
     "domelementtype" "^2.2.0"
+
+"dompurify@^2.3.3":
+  "integrity" "sha512-OFP2u/3T1R5CEgWCEONuJ1a5+MFKnOYpkywpUSxv/dj1LeBT1erK+JwM7zK0ROy2BRhqVCf0LRw/kHqKuMkVGg=="
+  "resolved" "https://registry.npmjs.org/dompurify/-/dompurify-2.3.6.tgz"
+  "version" "2.3.6"
 
 "domutils@^1.7.0":
   "integrity" "sha512-Lgd2XcJ/NjEw+7tFvfKxOzCYKZsdct5lczQ2ZaQY8Djz7pfAD3Gbp8ySJWtreII/vDlMVmxwa6pHmdxIYgttDg=="
@@ -6506,6 +6532,11 @@
     "type-check" "^0.4.0"
     "word-wrap" "^1.2.3"
 
+"orderedmap@^1.1.0":
+  "integrity" "sha512-/fzlCGKRmfayGoI9UUXvJfc2nMZlJHW30QqEvwPvlg8tsX7jyiUSomYie6mYqx7Z9bOMGoag0H/q1PS/0PjYkg=="
+  "resolved" "https://registry.npmjs.org/orderedmap/-/orderedmap-1.1.5.tgz"
+  "version" "1.1.5"
+
 "p-limit@^1.1.0":
   "integrity" "sha512-vvcXsLAJ9Dr5rQOPk7toZQZJApBl2K4J6dANSsEuh6QI41JYcsS/qhTGa9ErIUUgK3WNQoJYvylxvjqmiqEA9Q=="
   "resolved" "https://registry.npmjs.org/p-limit/-/p-limit-1.3.0.tgz"
@@ -7321,6 +7352,71 @@
     "object-assign" "^4.1.1"
     "react-is" "^16.13.1"
 
+"prosemirror-commands@^1.1.9":
+  "integrity" "sha512-TX+KpWudMon06frryfpO/u7hsQv2hu8L4VSVbCpi3/7wXHBgl+35mV85qfa3RpT8xD2f3MdeoTqH0vy5JdbXPg=="
+  "resolved" "https://registry.npmjs.org/prosemirror-commands/-/prosemirror-commands-1.2.2.tgz"
+  "version" "1.2.2"
+  dependencies:
+    "prosemirror-model" "^1.0.0"
+    "prosemirror-state" "^1.0.0"
+    "prosemirror-transform" "^1.0.0"
+
+"prosemirror-history@^1.1.3":
+  "integrity" "sha512-B9v9xtf4fYbKxQwIr+3wtTDNLDZcmMMmGiI3TAPShnUzvo+Rmv1GiUrsQChY1meetHl7rhML2cppF3FTs7f7UQ=="
+  "resolved" "https://registry.npmjs.org/prosemirror-history/-/prosemirror-history-1.2.0.tgz"
+  "version" "1.2.0"
+  dependencies:
+    "prosemirror-state" "^1.2.2"
+    "prosemirror-transform" "^1.0.0"
+    "rope-sequence" "^1.3.0"
+
+"prosemirror-inputrules@^1.1.3":
+  "integrity" "sha512-ZaHCLyBtvbyIHv0f5p6boQTIJjlD6o2NPZiEaZWT2DA+j591zS29QQEMT4lBqwcLW3qRSf7ZvoKNbf05YrsStw=="
+  "resolved" "https://registry.npmjs.org/prosemirror-inputrules/-/prosemirror-inputrules-1.1.3.tgz"
+  "version" "1.1.3"
+  dependencies:
+    "prosemirror-state" "^1.0.0"
+    "prosemirror-transform" "^1.0.0"
+
+"prosemirror-keymap@^1.1.4":
+  "integrity" "sha512-8SZgPH3K+GLsHL2wKuwBD9rxhsbnVBTwpHCO4VUO5GmqUQlxd/2GtBVWTsyLq4Dp3N9nGgPd3+lZFKUDuVp+Vw=="
+  "resolved" "https://registry.npmjs.org/prosemirror-keymap/-/prosemirror-keymap-1.1.5.tgz"
+  "version" "1.1.5"
+  dependencies:
+    "prosemirror-state" "^1.0.0"
+    "w3c-keyname" "^2.2.0"
+
+"prosemirror-model@^1.0.0", "prosemirror-model@^1.14.1", "prosemirror-model@^1.16.0":
+  "integrity" "sha512-r1/w0HDU40TtkXp0DyKBnFPYwd8FSlUSJmGCGFv4DeynfeSlyQF2FD0RQbVEMOe6P3PpUSXM6LZBV7W/YNZ4mA=="
+  "resolved" "https://registry.npmjs.org/prosemirror-model/-/prosemirror-model-1.16.1.tgz"
+  "version" "1.16.1"
+  dependencies:
+    "orderedmap" "^1.1.0"
+
+"prosemirror-state@^1.0.0", "prosemirror-state@^1.2.2", "prosemirror-state@^1.3.4":
+  "integrity" "sha512-Xkkrpd1y/TQ6HKzN3agsQIGRcLckUMA9u3j207L04mt8ToRgpGeyhbVv0HI7omDORIBHjR29b7AwlATFFf2GLA=="
+  "resolved" "https://registry.npmjs.org/prosemirror-state/-/prosemirror-state-1.3.4.tgz"
+  "version" "1.3.4"
+  dependencies:
+    "prosemirror-model" "^1.0.0"
+    "prosemirror-transform" "^1.0.0"
+
+"prosemirror-transform@^1.0.0", "prosemirror-transform@^1.1.0":
+  "integrity" "sha512-bcIsf3uRZhfab0xRfyyxOEh6eqSszq/hJbDbmUumFnbHBoWhB/uXbpz6vvUxfk0XiEvrZDJ+5pXRrNDc1Hu3vQ=="
+  "resolved" "https://registry.npmjs.org/prosemirror-transform/-/prosemirror-transform-1.4.2.tgz"
+  "version" "1.4.2"
+  dependencies:
+    "prosemirror-model" "^1.0.0"
+
+"prosemirror-view@^1.18.7":
+  "integrity" "sha512-uvw9ZVz5dNDD9w1bzHkU2r4NWFlpFz85v9rCD8NAhQBau6LYhwM/crjry+C4JgeR8gy6pMXS5eJ1zhNLcK4ctQ=="
+  "resolved" "https://registry.npmjs.org/prosemirror-view/-/prosemirror-view-1.23.12.tgz"
+  "version" "1.23.12"
+  dependencies:
+    "prosemirror-model" "^1.16.0"
+    "prosemirror-state" "^1.0.0"
+    "prosemirror-transform" "^1.1.0"
+
 "proxy-addr@~2.0.7":
   "integrity" "sha512-llQsMLSUDUPT44jdrU/O37qlnifitDP+ZwrmmZcoSKyLKvtZxpyV0n2/bD/N4tBAAZ/gJEdZU7KMraoK1+XYAg=="
   "resolved" "https://registry.npmjs.org/proxy-addr/-/proxy-addr-2.0.7.tgz"
@@ -7547,7 +7643,7 @@
   optionalDependencies:
     "fsevents" "^2.3.2"
 
-"react@*", "react@^17.0.2", "react@>= 16", "react@>=16.8", "react@17.0.2":
+"react@*", "react@^17.0.1", "react@^17.0.2", "react@>= 16", "react@>=16.8", "react@17.0.2":
   "integrity" "sha512-gnhPt75i/dq/z3/6q/0asP78D0u592D5L1pd7M8P+dck6Fu/jJeL6iVVK23fptSUZj8Vjf++7wXA8UNclGQcbA=="
   "resolved" "https://registry.npmjs.org/react/-/react-17.0.2.tgz"
   "version" "17.0.2"
@@ -7805,6 +7901,11 @@
   "version" "2.67.3"
   optionalDependencies:
     "fsevents" "~2.3.2"
+
+"rope-sequence@^1.3.0":
+  "integrity" "sha512-ku6MFrwEVSVmXLvy3dYph3LAMNS0890K7fabn+0YIRQ2T96T9F4gkFf0vf0WW0JUraNWwGRtInEpH7yO4tbQZg=="
+  "resolved" "https://registry.npmjs.org/rope-sequence/-/rope-sequence-1.3.2.tgz"
+  "version" "1.3.2"
 
 "run-parallel@^1.1.9":
   "integrity" "sha512-5l4VyZR86LZ/lDxZTR6jqL8AFE2S0IFLMP26AbjsLVADxHdhB/c0GUsH+y39UfCi3dzz8OlQuPmnaJOMoDHQBA=="
@@ -8843,6 +8944,11 @@
   "version" "1.0.2"
   dependencies:
     "browser-process-hrtime" "^1.0.0"
+
+"w3c-keyname@^2.2.0":
+  "integrity" "sha512-tOhfEwEzFLJzf6d1ZPkYfGj+FWhIpBux9ppoP3rlclw3Z0BZv3N7b7030Z1kYth+6rDuAsXUFr+d0VE6Ed1ikw=="
+  "resolved" "https://registry.npmjs.org/w3c-keyname/-/w3c-keyname-2.2.4.tgz"
+  "version" "2.2.4"
 
 "w3c-xmlserializer@^2.0.0":
   "integrity" "sha512-4tzD0mF8iSiMiNs30BiLO3EpfGLZUT2MSX/G+o7ZywDzliWQ3OPtTZ0PTC3B3ca1UAf4cJMHB+2Bf56EriJuRA=="

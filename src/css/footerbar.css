@@ -15,7 +15,7 @@
   position: relative;
   display: block;
   flex: 1 1 0%;
-  padding: 10px 0px;
+  padding: 8px 0px;
   height: 60px;
   color: rgb(68, 68, 68);
   text-align: center;
@@ -28,12 +28,13 @@
   left: 0px;
   top: -1px;
   right: 0px;
-  height: 4px;
+  height: 3px;
   border-radius: 1px;
   background-color: #3e55ff;
 }
 
 .footerBar p {
+  font-size:0.75rem;
   margin-top: 7px;
 }
 

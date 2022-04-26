@@ -1,19 +1,19 @@
-require('dotenv').config({ path: '../.env' });
-const db = require('./db_config');
-const express = require('express');
+require("dotenv").config({ path: "../.env" });
+const db = require("./db_config");
+const express = require("express");
 const app = express();
 const PORT = process.env.SERVER_port || 3001;
-const cors = require('cors');
-const axios = require('axios');
-const cheerio = require('cheerio');
+const cors = require("cors");
+const axios = require("axios");
+const cheerio = require("cheerio");
 const SECRET_TOKEN = process.env.SECRET_TOKEN;
-const jwt = require('jsonwebtoken');
-const { default: jwtDecode } = require('jwt-decode');
-const tokenCheck = require('./routes/tokenCheck');
+const jwt = require("jsonwebtoken");
+const { default: jwtDecode } = require("jwt-decode");
+const tokenCheck = require("./routes/tokenCheck");
 
 const myLogger = function (req, res, next) {
-  console.log('log');
-  req.userId = 'id입니다';
+  console.log("log");
+  req.userId = "id입니다";
   next();
 };
 
@@ -57,8 +57,8 @@ const myLogger = function (req, res, next) {
 // };
 
 db.connect((err) => {
-  if (err) console.log('MySQL 연결 실패 : ', err);
-  console.log('MySQL Connected!!!');
+  if (err) console.log("MySQL 연결 실패 : ", err);
+  console.log("MySQL Connected!!!");
 }); // 오류해결 https://www.inflearn.com/questions/3637
 
 app.use(
@@ -70,23 +70,23 @@ app.use(express.json());
 app.use(myLogger);
 app.use(tokenCheck);
 //머스트잇 router
-const mustit = require('./routes/mustit_router');
-app.use('/api/mustitApiData', mustit);
+const mustit = require("./routes/mustit_router");
+app.use("/api/mustitApiData", mustit);
 
 //올리브영 router
-const oliveyoung = require('./routes/oliveyoung_router');
-app.use('/api/oliveyoungApiData', oliveyoung);
+const oliveyoung = require("./routes/oliveyoung_router");
+app.use("/api/oliveyoungApiData", oliveyoung);
 
 //에이랜드 router
-const aland = require('./routes/aland_router');
-app.use('/api/alandApiData', aland);
+const aland = require("./routes/aland_router");
+app.use("/api/alandApiData", aland);
 
 //로그인 인증 router
-const auth = require('./routes/auth_router');
-app.use('/api/authApiData', auth);
+const auth = require("./routes/auth_router");
+app.use("/api/authApiData", auth);
 
 //공통api 댓글 비밀번호와 브랜드명 확인 후 삭제진행
-app.post('/api/comment_password_check', (req, res) => {
+app.post("/api/comment_password_check", (req, res) => {
   const idx = req.body.idx;
   const password = req.body.hash;
   const brandName = req.body.brandName;
@@ -96,7 +96,7 @@ app.post('/api/comment_password_check', (req, res) => {
   });
 });
 
-app.post('/api/middlewere', (req, res) => {
+app.post("/api/middlewere", (req, res) => {
   // console.log(`${req.headers.authorization}`);
   console.log(req.authorization);
   // console.log(req.userId);
@@ -104,8 +104,39 @@ app.post('/api/middlewere', (req, res) => {
   res.send(req.authorization);
 });
 
-app.post('/tokenCheck', (req, res) => {
+app.post("/tokenCheck", (req, res) => {
   res.send(req.authorization);
+});
+
+app.post("/api/boardApiData/write", (req, res) => {
+  const { board_title, board_content, board_writer, board_date, board_views } =
+    req.body;
+
+  console.log(board_title, board_content, board_writer);
+
+  const writeQuery =
+    "INSERT INTO board_table (board_title,board_content,board_writer, board_date) VALUES (?,?,?,?)";
+
+  db.query(writeQuery, [board_title, board_content, board_writer, board_date]);
+
+  res.send("글 작성 통신");
+});
+
+app.post("/api/boardApiData/getBoard", (req, res) => {
+  const sqlQuery = "SELECT * FROM board_table;";
+  db.query(sqlQuery, (err, result) => {
+    res.send(result);
+  });
+});
+
+app.post("/api/boardApiData/viewBoard", (req, res) => {
+  const num = req.body.key;
+  console.log(num);
+  const sqlQuery = "SELECT * FROM board_table WHERE board_index = ?;";
+  db.query(sqlQuery, [num], (err, result, fields) => {
+    console.log(result);
+    res.send(result);
+  });
 });
 
 app.listen(PORT, () => {

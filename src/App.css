@@ -9,32 +9,6 @@ body img {
 /* https://moo-you.tistory.com/254 */
 @import url(https://fonts.googleapis.com/earlyaccess/notosanskr.css);
 
-body,
-talbe,
-th,
-td,
-div,
-dl,
-dt,
-dd,
-ul,
-ol,
-li,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-pre,
-form,
-fieldset,
-textarea,
-blockquote,
-span,
-* {
-  font-family: 'Noto Sans KR', sans-serif;
-}
 
 @font-face {
   font-family: 'Noto Sans KR';
@@ -107,6 +81,35 @@ span,
     url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Black.otf)
       format('opentype');
 }
+
+
+body,
+talbe,
+th,
+td,
+div,
+dl,
+dt,
+dd,
+ul,
+ol,
+li,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+pre,
+form,
+fieldset,
+textarea,
+blockquote,
+span,
+* {
+  font-family: 'Noto Sans KR', sans-serif !important;
+}
+
 
 /* css Reset */
 html,

@@ -4,7 +4,7 @@ const db = mysql.createConnection({
   port: process.env.local_DB_port,
   user: process.env.local_DB_user,
   password: process.env.local_DB_password,
-  database: "saemoi",
+  database: "test",
   charset: "utf8mb4",
 });
 

@@ -92,13 +92,19 @@
 }
 .categoryMapHeader {
   position: relative;
-  font-size: 2rem;
-  font-weight: bold;
+  display: flex;
+  font-size: 1rem;
+  font-weight: 300;
   text-align: center;
   color: #fff;
   background-color: #3e55ff;
   width: 100%;
   height: 100px;
+  justify-content: space-around;
+  align-items: center;
+}
+.welcomeMent{
+ 
 }
 .categoryMapHeader span {
   display: block;
@@ -110,13 +116,19 @@
   height: 100%;
 }
 
-.goback {
+.goBack {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   position: fixed;
   z-index: 10000;
   border-radius: 50px;
-  width: 50px;
-  height: 50px;
-  background-color: rgba(0, 0, 0, 0.2);
+  width: 45px;
+  height: 45px;
+  background-color: rgba(0, 0, 0, 0.4);
   bottom: 10%;
   left: 2%;
+}
+.goBack img {
+  width: 30px;
 }
