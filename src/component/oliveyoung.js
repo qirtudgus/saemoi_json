@@ -59,6 +59,7 @@ const Oliveyoung = () => {
       .map((item, i_4) => ({ ...item, ...dateList[i_4] }))
       .map((item_1, i_5) => ({ ...item_1, ...imgList[i_5] }))
       .map((item_2, i_6) => ({ ...item_2, ...linkList[i_6] }));
+    console.log(eventList);
     return eventList;
   }
 
