@@ -24,6 +24,7 @@ const Oliveyoung = () => {
   async function getNewOliveData() {
     const html = await Axios.get(
       'https://www.oliveyoung.co.kr/store/main/getEventList.do',
+      { withCredentials: true },
     );
     let titleList = [];
     let dateList = [];
@@ -75,9 +76,10 @@ const Oliveyoung = () => {
         const pareTitle = tableDataTitle.filter(
           (i) => !newDataTitle.includes(i),
         );
+        console.log(pareTitle);
 
         if (pareTitle.length === 0) {
-          // console.log("이벤트가 최신입니다.")
+          console.log('이벤트가 최신입니다.');
           setEventData([...tableData.data]);
         } else {
           // 새로 받아온 이벤트의 타이틀과 compare2의 차집합 배열
@@ -98,6 +100,7 @@ const Oliveyoung = () => {
             const title = i.title;
             return !newDataTitle.includes(title);
           });
+          console.log(delData);
 
           // 종료된 타이틀의 배열을 전송
           Axios.post('https://sungtt.com/api/oliveyoungApiData/end', delData);
@@ -105,7 +108,7 @@ const Oliveyoung = () => {
           // 새로운 데이터를 받아와서, 렌더링
           Axios.get('https://sungtt.com/api/oliveyoungApiData').then((res) => {
             setEventData([...res.data]);
-            // console.log(`${NewDataNum}개가 갱신되었습니다.`);
+            console.log(`${NewDataNum}개가 갱신되었습니다.`);
           });
         }
         setLoading(true);

@@ -6,7 +6,8 @@ body img {
   -ms-interpolation-mode: nearest-neighbor; /* IE (non-standard property) */
 }
 
-@import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
+/* https://moo-you.tistory.com/254 */
+@import url(https://fonts.googleapis.com/earlyaccess/notosanskr.css);
 
 body,
 talbe,
