@@ -34,7 +34,7 @@ const ViewBoard = (pathname) => {
 
   useEffect(() => {
     axios
-      .post('https://sungtt.com/api/boardApiData/viewBoard', { key: key })
+      .post('http://localhost:3001/api/boardApiData/viewBoard', { key: key })
       .then((res) => {
         console.log(res.data);
         setPage([...res.data]);
@@ -43,7 +43,7 @@ const ViewBoard = (pathname) => {
 
   const like = (index, id) => {
     axios
-      .post('https://sungtt.com/api/boardApiData/like', {
+      .post('http://localhost:3001/api/boardApiData/like', {
         key: index,
         id: id,
       })
@@ -54,12 +54,12 @@ const ViewBoard = (pathname) => {
         } else if (res.data === false) {
           //추천이 취소되는 기능도 만들어보자..
           //db에서 -1 해주고 리스트에서 아이디를 제거해주면 될거같다.
-          alert('이미 추천했어요');
+          console.log('추천취소!');
         }
       })
       .then((res) => {
         axios
-          .post('https://sungtt.com/api/boardApiData/viewBoard', {
+          .post('http://localhost:3001/api/boardApiData/viewBoard', {
             key: key,
           })
           .then((res) => {

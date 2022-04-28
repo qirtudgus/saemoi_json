@@ -18,7 +18,7 @@ const Board = () => {
 
   useEffect(() => {
     axios
-      .post('https://sungtt.com/api/boardApiData/getBoard')
+      .post('http://localhost:3001/api/boardApiData/getBoard')
       .then((res) => {
         console.log(res.data);
 
@@ -40,7 +40,7 @@ const Board = () => {
         {list.map((i, index) => (
           <div
             onClick={() => {
-              axios.post('https://sungtt.com/api/boardApiData/views', {
+              axios.post('http://localhost:3001/api/boardApiData/views', {
                 index: i.board_index,
               });
               navigate(`/board/viewboard/${i.board_index}`);

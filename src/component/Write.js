@@ -45,7 +45,6 @@ const Write = () => {
     let today = month + '.' + day;
     let submitDate = today + ' ' + time;
 
-    console.log(title);
     // console.log(editorInstance.getHTML());
     let content = editor.current.getInstance().getHTML();
     // setBoard({
@@ -60,7 +59,7 @@ const Write = () => {
       board_date: submitDate,
     };
     await axios
-      .post('https://sungtt.com/api/boardApiData/write', arr)
+      .post('http://localhost:3001/api/boardApiData/write', arr)
       .then((res) => {
         goBoard();
       });
@@ -70,13 +69,9 @@ const Write = () => {
     setBoard({ ...board, board_title: e.target.value });
   };
 
-  const content_write = (e) => {
-    setBoard({ ...board, board_content: e.target.value });
-  };
-
   const goSee = async () => {
     await axios
-      .post('https://sungtt.com/api/boardApiData/getBoard')
+      .post('http://localhost:3001/api/boardApiData/getBoard')
       .then((res) => {
         console.log(res.data);
         setEditText([...res.data]);
@@ -86,7 +81,6 @@ const Write = () => {
         editText.push('zz');
       });
   };
-  console.log(editText);
 
   return (
     <>
