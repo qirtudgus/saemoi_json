@@ -60,7 +60,7 @@ const Write = () => {
       board_date: submitDate,
     };
     await axios
-      .post('http://localhost:3001/api/boardApiData/write', arr)
+      .post('https://sungtt.com/api/boardApiData/write', arr)
       .then((res) => {
         goBoard();
       });
@@ -76,7 +76,7 @@ const Write = () => {
 
   const goSee = async () => {
     await axios
-      .post('http://localhost:3001/api/boardApiData/getBoard')
+      .post('https://sungtt.com/api/boardApiData/getBoard')
       .then((res) => {
         console.log(res.data);
         setEditText([...res.data]);

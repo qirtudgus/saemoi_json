@@ -34,7 +34,7 @@ const ViewBoard = (pathname) => {
 
   useEffect(() => {
     axios
-      .post('http://localhost:3001/api/boardApiData/viewBoard', { key: key })
+      .post('https://sungtt.com/api/boardApiData/viewBoard', { key: key })
       .then((res) => {
         console.log(res.data);
         setPage([...res.data]);
@@ -43,7 +43,7 @@ const ViewBoard = (pathname) => {
 
   const like = (index, id) => {
     axios
-      .post('http://localhost:3001/api/boardApiData/like', {
+      .post('https://sungtt.com/api/boardApiData/like', {
         key: index,
         id: id,
       })
@@ -59,7 +59,7 @@ const ViewBoard = (pathname) => {
       })
       .then((res) => {
         axios
-          .post('http://localhost:3001/api/boardApiData/viewBoard', {
+          .post('https://sungtt.com/api/boardApiData/viewBoard', {
             key: key,
           })
           .then((res) => {
