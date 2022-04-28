@@ -1,31 +1,31 @@
-import React, { useState, useEffect } from "react";
-import Comment from "./comment";
-import EventForm from "./eventForm";
-import Axios from "axios";
-import cheerio from "cheerio";
-import Loading from "./loading";
-import { Route, Routes, useNavigate, useLocation } from "react-router-dom";
+import React, { useState, useEffect } from 'react';
+import Comment from './comment';
+import EventForm from './eventForm';
+import Axios from 'axios';
+import cheerio from 'cheerio';
+import Loading from './loading';
+import { Route, Routes, useNavigate, useLocation } from 'react-router-dom';
 
 const Oliveyoung = () => {
-  const brandName = "oliveyoung";
+  const brandName = 'oliveyoung';
   const [eventData, setEventData] = useState([]);
   const [loading, setLoading] = useState(false);
   const href = useLocation();
 
   //json데이터를 받아올 api 주소
-  const getApi = "https://sungtt.com/api/oliveyoungApiData";
+  const getApi = 'https://sungtt.com/api/oliveyoungApiData';
   //조회수를 전송할 api 주소
-  const getView = "https://sungtt.com/api/oliveyoungApiData/views";
+  const getView = 'https://sungtt.com/api/oliveyoungApiData/views';
 
   //테이블에 있는 데이터 가져오기
   function getOliveData() {
-    return Axios.get("https://sungtt.com/api/oliveyoungApiData");
+    return Axios.get('https://sungtt.com/api/oliveyoungApiData');
   }
 
   //올리브영의 새로운 배열을 생성하여 리턴
   async function getNewOliveData() {
     const html = await Axios.get(
-      "https://www.oliveyoung.co.kr/store/main/getEventList.do",
+      'https://www.oliveyoung.co.kr/store/main/getEventList.do',
     );
     let titleList = [];
     let dateList = [];
@@ -33,10 +33,10 @@ const Oliveyoung = () => {
     let linkList = [];
     let eventList = [];
     const $ = cheerio.load(html.data);
-    const title = $("div.event_tab_cont ul.event_thumb_list li p.evt_tit");
-    const date = $("div.event_tab_cont ul.event_thumb_list li p.evt_date");
-    const img = $("ul.event_thumb_list li a").children("img");
-    const link = $("ul.event_thumb_list li input[name=urlInfo]");
+    const title = $('div.event_tab_cont ul.event_thumb_list li p.evt_tit');
+    const date = $('div.event_tab_cont ul.event_thumb_list li p.evt_date');
+    const img = $('ul.event_thumb_list li a').children('img');
+    const link = $('ul.event_thumb_list li input[name=urlInfo]');
     title.each(function (i) {
       titleList[i] = {
         title: $(this).text(),
@@ -49,12 +49,12 @@ const Oliveyoung = () => {
     });
     img.each(function (i) {
       imgList[i] = {
-        img: $(this).attr("data-original"),
+        img: $(this).attr('data-original'),
       };
     });
     link.each(function (i) {
       linkList[i] = {
-        link: "https://www.oliveyoung.co.kr/store/" + $(this).attr("value"),
+        link: 'https://www.oliveyoung.co.kr/store/' + $(this).attr('value'),
       };
     });
     eventList = titleList
@@ -66,7 +66,7 @@ const Oliveyoung = () => {
   }
 
   useEffect(() => {
-    Axios.get("https://sungtt.com/api/oliveyoungApiData")
+    Axios.get('https://sungtt.com/api/oliveyoungApiData')
       .then((res) => {
         setEventData([...res.data]);
       })
@@ -85,7 +85,7 @@ const Oliveyoung = () => {
           console.log(pareTitle);
 
           if (pareTitle.length === 0) {
-            console.log("이벤트가 최신입니다.");
+            console.log('이벤트가 최신입니다.');
             setEventData([...tableData.data]);
           } else {
             // 새로 받아온 이벤트의 타이틀과 compare2의 차집합 배열
@@ -97,7 +97,7 @@ const Oliveyoung = () => {
 
             // 없는 타이틀의 배열을 전송
             Axios.post(
-              "https://sungtt.com/api/oliveyoungApiData/get",
+              'https://sungtt.com/api/oliveyoungApiData/get',
               compareNewData,
             );
 
@@ -109,10 +109,10 @@ const Oliveyoung = () => {
             console.log(delData);
 
             // 종료된 타이틀의 배열을 전송
-            Axios.post("https://sungtt.com/api/oliveyoungApiData/end", delData);
+            Axios.post('https://sungtt.com/api/oliveyoungApiData/end', delData);
 
             // 새로운 데이터를 받아와서, 렌더링
-            Axios.get("https://sungtt.com/api/oliveyoungApiData").then(
+            Axios.get('https://sungtt.com/api/oliveyoungApiData').then(
               (res) => {
                 setEventData([...res.data]);
                 console.log(`${NewDataNum}개가 갱신되었습니다.`);
@@ -141,8 +141,8 @@ const Oliveyoung = () => {
           />
           <Comment
             brandName={brandName}
-            getCommentApi="https://sungtt.com/api/oliveyoungApiData/comment"
-            postCommentApi="https://sungtt.com/api/oliveyoungApiData/comment/post"
+            getCommentApi='https://sungtt.com/api/oliveyoungApiData/comment'
+            postCommentApi='https://sungtt.com/api/oliveyoungApiData/comment/post'
           />
         </>
       ) : (

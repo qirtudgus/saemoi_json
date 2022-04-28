@@ -1,18 +1,18 @@
-import axios from "axios";
-import { useState, useRef, useEffect, useContext } from "react";
+import axios from 'axios';
+import React, { useState, useRef, useEffect, useContext } from 'react';
 // TOAST UI Editor import
-import "@toast-ui/editor/dist/toastui-editor.css";
-import { Editor, Viewer } from "@toast-ui/react-editor";
-import { UserInfo } from "../App";
+import '@toast-ui/editor/dist/toastui-editor.css';
+import { Editor, Viewer } from '@toast-ui/react-editor';
+import { UserInfo } from '../App';
 
 const Write = () => {
-  const { userAuth, goLogOut } = useContext(UserInfo);
+  const { userAuth, goLogOut, goBoard } = useContext(UserInfo);
 
   const [board, setBoard] = useState({
-    board_title: "",
-    board_content: "",
+    board_title: '',
+    board_content: '',
     board_writer: userAuth.id,
-    board_date: "",
+    board_date: '',
   });
 
   const [editText, setEditText] = useState([]);
@@ -29,21 +29,21 @@ const Write = () => {
 
   const goWrite = async () => {
     let hours = new Date().getHours();
-    hours = hours >= 10 ? hours : "0" + hours;
+    hours = hours >= 10 ? hours : '0' + hours;
 
     let minute = new Date().getMinutes();
-    minute = minute >= 10 ? minute : "0" + minute;
+    minute = minute >= 10 ? minute : '0' + minute;
 
-    let time = hours + ":" + minute;
+    let time = hours + ':' + minute;
 
     let day = new Date().getDate();
-    day = day >= 10 ? day : "0" + day;
+    day = day >= 10 ? day : '0' + day;
 
     let month = new Date().getMonth() + 1;
-    month = month >= 10 ? month : "0" + month;
+    month = month >= 10 ? month : '0' + month;
 
-    let today = month + "." + day;
-    let submitDate = today + " " + time;
+    let today = month + '.' + day;
+    let submitDate = today + ' ' + time;
 
     console.log(title);
     // console.log(editorInstance.getHTML());
@@ -60,8 +60,10 @@ const Write = () => {
       board_date: submitDate,
     };
     await axios
-      .post("http://localhost:3001/api/boardApiData/write", arr)
-      .then((res) => {});
+      .post('http://localhost:3001/api/boardApiData/write', arr)
+      .then((res) => {
+        goBoard();
+      });
   };
 
   const title_write = (e) => {
@@ -74,14 +76,14 @@ const Write = () => {
 
   const goSee = async () => {
     await axios
-      .post("http://localhost:3001/api/boardApiData/getBoard")
+      .post('http://localhost:3001/api/boardApiData/getBoard')
       .then((res) => {
         console.log(res.data);
         setEditText([...res.data]);
         console.log(res.data[1].board_content);
         // setBoard({ ...board, board_content: res.data[1].board_content });
         editText.concat(res.data[1].board_content);
-        editText.push("zz");
+        editText.push('zz');
       });
   };
   console.log(editText);
@@ -89,16 +91,16 @@ const Write = () => {
   return (
     <>
       <input
-        name="title"
-        placeholder="제목을 입력해주세요"
+        name='title'
+        placeholder='제목을 입력해주세요'
         ref={title}
         onChange={title_write}
       ></input>
       <Editor ref={editor}></Editor>
       <button onClick={goWrite}>작성</button>
-      <button onClick={goSee}>글보기</button>
 
-      {editText.map((i, index) => (
+      {/* <button onClick={goSee}>글보기</button> */}
+      {/* {editText.map((i, index) => (
         <div key={index}>
           <Viewer
             ref={viewer}
@@ -109,9 +111,9 @@ const Write = () => {
           <li>작성날짜 : {i.board_date}</li>
           <li>작성자 : {i.board_writer}</li>
         </div>
-      ))}
+      ))} */}
     </>
   );
 };
 
-export default Write;
+export default React.memo(Write);
