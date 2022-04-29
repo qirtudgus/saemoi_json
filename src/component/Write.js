@@ -27,6 +27,15 @@ const Write = () => {
   //   const viewerInstance = viewer.current.getInstance();
   //   const viewer_content = editorInstance.setHTML();
 
+  useEffect(() => {
+    if (userAuth.auth) {
+      return;
+    }
+    if (!userAuth.auth) {
+      alert('회원만 작성하실 수 있습니다.');
+    }
+  }, []);
+
   const goWrite = async () => {
     let hours = new Date().getHours();
     hours = hours >= 10 ? hours : '0' + hours;
@@ -59,7 +68,7 @@ const Write = () => {
       board_date: submitDate,
     };
     await axios
-      .post('http://localhost:3001/api/boardApiData/write', arr)
+      .post('https://sungtt.com/api/boardApiData/write', arr)
       .then((res) => {
         goBoard();
       });
@@ -71,7 +80,7 @@ const Write = () => {
 
   const goSee = async () => {
     await axios
-      .post('http://localhost:3001/api/boardApiData/getBoard')
+      .post('https://sungtt.com/api/boardApiData/getBoard')
       .then((res) => {
         console.log(res.data);
         setEditText([...res.data]);
@@ -92,20 +101,6 @@ const Write = () => {
       ></input>
       <Editor ref={editor}></Editor>
       <button onClick={goWrite}>작성</button>
-
-      {/* <button onClick={goSee}>글보기</button> */}
-      {/* {editText.map((i, index) => (
-        <div key={index}>
-          <Viewer
-            ref={viewer}
-            initialValue={i.board_content}
-            onChange={content_write}
-          ></Viewer>
-          <li>제목 : {i.board_title}</li>
-          <li>작성날짜 : {i.board_date}</li>
-          <li>작성자 : {i.board_writer}</li>
-        </div>
-      ))} */}
     </>
   );
 };

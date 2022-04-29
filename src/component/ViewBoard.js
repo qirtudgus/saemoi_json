@@ -20,6 +20,7 @@ const ViewBoard = (pathname) => {
 
   const navigate = useNavigate();
   const [page, setPage] = useState([]);
+  const [checkLikeUser, setCheckLikeUser] = useState(false);
 
   const key = pathname.data.replace(/[^0-9]/g, '');
   console.log(key);
@@ -32,18 +33,31 @@ const ViewBoard = (pathname) => {
     navigate(-1);
   };
 
+  //게시판 api 뿌려주기
   useEffect(() => {
     axios
-      .post('http://localhost:3001/api/boardApiData/viewBoard', { key: key })
+      .post('https://sungtt.com/api/boardApiData/viewBoard', { key: key })
       .then((res) => {
         console.log(res.data);
         setPage([...res.data]);
-      });
+      })
+      .then((res) => {});
+  }, []);
+
+  //추천 유무 확인하기
+  useEffect(() => {
+    let id = userAuth.id;
+    axios
+      .post('https://sungtt.com/api/boardApiData/checkLikeUser', {
+        id: id,
+        index: key,
+      })
+      .then((res) => {});
   }, []);
 
   const like = (index, id) => {
     axios
-      .post('http://localhost:3001/api/boardApiData/like', {
+      .post('https://sungtt.com/api/boardApiData/like', {
         key: index,
         id: id,
       })
@@ -59,7 +73,7 @@ const ViewBoard = (pathname) => {
       })
       .then((res) => {
         axios
-          .post('http://localhost:3001/api/boardApiData/viewBoard', {
+          .post('https://sungtt.com/api/boardApiData/viewBoard', {
             key: key,
           })
           .then((res) => {

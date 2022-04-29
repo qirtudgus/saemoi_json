@@ -2,6 +2,25 @@ const express = require('express');
 const router = express.Router();
 const db = require('../db_config');
 
+//추천한 유저인지 확인 후 boolean 값 반환해주기 로직짜기
+// 들어간 게시물 인덱스의 userList 불러오고, id랑 비교했을 때 있으면 true를 줘서 state에 true설정해주기
+// 게시물에서 새로고침 시 아이디값을 바로 가져오지못하여 오류가 난다..해결방법을 생각해보자
+router.post('/checkLikeUser', (req, res) => {
+  const id = req.body.id;
+  const index = req.body.index;
+  console.log(index);
+  console.log(id);
+  //들어온 게시물의 데이터를 불러온다.
+  const findQuery =
+    'SELECT board_listList FROM board_table WHERE board_index = ?';
+
+  db.query(findQuery, [index], function (err, rows, fields) {
+    console.log(rows);
+  });
+
+  res.send('good');
+});
+
 //글 작성하기
 router.post('/write', (req, res) => {
   const { board_title, board_content, board_writer, board_date, board_views } =
@@ -27,10 +46,9 @@ router.post('/getBoard', (req, res) => {
 //게시물 확인
 router.post('/viewBoard', (req, res) => {
   const num = req.body.key;
-  console.log(num);
   const sqlQuery = 'SELECT * FROM board_table WHERE board_index = ?;';
   db.query(sqlQuery, [num], (err, result, fields) => {
-    console.log(result);
+    // console.log(result);
     res.send(result);
   });
 });

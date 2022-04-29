@@ -55,7 +55,7 @@ function App() {
 
   const userAuthContext = { userAuth, setUserAuth, goLogOut, goLogin, goBoard };
   const href = useLocation();
-  console.log(href);
+  // console.log(href);
   const navigate = useNavigate();
 
   //useLocation의 path.name을 의존성 배열로 사용
@@ -75,6 +75,8 @@ function App() {
       });
       console.log(userAuth);
       console.log('토큰 헤더 등록 완료');
+      // console.log(`${userAuth.id}님이 로그인 하셨습니다.`);
+      setUserAuth({ ...userAuth, id: userId });
     } else {
       console.log('헤더에 등록할 토큰이 없습니다.');
       setUserAuth({

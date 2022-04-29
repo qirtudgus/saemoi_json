@@ -40,7 +40,7 @@ const Board = () => {
         {list.map((i, index) => (
           <div
             onClick={() => {
-              axios.post('http://localhost:3001/api/boardApiData/views', {
+              axios.post('https://sungtt.com/api/boardApiData/views', {
                 index: i.board_index,
               });
               navigate(`/board/viewboard/${i.board_index}`);
