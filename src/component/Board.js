@@ -18,7 +18,7 @@ const Board = () => {
 
   useEffect(() => {
     axios
-      .post('http://localhost:3001/api/boardApiData/getBoard')
+      .post('https://sungtt.com/api/boardApiData/getBoard')
       .then((res) => {
         console.log(res.data);
 
