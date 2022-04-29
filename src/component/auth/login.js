@@ -32,7 +32,8 @@ const Login = () => {
   };
 
   useEffect(() => {
-    if (!userAuth.auth) {
+    if (userAuth.auth) {
+      alert('잘못된 접근입니다.');
       window.location.replace('/');
     }
   }, []);
