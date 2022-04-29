@@ -32,7 +32,7 @@ const Login = () => {
   };
 
   useEffect(() => {
-    if (localStorage.getItem('token') && window.confirm('잘못된 접근입니다.')) {
+    if (!userAuth.auth) {
       window.location.replace('/');
     }
   }, []);
