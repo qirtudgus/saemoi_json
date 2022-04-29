@@ -6,7 +6,7 @@ import { Editor, Viewer } from '@toast-ui/react-editor';
 import { UserInfo } from '../App';
 
 const Write = () => {
-  const { userAuth, goLogOut, goBoard } = useContext(UserInfo);
+  const { userAuth, goLogOut, goBoard, goHome, goLogin } = useContext(UserInfo);
 
   const [board, setBoard] = useState({
     board_title: '',
@@ -32,7 +32,8 @@ const Write = () => {
       return;
     }
     if (!userAuth.auth) {
-      alert('회원만 작성하실 수 있습니다.');
+      alert('회원만 작성하실 수 있습니다. 로그인 해 주세요!');
+      goLogin();
     }
   }, []);
 
