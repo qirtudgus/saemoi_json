@@ -10,15 +10,16 @@ import '../css/board.css';
 import axios from 'axios';
 import '@toast-ui/editor/dist/toastui-editor.css';
 import { Editor, Viewer } from '@toast-ui/react-editor';
+import { UserInfo } from '../App';
 
 const Board = () => {
   const boardNumber = useRef();
-
+  const { URL } = useContext(UserInfo);
   const [list, setList] = useState([]);
 
   useEffect(() => {
     axios
-      .post('https://sungtt.com/api/boardApiData/getBoard')
+      .post(`${URL}/api/boardApiData/getBoard`)
       .then((res) => {
         console.log(res.data);
 
@@ -40,7 +41,7 @@ const Board = () => {
         {list.map((i, index) => (
           <div
             onClick={() => {
-              axios.post('https://sungtt.com/api/boardApiData/views', {
+              axios.post(`${URL}/api/boardApiData/views`, {
                 index: i.board_index,
               });
               navigate(`/board/viewboard/${i.board_index}`);

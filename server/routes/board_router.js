@@ -71,18 +71,36 @@ router.post('/write', (req, res) => {
 router.post('/updatewrite', (req, res) => {
   const { board_title, board_content, board_writer, board_index } = req.body;
 
-  console.log(board_title, board_content, board_writer);
+  // console.log(board_title, board_content, board_writer);
 
+  console.log(board_index);
   // 'update board_table set board_views = board_views + 1 where board_index = (?)'; //https://blog.serpongs.net/24
 
   const writeQuery =
-    'UPDATE board_table SET board_title = (?) board_content = (?) WHERE board_index = (?)';
+    'UPDATE board_table SET board_title = ?, board_content = ?, board_writer = ? WHERE board_index = ?';
 
-  db.query(writeQuery, [board_title, board_content, board_index]);
+  db.query(
+    writeQuery,
+    [board_title, board_content, board_writer, board_index],
+    function (err) {
+      console.log(err);
+    },
+  );
 
   res.send('글 수정 통신');
 });
 
+//글 삭제하기
+router.post('/removeBoard', (req, res) => {
+  const index = req.body.key;
+  console.log(index);
+  const removeQuery = 'DELETE FROM board_table WHERE board_index = ?';
+  db.query(removeQuery, [index]);
+
+  res.send('글삭제');
+});
+
+//게시판리스트 뿌려주기
 router.post('/getBoard', (req, res) => {
   const sqlQuery = 'SELECT * FROM board_table;';
   db.query(sqlQuery, (err, result) => {

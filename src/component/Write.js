@@ -7,7 +7,8 @@ import { UserInfo } from '../App';
 import { addDate } from './addDate';
 
 const Write = () => {
-  const { userAuth, goLogOut, goBoard, goHome, goLogin } = useContext(UserInfo);
+  const { userAuth, goLogOut, goBoard, goHome, goLogin, URL } =
+    useContext(UserInfo);
 
   const [board, setBoard] = useState({
     board_title: '',
@@ -52,11 +53,9 @@ const Write = () => {
       board_writer: board.board_writer,
       board_date: addDate(),
     };
-    await axios
-      .post('https://sungtt.com/api/boardApiData/write', arr)
-      .then((res) => {
-        goBoard();
-      });
+    await axios.post(`${URL}api/boardApiData/write`, arr).then((res) => {
+      goBoard();
+    });
   };
 
   const title_write = (e) => {
@@ -64,16 +63,14 @@ const Write = () => {
   };
 
   const goSee = async () => {
-    await axios
-      .post('https://sungtt.com/api/boardApiData/getBoard')
-      .then((res) => {
-        console.log(res.data);
-        setEditText([...res.data]);
-        console.log(res.data[1].board_content);
-        // setBoard({ ...board, board_content: res.data[1].board_content });
-        editText.concat(res.data[1].board_content);
-        editText.push('zz');
-      });
+    await axios.post(`${URL}/api/boardApiData/getBoard`).then((res) => {
+      console.log(res.data);
+      setEditText([...res.data]);
+      console.log(res.data[1].board_content);
+      // setBoard({ ...board, board_content: res.data[1].board_content });
+      editText.concat(res.data[1].board_content);
+      editText.push('zz');
+    });
   };
 
   return (

@@ -7,7 +7,8 @@ import { UserInfo } from '../App';
 import { addDate } from './addDate';
 
 const UpdateWrite = (pathname) => {
-  const { userAuth, goLogOut, goBoard, goHome, goLogin } = useContext(UserInfo);
+  const { userAuth, goLogOut, goBoard, goHome, goLogin, URL } =
+    useContext(UserInfo);
   const key = pathname.data.replace(/[^0-9]/g, '');
   const [board, setBoard] = useState({
     board_title: '',
@@ -29,7 +30,7 @@ const UpdateWrite = (pathname) => {
   //기존게시글 데이터 불러오기
   useEffect(() => {
     axios
-      .post('https://sungtt.com/api/boardApiData/viewBoard', { key: key })
+      .post(`${URL}/api/boardApiData/viewBoard`, { key: key })
       .then((res) => {
         console.log(res.data[0].board_title);
 
@@ -57,11 +58,9 @@ const UpdateWrite = (pathname) => {
       board_writer: board.board_writer,
       board_date: addDate(),
     };
-    await axios
-      .post('https://sungtt.com/api/boardApiData/updatewrite', arr)
-      .then((res) => {
-        goBoard();
-      });
+    await axios.post(`${URL}/api/boardApiData/updatewrite`, arr).then((res) => {
+      goBoard();
+    });
   };
 
   const title_write = (e) => {

@@ -25,6 +25,11 @@ import ViewBoard from './component/ViewBoard';
 
 export const UserInfo = React.createContext();
 
+// api통신 시 URL 변경용
+const local = 'http://localhost:3001';
+const server = 'https://sungtt.com';
+const URL = server;
+
 let vh = window.innerHeight * 0.01;
 document.documentElement.style.setProperty('--vh', `${vh}px`);
 
@@ -54,7 +59,14 @@ function App() {
     navigate('/board');
   };
 
-  const userAuthContext = { userAuth, setUserAuth, goLogOut, goLogin, goBoard };
+  const userAuthContext = {
+    userAuth,
+    setUserAuth,
+    goLogOut,
+    goLogin,
+    goBoard,
+    URL,
+  };
   const href = useLocation();
   // console.log(href);
   const navigate = useNavigate();

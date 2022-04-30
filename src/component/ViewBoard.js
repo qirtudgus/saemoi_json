@@ -16,7 +16,7 @@ import { Editor, Viewer } from '@toast-ui/react-editor';
 import { UserInfo } from '../App';
 
 const ViewBoard = (pathname) => {
-  const { userAuth, goLogOut } = useContext(UserInfo);
+  const { userAuth, goLogOut, goBoard, URL } = useContext(UserInfo);
 
   const navigate = useNavigate();
   const [page, setPage] = useState([]);
@@ -68,7 +68,7 @@ const ViewBoard = (pathname) => {
   //게시판 api 뿌려주기
   useEffect(() => {
     axios
-      .post('https://sungtt.com/api/boardApiData/viewBoard', { key: key })
+      .post(`${URL}/api/boardApiData/viewBoard`, { key: key })
       .then((res) => {
         // console.log(res.data);
         setPage([...res.data]);
@@ -79,7 +79,7 @@ const ViewBoard = (pathname) => {
   //해당 게시물 댓글 api 뿌려주기
   useEffect(() => {
     axios
-      .post('https://sungtt.com/api/boardApiData/comment', { index: key })
+      .post(`${URL}/api/boardApiData/comment`, { index: key })
       .then((res) => {
         console.log(res.data);
         setCommentList([...res.data]);
@@ -90,7 +90,7 @@ const ViewBoard = (pathname) => {
   useEffect(() => {
     let id = userAuth.id;
     axios
-      .post('https://sungtt.com/api/boardApiData/checkLikeUser', {
+      .post(`${URL}/api/boardApiData/checkLikeUser`, {
         id: id,
         index: key,
       })
@@ -99,7 +99,7 @@ const ViewBoard = (pathname) => {
 
   const like = (index, id) => {
     axios
-      .post('https://sungtt.com/api/boardApiData/like', {
+      .post(`${URL}/api/boardApiData/like`, {
         key: index,
         id: id,
       })
@@ -115,7 +115,7 @@ const ViewBoard = (pathname) => {
       })
       .then((res) => {
         axios
-          .post('https://sungtt.com/api/boardApiData/viewBoard', {
+          .post(`${URL}/api/boardApiData/viewBoard`, {
             key: key,
           })
           .then((res) => {
@@ -127,12 +127,22 @@ const ViewBoard = (pathname) => {
 
   //댓글 등록하기
   const addComment = () => {
-    axios.post('https://sungtt.com/api/boardApiData/addComment', {
+    axios.post(`${URL}/api/boardApiData/addComment`, {
       key: key,
       id: userAuth.id,
       date: addDate(),
       content: comment,
     });
+  };
+
+  const removeBoard = () => {
+    if (window.confirm('글을 삭제하시겠습니까?')) {
+      console.log(key);
+      axios.post(`${URL}/api/boardApiData/removeBoard`, {
+        key: key,
+      });
+      goBoard();
+    }
   };
 
   return (
@@ -148,7 +158,7 @@ const ViewBoard = (pathname) => {
               >
                 글수정
               </button>
-              <button>글삭제</button>
+              <button onClick={removeBoard}>글삭제</button>
             </>
           ) : null}
 
