@@ -4,6 +4,7 @@ import React, { useState, useRef, useEffect, useContext } from 'react';
 import '@toast-ui/editor/dist/toastui-editor.css';
 import { Editor, Viewer } from '@toast-ui/react-editor';
 import { UserInfo } from '../App';
+import { addDate } from './addDate';
 
 const Write = () => {
   const { userAuth, goLogOut, goBoard, goHome, goLogin } = useContext(UserInfo);
@@ -38,23 +39,6 @@ const Write = () => {
   }, []);
 
   const goWrite = async () => {
-    let hours = new Date().getHours();
-    hours = hours >= 10 ? hours : '0' + hours;
-
-    let minute = new Date().getMinutes();
-    minute = minute >= 10 ? minute : '0' + minute;
-
-    let time = hours + ':' + minute;
-
-    let day = new Date().getDate();
-    day = day >= 10 ? day : '0' + day;
-
-    let month = new Date().getMonth() + 1;
-    month = month >= 10 ? month : '0' + month;
-
-    let today = month + '.' + day;
-    let submitDate = today + ' ' + time;
-
     // console.log(editorInstance.getHTML());
     let content = editor.current.getInstance().getHTML();
     // setBoard({
@@ -66,7 +50,7 @@ const Write = () => {
       board_title: board.board_title,
       board_content: content,
       board_writer: board.board_writer,
-      board_date: submitDate,
+      board_date: addDate(),
     };
     await axios
       .post('https://sungtt.com/api/boardApiData/write', arr)
@@ -100,7 +84,7 @@ const Write = () => {
         ref={title}
         onChange={title_write}
       ></input>
-      <Editor ref={editor}></Editor>
+      <Editor ref={editor} initialEditType='wysiwyg'></Editor>
       <button onClick={goWrite}>작성</button>
     </>
   );

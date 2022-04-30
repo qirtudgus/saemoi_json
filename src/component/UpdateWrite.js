@@ -11,7 +11,7 @@ const UpdateWrite = (pathname) => {
   const key = pathname.data.replace(/[^0-9]/g, '');
   const [board, setBoard] = useState({
     board_title: '',
-    board_content: '',
+    board_content: 'zzzzzzzzzzzzz',
     board_writer: userAuth.id,
     board_date: '',
   });
@@ -31,17 +31,19 @@ const UpdateWrite = (pathname) => {
     axios
       .post('https://sungtt.com/api/boardApiData/viewBoard', { key: key })
       .then((res) => {
+        console.log(res.data[0].board_title);
+
         console.log(res.data[0].board_content);
         //기존의 글 제목 불러오기 성공
         setBoard({
           ...board,
           board_title: res.data[0].board_title,
-          board_content: 'zzzzzzzzzzzzzz',
         });
+        setEditText([...res.data]);
       });
   }, []);
 
-  const goWrite = async () => {
+  const goUpdate = async () => {
     let content = editor.current.getInstance().getHTML();
     // setBoard({
     //   ...board,
@@ -49,46 +51,42 @@ const UpdateWrite = (pathname) => {
     //   board_content: editor.current.getInstance().getHTML(),
     // });
     let arr = {
+      board_index: key,
       board_title: board.board_title,
       board_content: content,
       board_writer: board.board_writer,
       board_date: addDate(),
     };
     await axios
-      .post('https://sungtt.com/api/boardApiData/write', arr)
+      .post('https://sungtt.com/api/boardApiData/updatewrite', arr)
       .then((res) => {
         goBoard();
       });
   };
 
   const title_write = (e) => {
-    setBoard({ ...board, board_title: e.target.value });
-  };
-
-  const goSee = async () => {
-    await axios
-      .post('https://sungtt.com/api/boardApiData/getBoard')
-      .then((res) => {
-        console.log(res.data);
-        setEditText([...res.data]);
-        console.log(res.data[1].board_content);
-        // setBoard({ ...board, board_content: res.data[1].board_content });
-        editText.concat(res.data[1].board_content);
-        editText.push('zz');
-      });
+    setEditText([{ ...editText, board_title: e.target.value }]);
   };
 
   return (
     <>
-      <input
-        name='title'
-        placeholder='제목을 입력해주세요'
-        ref={title}
-        onChange={title_write}
-        value={board.board_title}
-      ></input>
-      <Editor ref={editor} initialValue={board.board_content}></Editor>
-      <button onClick={goWrite}>수정하기</button>
+      {editText.map((i, index) => (
+        <>
+          <input
+            name='title'
+            placeholder='제목을 입력해주세요'
+            ref={title}
+            onChange={title_write}
+            value={i.board_title}
+          ></input>
+          <Editor
+            initialEditType='wysiwyg'
+            ref={editor}
+            initialValue={i.board_content}
+          ></Editor>
+          <button onClick={goUpdate}>수정하기</button>
+        </>
+      ))}
     </>
   );
 };
