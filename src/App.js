@@ -19,6 +19,7 @@ import axios from 'axios';
 import MyPage from './component/MyPage';
 import PasswordChange from './component/auth/PasswordChange';
 import Write from './component/Write';
+import UpdateWrite from './component/UpdateWrite';
 import Board from './component/Board';
 import ViewBoard from './component/ViewBoard';
 
@@ -107,6 +108,11 @@ function App() {
               path='/board/viewboard/:boardnumber'
               element={<ViewBoard data={href.pathname} />}
             />
+            <Route
+              path='/board/UpdateWrite/:boardnumber'
+              element={<UpdateWrite data={href.pathname} />}
+            />
+
             <Route path='/comment' element={<NotReady />} />
           </Route>
           <Route path='/category' element={<Category />} />

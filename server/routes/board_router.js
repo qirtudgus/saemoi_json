@@ -2,14 +2,45 @@ const express = require('express');
 const router = express.Router();
 const db = require('../db_config');
 
+//댓글 불러오기 1.게시물index
+router.post('/comment', (req, res) => {
+  const index = req.body.index;
+  console.log(index);
+  const findQuery = 'SELECT * FROM comment_table WHERE board_index = (?)';
+  db.query(findQuery, [index], function (err, rows, fields) {
+    console.log(rows);
+    res.send(rows);
+  });
+});
+
+//댓글 작성하기 1.게시물index 2.날짜 3.작성자 4.내용
+router.post('/addComment', (req, res) => {
+  const board_index = req.body.key;
+  const id = req.body.id;
+  const date = req.body.date;
+  const content = req.body.content;
+  // console.log(date);
+  // console.log(id);
+  // console.log(board_index);
+  // console.log(content);
+  //데이터 정상적으로 들어옴
+
+  const insertQuery =
+    'INSERT INTO comment_table (board_index,comment_content,comment_date,comment_writer) VALUES  ( ?,?,?,?)';
+
+  db.query(insertQuery, [board_index, content, date, id]);
+
+  res.send('');
+});
+
 //추천한 유저인지 확인 후 boolean 값 반환해주기 로직짜기
 // 들어간 게시물 인덱스의 userList 불러오고, id랑 비교했을 때 있으면 true를 줘서 state에 true설정해주기
 // 게시물에서 새로고침 시 아이디값을 바로 가져오지못하여 오류가 난다..해결방법을 생각해보자
 router.post('/checkLikeUser', (req, res) => {
   const id = req.body.id;
   const index = req.body.index;
-  console.log(index);
-  console.log(id);
+  // console.log(index);
+  // console.log(id);
   //들어온 게시물의 데이터를 불러온다.
   const findQuery =
     'SELECT board_listList FROM board_table WHERE board_index = ?';
@@ -56,11 +87,11 @@ router.post('/viewBoard', (req, res) => {
 //게시물 조회수
 router.post('/views', (req, res) => {
   const num = req.body.index;
-  console.log(num);
+  // console.log(num);
   const sqlQuery =
     'update board_table set board_views = board_views + 1 where board_index = (?)'; //https://blog.serpongs.net/24
   db.query(sqlQuery, [num], (err, result, fields) => {
-    console.log(result);
+    // console.log(result);
     res.send(result);
   });
 });
