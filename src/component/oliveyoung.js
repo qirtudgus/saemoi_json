@@ -1,25 +1,31 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import Comment from './comment';
 import EventForm from './eventForm';
 import Axios from 'axios';
 import cheerio from 'cheerio';
 import Loading from './loading';
 import { Route, Routes, useNavigate, useLocation } from 'react-router-dom';
+import { UserInfo } from '../App';
 
 const Oliveyoung = () => {
   const brandName = 'oliveyoung';
   const [eventData, setEventData] = useState([]);
   const [loading, setLoading] = useState(false);
   const href = useLocation();
+  const { URL } = useContext(UserInfo);
 
   //json데이터를 받아올 api 주소
-  const getApi = 'https://sungtt.com/api/oliveyoungApiData';
+  const getApi = `${URL}/api/oliveyoungApiData`;
+
+  const getCommentApi = `${URL}/api/oliveyoungApiData/comment`;
+  const postCommentApi = `${URL}/api/oliveyoungApiData/comment/post`;
+
   //조회수를 전송할 api 주소
-  const getView = 'https://sungtt.com/api/oliveyoungApiData/views';
+  const getView = `${URL}/api/oliveyoungApiData/views`;
 
   //테이블에 있는 데이터 가져오기
   function getOliveData() {
-    return Axios.get('https://sungtt.com/api/oliveyoungApiData');
+    return Axios.get(`${URL}/api/oliveyoungApiData`);
   }
 
   //올리브영의 새로운 배열을 생성하여 리턴
@@ -66,7 +72,7 @@ const Oliveyoung = () => {
   }
 
   useEffect(() => {
-    Axios.get('https://sungtt.com/api/oliveyoungApiData')
+    Axios.get(`${URL}/api/oliveyoungApiData`)
       .then((res) => {
         setEventData([...res.data]);
       })
@@ -96,10 +102,7 @@ const Oliveyoung = () => {
             const NewDataNum = compareNewData.length;
 
             // 없는 타이틀의 배열을 전송
-            Axios.post(
-              'https://sungtt.com/api/oliveyoungApiData/get',
-              compareNewData,
-            );
+            Axios.post(`${URL}/api/oliveyoungApiData/get`, compareNewData);
 
             // 진행중인 이벤트엔없고, 기존엔 가지고있는 삭제해야할 배열 생성
             const delData = tableData.data.filter((i) => {
@@ -109,15 +112,13 @@ const Oliveyoung = () => {
             console.log(delData);
 
             // 종료된 타이틀의 배열을 전송
-            Axios.post('https://sungtt.com/api/oliveyoungApiData/end', delData);
+            Axios.post(`${URL}/api/oliveyoungApiData/end`, delData);
 
             // 새로운 데이터를 받아와서, 렌더링
-            Axios.get('https://sungtt.com/api/oliveyoungApiData').then(
-              (res) => {
-                setEventData([...res.data]);
-                console.log(`${NewDataNum}개가 갱신되었습니다.`);
-              },
-            );
+            Axios.get(`${URL}/api/oliveyoungApiData`).then((res) => {
+              setEventData([...res.data]);
+              console.log(`${NewDataNum}개가 갱신되었습니다.`);
+            });
           }
           setLoading(true);
         }),
@@ -141,8 +142,8 @@ const Oliveyoung = () => {
           />
           <Comment
             brandName={brandName}
-            getCommentApi='https://sungtt.com/api/oliveyoungApiData/comment'
-            postCommentApi='https://sungtt.com/api/oliveyoungApiData/comment/post'
+            getCommentApi={getCommentApi}
+            postCommentApi={postCommentApi}
           />
         </>
       ) : (
