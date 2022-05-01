@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import EventForm from './eventForm';
 import Comment from './comment';
+import { UserInfo } from '../App';
 
 const getJson = [
   {
@@ -55,6 +56,9 @@ const getJson = [
 
 const Mustit = () => {
   const brandName = 'mustit';
+  const { URL } = useContext(UserInfo);
+  const getCommentApi = `${URL}/api/mustitApiData/comment`;
+  const postCommentApi = `${URL}/api/mustitApiData/comment/post`;
   const [eventData, setEventData] = useState([]);
 
   const getView = (eventData) => {
@@ -70,8 +74,8 @@ const Mustit = () => {
       <EventForm Data={eventData} setData={setEventData} getView={getView} />
       <Comment
         brandName={brandName}
-        getCommentApi='https://sungtt.com/api/mustitApiData/comment'
-        postCommentApi='https://sungtt.com/api/mustitApiData/comment/post'
+        getCommentApi={getCommentApi}
+        postCommentApi={postCommentApi}
         // getCommentApi='http://localhost:3001/api/mustitApiData/comment'
         // postCommentApi='http://localhost:3001/api/mustitApiData/comment/post'
       />
