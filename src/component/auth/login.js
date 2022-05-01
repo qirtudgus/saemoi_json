@@ -18,7 +18,7 @@ const Login = () => {
     navigate('/');
   };
 
-  const { userAuth, setUserAuth } = useContext(UserInfo);
+  const { userAuth, setUserAuth, URL } = useContext(UserInfo);
 
   const [id, setId] = useState('');
   const [password, setPassword] = useState('');
@@ -44,37 +44,35 @@ const Login = () => {
     const userLoginInfo = {};
     userLoginInfo.id = id;
     userLoginInfo.password = password;
-    axios
-      .post('https://sungtt.com/api/authApiData/login', userLoginInfo)
-      .then((res) => {
-        console.log(res);
-        //로그인 성공 했을 때
-        if (res.data.auth === true) {
-          localStorage.setItem('token', res.data.refreshToken);
-          console.log(res.data);
-          const token = localStorage.getItem('token');
-          console.log(token);
-          const RefreshPayload = jwtDecode(token);
-          const accessPayload = jwtDecode(RefreshPayload.accessToken);
+    axios.post(`${URL}/api/authApiData/login`, userLoginInfo).then((res) => {
+      console.log(res);
+      //로그인 성공 했을 때
+      if (res.data.auth === true) {
+        localStorage.setItem('token', res.data.refreshToken);
+        console.log(res.data);
+        const token = localStorage.getItem('token');
+        console.log(token);
+        const RefreshPayload = jwtDecode(token);
+        const accessPayload = jwtDecode(RefreshPayload.accessToken);
 
-          console.log(accessPayload);
+        console.log(accessPayload);
 
-          setUserAuth({ ...userAuth, id: accessPayload.userId, auth: true });
+        setUserAuth({ ...userAuth, id: accessPayload.userId, auth: true });
 
-          axios.defaults.headers.common[
-            'Authorization'
-          ] = `${res.data.refreshToken}`; //앞으로 api통신에 토큰이 들어가있음
-          goHome();
-        }
-        // 비밀번호가 틀렸을 때
-        else if (res.data.authPassword === false) {
-          alert('비밀번호가 틀렸습니다.');
-        }
-        // 아이디가 틀렸을 때
-        else if (res.data.auth === false) {
-          alert('아이디가 틀렸습니다.');
-        }
-      });
+        axios.defaults.headers.common[
+          'Authorization'
+        ] = `${res.data.refreshToken}`; //앞으로 api통신에 토큰이 들어가있음
+        goHome();
+      }
+      // 비밀번호가 틀렸을 때
+      else if (res.data.authPassword === false) {
+        alert('비밀번호가 틀렸습니다.');
+      }
+      // 아이디가 틀렸을 때
+      else if (res.data.auth === false) {
+        alert('아이디가 틀렸습니다.');
+      }
+    });
   };
 
   const resetId = () => {
