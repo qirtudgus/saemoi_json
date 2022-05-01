@@ -1,22 +1,23 @@
-import axios from 'axios';
-import { useState, useRef, useEffect, useContext } from 'react';
+import axios from "axios";
+import { useState, useRef, useEffect, useContext } from "react";
 import {
   Route,
   Routes,
   useNavigate,
   useLocation,
   useParams,
-} from 'react-router-dom';
-
-import backHistory from '../img/뒤로가기_흰색.svg';
-import { addDate } from './addDate';
+} from "react-router-dom";
+import "../css/viewboard.css";
+import backHistory from "../img/뒤로가기_흰색.svg";
+import { addDate } from "./addDate";
 // TOAST UI Editor import
-import '@toast-ui/editor/dist/toastui-editor.css';
-import { Editor, Viewer } from '@toast-ui/react-editor';
-import { UserInfo } from '../App';
+import "@toast-ui/editor/dist/toastui-editor.css";
+import { Editor, Viewer } from "@toast-ui/react-editor";
+import { UserInfo } from "../App";
 
 const ViewBoard = (pathname) => {
-  const { userAuth, goLogOut, goBoard, URL } = useContext(UserInfo);
+  const { userAuth, goLogOut, goBoard, URL, setUserAuth } =
+    useContext(UserInfo);
 
   const navigate = useNavigate();
   const [page, setPage] = useState([]);
@@ -25,7 +26,7 @@ const ViewBoard = (pathname) => {
   const [checkLikeUser, setCheckLikeUser] = useState(false);
   const [checkWriteUser, setCheckWriteUser] = useState(false);
 
-  const key = pathname.data.replace(/[^0-9]/g, '');
+  const key = pathname.data.replace(/[^0-9]/g, "");
   // console.log(key);
 
   // let commentList = [
@@ -45,7 +46,7 @@ const ViewBoard = (pathname) => {
   //     comment_date: '22.22.29',
   //   },
   // ];
-
+  const commentRef = useRef();
   const params = useParams();
   //필요가 없네..?
   const profile = page[params.boardnumber];
@@ -58,12 +59,20 @@ const ViewBoard = (pathname) => {
   function checkWriter(userAuth, writer) {
     if (userAuth === writer) {
       setCheckWriteUser(true);
-      console.log('글의 작성자입니다.');
+      console.log("글의 작성자입니다.");
     } else {
       setCheckWriteUser(false);
-      console.log('작성자가 아닙니다.');
+      console.log("작성자가 아닙니다.");
     }
   }
+
+  useEffect(() => {
+    setUserAuth({
+      ...userAuth,
+      id: userAuth.id,
+      auth: true,
+    });
+  }, []);
 
   //게시판 api 뿌려주기
   useEffect(() => {
@@ -105,12 +114,12 @@ const ViewBoard = (pathname) => {
       })
       .then((res) => {
         if (res.data === true) {
-          console.log('추천되었습니다.');
+          console.log("추천되었습니다.");
           return;
         } else if (res.data === false) {
           //추천이 취소되는 기능도 만들어보자..
           //db에서 -1 해주고 리스트에서 아이디를 제거해주면 될거같다.
-          console.log('추천취소!');
+          console.log("추천취소!");
         }
       })
       .then((res) => {
@@ -127,17 +136,26 @@ const ViewBoard = (pathname) => {
 
   //댓글 등록하기
   const addComment = () => {
-    axios.post(`${URL}/api/boardApiData/addComment`, {
-      key: key,
-      id: userAuth.id,
-      date: addDate(),
-      content: comment,
-    });
-    window.location.reload();
+    axios
+      .post(`${URL}/api/boardApiData/addComment`, {
+        key: key,
+        id: userAuth.id,
+        date: addDate(),
+        content: comment,
+      })
+      .then((res) => {
+        setComment("");
+        axios
+          .post(`${URL}/api/boardApiData/comment`, { index: key })
+          .then((res) => {
+            console.log(res.data);
+            setCommentList([...res.data]);
+          });
+      });
   };
 
   const removeBoard = () => {
-    if (window.confirm('글을 삭제하시겠습니까?')) {
+    if (window.confirm("글을 삭제하시겠습니까?")) {
       console.log(key);
       axios.post(`${URL}/api/boardApiData/removeBoard`, {
         key: key,
@@ -149,51 +167,56 @@ const ViewBoard = (pathname) => {
   return (
     <>
       {page.reverse().map((i, index) => (
-        <div key={index}>
-          {checkWriteUser ? (
-            <>
-              <button
-                onClick={() => {
-                  navigate(`/board/UpdateWrite/${i.board_index}`);
-                }}
-              >
-                글수정
-              </button>
-              <button onClick={removeBoard}>글삭제</button>
-            </>
-          ) : null}
+        <div key={index} className="viewboard_warp">
+          <div className="viewboard_container">
+            {checkWriteUser ? (
+              <>
+                <button
+                  onClick={() => {
+                    navigate(`/board/UpdateWrite/${i.board_index}`);
+                  }}
+                >
+                  글수정
+                </button>
+                <button onClick={removeBoard}>글삭제</button>
+              </>
+            ) : null}
 
-          <li>제목 : {i.board_title}</li>
-          <li>작성날짜 : {i.board_date}</li>
-          <li>작성자 : {i.board_writer}</li>
-          <Viewer initialValue={i.board_content}></Viewer>
-          <span>추천수 : {i.board_like}</span>
-
-          <button
-            className='like'
-            onClick={() => {
-              like(i.board_index, userAuth.id);
-            }}
-          >
-            추천
-          </button>
-          <input
-            placeholder='댓글을 입력해주세요'
-            onChange={(e) => {
-              setComment(e.target.value);
-            }}
-          ></input>
-          <button onClick={addComment}>댓글 등록</button>
-          {commentList.map((i, index) => (
-            <div key={i.comment_index}>
-              <p>{i.comment_date}</p>
-              <p>{i.comment_content}</p>
-              <p>{i.comment_writer}</p>
+            <li>제목 : {i.board_title}</li>
+            <li>작성날짜 : {i.board_date}</li>
+            <li>작성자 : {i.board_writer}</li>
+            <div className="viewboard_view">
+              <Viewer initialValue={i.board_content}></Viewer>
             </div>
-          ))}
+            <span>추천수 : {i.board_like}</span>
 
-          <div className='goBack' onClick={goBack}>
-            <img src={backHistory} alt='뒤로가기' />
+            <button
+              className="like"
+              onClick={() => {
+                like(i.board_index, userAuth.id);
+              }}
+            >
+              추천
+            </button>
+            <input
+              value={comment}
+              placeholder="댓글을 입력해주세요"
+              onChange={(e) => {
+                setComment(e.target.value);
+              }}
+            ></input>
+            <button onClick={addComment}>댓글 등록</button>
+            {commentList.map((i, index) => (
+              <div key={i.comment_index}>
+                <p>{i.comment_date}</p>
+                <p>{i.comment_content}</p>
+                <p>{i.comment_writer}</p>
+              </div>
+            ))}
+            <div className="viewboard_bottomdiv"></div>
+          </div>
+          <div className="goBack" onClick={goBack}>
+            <img src={backHistory} alt="뒤로가기" />
           </div>
         </div>
       ))}

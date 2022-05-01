@@ -1,22 +1,24 @@
-import axios from 'axios';
-import React, { useState, useRef, useEffect, useContext } from 'react';
+import axios from "axios";
+import React, { useState, useRef, useEffect, useContext } from "react";
 // TOAST UI Editor import
-import '@toast-ui/editor/dist/toastui-editor.css';
-import { Editor, Viewer } from '@toast-ui/react-editor';
-import { UserInfo } from '../App';
-import { addDate } from './addDate';
+import "@toast-ui/editor/dist/toastui-editor.css";
+import { Editor, Viewer } from "@toast-ui/react-editor";
+import { UserInfo } from "../App";
+import { addDate } from "./addDate";
+import { useNavigate } from "react-router-dom";
 
 const UpdateWrite = (pathname) => {
-  const { userAuth, goLogOut, goBoard, goHome, goLogin, URL } =
+  const { userAuth, goLogOut, goBoard, goHome, goLogin, goBack, URL } =
     useContext(UserInfo);
-  const key = pathname.data.replace(/[^0-9]/g, '');
+  const key = pathname.data.replace(/[^0-9]/g, "");
   const [board, setBoard] = useState({
-    board_title: '',
-    board_content: 'zzzzzzzzzzzzz',
+    board_title: "",
+    board_content: "zzzzzzzzzzzzz",
     board_writer: userAuth.id,
-    board_date: '',
+    board_date: "",
   });
 
+  const navigate = useNavigate();
   const [editText, setEditText] = useState([]);
 
   const title = useRef();
@@ -59,7 +61,7 @@ const UpdateWrite = (pathname) => {
       board_date: addDate(),
     };
     await axios.post(`${URL}/api/boardApiData/updatewrite`, arr).then((res) => {
-      goBoard();
+      navigate(`/board/viewboard/${key}`, { replace: true });
     });
   };
 
@@ -72,14 +74,14 @@ const UpdateWrite = (pathname) => {
       {editText.map((i, index) => (
         <>
           <input
-            name='title'
-            placeholder='제목을 입력해주세요'
+            name="title"
+            placeholder="제목을 입력해주세요"
             ref={title}
             onChange={title_write}
             value={i.board_title}
           ></input>
           <Editor
-            initialEditType='wysiwyg'
+            initialEditType="wysiwyg"
             ref={editor}
             initialValue={i.board_content}
           ></Editor>

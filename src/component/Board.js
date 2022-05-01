@@ -1,22 +1,23 @@
-import { useState, useRef, useEffect, useContext } from 'react';
+import { useState, useRef, useEffect, useContext } from "react";
 import {
   Route,
   Routes,
   useNavigate,
   useLocation,
   Link,
-} from 'react-router-dom';
-import '../css/board.css';
-import axios from 'axios';
-import '@toast-ui/editor/dist/toastui-editor.css';
-import { Editor, Viewer } from '@toast-ui/react-editor';
-import { UserInfo } from '../App';
+} from "react-router-dom";
+import "../css/board.css";
+import axios from "axios";
+import "@toast-ui/editor/dist/toastui-editor.css";
+import { Editor, Viewer } from "@toast-ui/react-editor";
+import { UserInfo } from "../App";
+import { useInView } from "react-intersection-observer";
 
 const Board = () => {
   const boardNumber = useRef();
   const { URL } = useContext(UserInfo);
   const [list, setList] = useState([]);
-
+  const [ref, inView] = useInView();
   useEffect(() => {
     axios
       .post(`${URL}/api/boardApiData/getBoard`)
@@ -37,7 +38,7 @@ const Board = () => {
 
   return (
     <>
-      <div className='board_wrap'>
+      <div className="board_wrap">
         {list.map((i, index) => (
           <div
             onClick={() => {
@@ -47,20 +48,27 @@ const Board = () => {
               navigate(`/board/viewboard/${i.board_index}`);
             }}
             key={i.board_index}
-            className='board_list'
+            className="board_list"
           >
-            <div className='board_content'>
-              <span ref={boardNumber}>{i.board_index}</span>
-              <span className='board_title'>제목 : {i.board_title}</span>
-              <span>작성자 : {i.board_writer}</span>
-              <Viewer initialValue={i.board_content}></Viewer>
-              <span>날짜 : {i.board_date}</span>
-              <span>조회수 : {i.board_views}</span>
-              <span>추천수 : {i.board_like}</span>
+            <div className="board_content" ref={ref}>
+              {/* <span ref={boardNumber}>{i.board_index}</span> */}
+              <p className="board_title">제목 : {i.board_title}</p>
+              <div className="board_view">
+                <Viewer initialValue={i.board_content}></Viewer>
+              </div>
+              <p className="board_writer">작성자 : {i.board_writer}</p>
+
+              <div className="board_bottom">
+                <span>추천수 : {i.board_like}</span>
+                <span>{i.board_date}</span>
+              </div>
+
+              {/* <span>조회수 : {i.board_views}</span> */}
             </div>
-            <div className='board_line'></div>
+            <div className="board_line"></div>
           </div>
         ))}
+        <div className="board_bottomdiv"></div>
       </div>
     </>
   );

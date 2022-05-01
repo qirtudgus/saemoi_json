@@ -1,0 +1,21 @@
+.viewboard_warp{
+display: flex;
+width: 100%;
+    
+}
+.viewboard_container{
+margin: 0 auto;
+width: calc(100% - 2rem);
+
+    }
+    
+
+.viewboard_view {
+    overflow-y: scroll;
+    display: block;
+}
+.viewboard_bottomdiv {
+    position: relative;
+    height: 7rem;
+    width: 100%;
+}
