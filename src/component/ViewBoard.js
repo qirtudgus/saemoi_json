@@ -133,6 +133,7 @@ const ViewBoard = (pathname) => {
       date: addDate(),
       content: comment,
     });
+    window.location.reload();
   };
 
   const removeBoard = () => {

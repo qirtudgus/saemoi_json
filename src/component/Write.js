@@ -53,7 +53,7 @@ const Write = () => {
       board_writer: board.board_writer,
       board_date: addDate(),
     };
-    await axios.post(`${URL}api/boardApiData/write`, arr).then((res) => {
+    await axios.post(`${URL}/api/boardApiData/write`, arr).then((res) => {
       goBoard();
     });
   };

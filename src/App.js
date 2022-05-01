@@ -28,7 +28,8 @@ export const UserInfo = React.createContext();
 // api통신 시 URL 변경용
 const local = 'http://localhost:3001';
 const server = 'https://sungtt.com';
-const URL = server;
+// URL 할당에 따른 서버환경 변경! 아주편리하다~
+const URL = local;
 
 let vh = window.innerHeight * 0.01;
 document.documentElement.style.setProperty('--vh', `${vh}px`);
