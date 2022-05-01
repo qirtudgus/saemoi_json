@@ -2,12 +2,13 @@ import axios from 'axios';
 import sha256 from 'crypto-js/sha256';
 import Footer from './footer';
 // import cryptoJs from "crypto-js";
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef, useContext } from 'react';
 import { addDate } from './addDate';
+import { UserInfo } from '../App';
 
 const Comment = ({ getCommentApi, postCommentApi, brandName }) => {
   const [comment, setComment] = useState([]);
-
+  const { URL } = useContext(UserInfo);
   useEffect(() => {
     axios.get(getCommentApi).then((res) => {
       console.log(res.data);
@@ -49,9 +50,7 @@ const Comment = ({ getCommentApi, postCommentApi, brandName }) => {
     const hash = sha256(delConfirm).words.join('');
     const passwordCheckValue = { idx, hash, brandName };
     axios
-      .get(
-        `https://sungtt.com/api/${brandName}ApiData/comment_password_check_${brandName}`,
-      )
+      .get(`${URL}/api/${brandName}ApiData/comment_password_check_${brandName}`)
       .then((res) => {
         let userInfo = res.data;
         let password = userInfo.find((i) => i.idx === idx).password;
@@ -59,10 +58,7 @@ const Comment = ({ getCommentApi, postCommentApi, brandName }) => {
       })
       .then((res) => {
         if (hash === res) {
-          axios.post(
-            'https://sungtt.com/api/comment_password_check',
-            passwordCheckValue,
-          );
+          axios.post(`${URL}/api/comment_password_check`, passwordCheckValue);
           alert('댓글이 삭제되었습니다.');
           window.location.reload(); //댓글 삭제 후 새로고침
         } else alert('비밀번호가 틀립니다.');
