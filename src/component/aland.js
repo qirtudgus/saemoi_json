@@ -1,17 +1,22 @@
-import axios from "axios";
-import Comment from "./comment";
-import cheerio from "cheerio";
-import React, { useState, useEffect } from "react";
-import Loading from "./loading";
-import EventForm from "./eventForm";
+import axios from 'axios';
+import Comment from './comment';
+import cheerio from 'cheerio';
+import React, { useState, useEffect, useContext } from 'react';
+import Loading from './loading';
+import EventForm from './eventForm';
+import { UserInfo } from '../App';
 
 const Aland = () => {
+  const { URL } = useContext(UserInfo);
   const [eventData, setEventData] = useState([]);
   const [loading, setLoading] = useState(false);
-  const brandName = "aland";
+  const brandName = 'aland';
 
-  const getApi = "https://sungtt.com/api/alandApiData";
-  const getView = "https://sungtt.com/api/alandApiData/views";
+  const getApi = `${URL}/api/alandApiData`;
+  const getView = `${URL}/api/alandApiData/views`;
+
+  const getCommentApi = `${URL}/api/alandApiData/comment`;
+  const postCommentApi = `${URL}/api/alandApiData/comment/post`;
 
   function getAlandData() {
     return axios.get(getApi);
@@ -19,7 +24,7 @@ const Aland = () => {
 
   async function getNewAlandData() {
     const res = await axios.get(
-      "https://www.a-land.co.kr/event/promotion_list.php",
+      'https://www.a-land.co.kr/event/promotion_list.php',
     );
     let titleList = [];
     let dateList = [];
@@ -27,36 +32,36 @@ const Aland = () => {
     let linkList = [];
     let eventList = [];
     const $ = cheerio.load(res.data);
-    const title = $(".wrap-event-list .ename");
-    console.log("title: ", title);
-    const date = $(".wrap-event-list .period");
-    const img = $(".wrap-event-list .thumb").children("img");
-    const link = $(".ajax_hash");
+    const title = $('.wrap-event-list .ename');
+    console.log('title: ', title);
+    const date = $('.wrap-event-list .period');
+    const img = $('.wrap-event-list .thumb').children('img');
+    const link = $('.ajax_hash');
     title.each(function (i) {
       titleList[i] = {
         title: $(this)
           .text()
-          .replace(/[\n\t]/g, ""),
+          .replace(/[\n\t]/g, ''),
       };
     });
     date.each(function (i_1) {
       dateList[i_1] = {
         date: $(this)
           .text()
-          .replace(/[/]/g, ".")
-          .replace(/ /g, "")
+          .replace(/[/]/g, '.')
+          .replace(/ /g, '')
           .substring(2)
-          .replaceAll("20", ""),
+          .replaceAll('20', ''),
       };
     });
     img.each(function (i_2) {
       imgList[i_2] = {
-        img: "https://www.a-land.co.kr" + $(this).attr("src"),
+        img: 'https://www.a-land.co.kr' + $(this).attr('src'),
       };
     });
     link.each(function (i_3) {
       linkList[i_3] = {
-        link: "https://www.a-land.co.kr" + $(this).attr("href"),
+        link: 'https://www.a-land.co.kr' + $(this).attr('href'),
       };
     });
     eventList = titleList
@@ -68,7 +73,7 @@ const Aland = () => {
   }
 
   useEffect(() => {
-    axios.get("https://sungtt.com/api/alandApiData").then((res) => {
+    axios.get(`${URL}/api/alandApiData`).then((res) => {
       setEventData([...res.data]);
     });
 
@@ -81,7 +86,7 @@ const Aland = () => {
         );
 
         if (pareTitle.length < 0) {
-          console.log("이벤트가 최신입니다.");
+          console.log('이벤트가 최신입니다.');
           setEventData([...tableData.data]);
         } else {
           // 새로 받아온 이벤트의 타이틀과 compare2의 차집합 배열
@@ -92,7 +97,7 @@ const Aland = () => {
           const NewDataNum = compareNewData.length;
 
           // 없는 타이틀의 배열을 전송
-          axios.post("https://sungtt.com/api/alandApiData/get", compareNewData);
+          axios.post(`${URL}/api/alandApiData/get`, compareNewData);
 
           // 진행중인 이벤트엔없고, 기존엔 가지고있는 삭제해야할 배열 생성
           const delData = tableData.data.filter((i) => {
@@ -101,10 +106,10 @@ const Aland = () => {
           });
 
           // 종료된 타이틀의 배열을 전송
-          axios.post("https://sungtt.com/api/alandApiData/end", delData);
+          axios.post(`${URL}/api/alandApiData/end`, delData);
 
           // 새로운 데이터를 받아와서, 렌더링
-          axios.get("https://sungtt.com/api/alandApiData").then((res) => {
+          axios.get(`${URL}/api/alandApiData`).then((res) => {
             setEventData([...res.data]);
             // console.log(`${NewDataNum}개가 갱신되었습니다.`);
           });
@@ -118,7 +123,7 @@ const Aland = () => {
     <>
       {loading ? (
         <>
-          {" "}
+          {' '}
           <EventForm
             Data={eventData}
             setData={setEventData}
@@ -127,8 +132,8 @@ const Aland = () => {
           />
           <Comment
             brandName={brandName}
-            getCommentApi="https://sungtt.com/api/alandApiData/comment"
-            postCommentApi="https://sungtt.com/api/alandApiData/comment/post"
+            getCommentApi={getCommentApi}
+            postCommentApi={postCommentApi}
           />
         </>
       ) : (
