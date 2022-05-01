@@ -54,6 +54,7 @@ const Write = () => {
       board_date: addDate(),
     };
     await axios.post(`${URL}/api/boardApiData/write`, arr).then((res) => {
+      console.log(res);
       goBoard();
     });
   };

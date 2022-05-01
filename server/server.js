@@ -62,11 +62,14 @@ app.post('/api/comment_password_check', (req, res) => {
   });
 });
 
+//렌더링때 마다 호출하여 토큰체크 미들웨어를 실행시키고,
+//헤더에 새로운 리프레쉬토큰을 담아서 응답해준다.
 app.post('/api/middlewere', (req, res) => {
   // console.log(`${req.headers.authorization}`);
-  console.log(req.authorization);
+  // console.log(req.authorization);
   // console.log(req.userId);
 
+  // 미들웨어에서 생성한 헤더속 토큰값을 응답해준다.
   res.send(req.authorization);
 });
 

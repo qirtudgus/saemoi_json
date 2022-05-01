@@ -75,31 +75,40 @@ function App() {
   //useLocation의 path.name을 의존성 배열로 사용
   //주소가 바뀔때마다 토큰을 유무를 확인 후, userAuth 세팅
   useEffect(() => {
-    if (localStorage.getItem('token')) {
-      const token = localStorage.getItem('token');
-      const RefreshPayload = jwtDecode(token);
-      const accessPayload = jwtDecode(RefreshPayload.accessToken);
-      const { userId } = accessPayload;
+    axios.post(`${URL}/api/middlewere`).then((res) => {
+      console.log(`서버 api jwt토큰검증 정상 Token = ${res.data}`);
+      if (res.data === false) {
+        localStorage.removeItem('token');
+        console.log('세션이 만료되었습니다.');
+      }
+
+      const token = res.data;
       axios.defaults.headers.common['Authorization'] = `${token}`; //앞으로 api통신에 토큰이 들어가있음
-      setUserAuth({
-        ...userAuth,
-        id: userId,
-        auth: true,
-        refreshToken: token,
-      });
-      console.log(userAuth);
-      console.log('토큰 헤더 등록 완료');
-      // console.log(`${userAuth.id}님이 로그인 하셨습니다.`);
-      setUserAuth({ ...userAuth, id: userId });
-    } else {
-      console.log('헤더에 등록할 토큰이 없습니다.');
-      setUserAuth({
-        ...userAuth,
-        id: '',
-        auth: false,
-        refreshToken: 'null',
-      });
-    }
+      if (localStorage.getItem('token')) {
+        const token = localStorage.getItem('token');
+        const RefreshPayload = jwtDecode(token);
+        const accessPayload = jwtDecode(RefreshPayload.accessToken);
+        const { userId } = accessPayload;
+        axios.defaults.headers.common['Authorization'] = `${token}`; //앞으로 api통신에 토큰이 들어가있음
+        setUserAuth({
+          ...userAuth,
+          id: userId,
+          auth: true,
+          refreshToken: token,
+        });
+        console.log('토큰 헤더 등록 완료');
+        // console.log(`${userAuth.id}님이 로그인 하셨습니다.`);
+        setUserAuth({ ...userAuth, id: userId });
+      } else {
+        console.log('헤더에 등록할 토큰이 없습니다.');
+        setUserAuth({
+          ...userAuth,
+          id: '',
+          auth: false,
+          refreshToken: 'null',
+        });
+      }
+    });
   }, [href.pathname]);
 
   return (

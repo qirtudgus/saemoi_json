@@ -46,12 +46,6 @@ const MyPage = () => {
       axios.defaults.headers.common['Authorization'] = `${token}`; //앞으로 api통신에 토큰이 들어가있음
     });
   };
-  const check_Router_MiddlewereToken = () => {
-    axios.post(`${URL}/api/authApiData/middle`).then((res) => {
-      console.log(`라우팅 api jwt토큰검증 정상 Token = ${res.data}`);
-      axios.defaults.headers.common['Authorization'] = `${res.data}`; //앞으로 api통신에 토큰이 들어가있음
-    });
-  };
 
   return (
     <>
@@ -66,9 +60,6 @@ const MyPage = () => {
               </button>
               <button onClick={check_Direct_MiddlewereToken}>
                 서버api 토큰 체크
-              </button>
-              <button onClick={check_Router_MiddlewereToken}>
-                라우팅api 토큰 체크
               </button>
               <button onClick={passwordChange}>비밀번호 변경하기</button>
               <button className='logOutBtn' onClick={goLogOut}>

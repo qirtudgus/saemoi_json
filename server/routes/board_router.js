@@ -54,17 +54,33 @@ router.post('/checkLikeUser', (req, res) => {
 
 //글 작성하기
 router.post('/write', (req, res) => {
-  const { board_title, board_content, board_writer, board_date, board_views } =
-    req.body;
+  const token = req.authorization;
+  console.log(token);
+  if (token === false) {
+    res.send(false);
+  }
+  if (token) {
+    const {
+      board_title,
+      board_content,
+      board_writer,
+      board_date,
+      board_views,
+    } = req.body;
 
-  console.log(board_title, board_content, board_writer);
+    console.log(board_title, board_content, board_writer);
 
-  const writeQuery =
-    'INSERT INTO board_table (board_title,board_content,board_writer, board_date) VALUES (?,?,?,?)';
+    const writeQuery =
+      'INSERT INTO board_table (board_title,board_content,board_writer, board_date) VALUES (?,?,?,?)';
 
-  db.query(writeQuery, [board_title, board_content, board_writer, board_date]);
-
-  res.send('글 작성 통신');
+    db.query(writeQuery, [
+      board_title,
+      board_content,
+      board_writer,
+      board_date,
+    ]);
+    res.send('글 작성 통신');
+  }
 });
 
 //글 수정하기

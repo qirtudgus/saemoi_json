@@ -118,7 +118,7 @@ const Login = () => {
                   ref={focusPassword}
                   placeholder='비밀번호'
                   type='password'
-                  autocomplete='off'
+                  autoComplete='off'
                   name='password'
                   value={password}
                   onChange={onChangePassword}
