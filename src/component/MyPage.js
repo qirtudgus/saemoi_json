@@ -1,18 +1,19 @@
-import axios from "axios";
-import jwtDecode from "jwt-decode";
-import { useEffect, useState, useContext } from "react";
-import { useNavigate } from "react-router-dom";
-import { UserInfo } from "../App";
-import "../css/myPage.css";
+import axios from 'axios';
+import jwtDecode from 'jwt-decode';
+import { useEffect, useState, useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { UserInfo } from '../App';
+import '../css/myPage.css';
 
 const MyPage = () => {
   const navigate = useNavigate();
-  const { userAuth, setUserAuth, goLogOut, goLogin } = useContext(UserInfo);
+  const { userAuth, setUserAuth, goLogOut, goLogin, URL } =
+    useContext(UserInfo);
   const goHome = () => {
-    navigate("/");
+    navigate('/');
   };
   const goRegister = () => {
-    navigate("/register");
+    navigate('/register');
   };
 
   //토큰이 없으면 아웃,
@@ -29,26 +30,26 @@ const MyPage = () => {
 
   //setState도 context로 받아와서 상태값을 변경시킬 수 있다.
   const contextSetState = () => {
-    setUserAuth({ ...userAuth, id: "hahaha" });
+    setUserAuth({ ...userAuth, id: 'hahaha' });
   };
 
   const passwordChange = () => {
-    navigate("/auth/passwordChange");
+    navigate('/auth/passwordChange');
   };
 
   const check_Direct_MiddlewereToken = () => {
-    axios.post("https://sungtt.com/api/middlewere").then((res) => {
+    axios.post(`${URL}/api/middlewere`).then((res) => {
       console.log(`서버 api jwt토큰검증 정상 Token = ${res.data}`);
       if (res.data === true) return;
       const token = res.data;
       // localStorage.setItem("token", token);
-      axios.defaults.headers.common["Authorization"] = `${token}`; //앞으로 api통신에 토큰이 들어가있음
+      axios.defaults.headers.common['Authorization'] = `${token}`; //앞으로 api통신에 토큰이 들어가있음
     });
   };
   const check_Router_MiddlewereToken = () => {
-    axios.post("https://sungtt.com/api/authApiData/middle").then((res) => {
+    axios.post(`${URL}/api/authApiData/middle`).then((res) => {
       console.log(`라우팅 api jwt토큰검증 정상 Token = ${res.data}`);
-      axios.defaults.headers.common["Authorization"] = `${res.data}`; //앞으로 api통신에 토큰이 들어가있음
+      axios.defaults.headers.common['Authorization'] = `${res.data}`; //앞으로 api통신에 토큰이 들어가있음
     });
   };
 
@@ -56,9 +57,9 @@ const MyPage = () => {
     <>
       {userAuth.auth ? (
         <>
-          <div className="mypage_wrap">
-            <p className="mypage_title">내 프로필</p>
-            <div className="mypage_container">
+          <div className='mypage_wrap'>
+            <p className='mypage_title'>내 프로필</p>
+            <div className='mypage_container'>
               <div> {userAuth.id}님</div>
               <button onClick={contextSetState}>
                 콘텍스트로 받은 세터함수로 변경
@@ -70,7 +71,7 @@ const MyPage = () => {
                 라우팅api 토큰 체크
               </button>
               <button onClick={passwordChange}>비밀번호 변경하기</button>
-              <button className="logOutBtn" onClick={goLogOut}>
+              <button className='logOutBtn' onClick={goLogOut}>
                 로그아웃
               </button>
               {/* <p>지금 당신의 토큰은! {userAuth.refreshToken}</p> */}
@@ -78,16 +79,16 @@ const MyPage = () => {
           </div>
         </>
       ) : (
-        <div className="mypage_wrap">
-          <p className="mypage_title">내 프로필</p>
-          <div className="mypage_container">
+        <div className='mypage_wrap'>
+          <p className='mypage_title'>내 프로필</p>
+          <div className='mypage_container'>
             <p>비회원입니다.</p>
-            <button className="loginBtn mainBgColor" onClick={goLogin}>
+            <button className='loginBtn mainBgColor' onClick={goLogin}>
               로그인
             </button>
             <p>
-              계정이 없으신가요?{" "}
-              <span className="pt" onClick={goRegister}>
+              계정이 없으신가요?{' '}
+              <span className='pt' onClick={goRegister}>
                 회원가입
               </span>
             </p>
