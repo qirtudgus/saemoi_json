@@ -89,17 +89,17 @@
 .footerBar .navWrite .navIcon {
   display: block;
   margin: 0 auto;
-  background: url('../img/footerSprite.png') no-repeat -106px -31px;
-  width: 26px;
-  height: 26px;
+  background: url('../img/footerSprite_2.png') no-repeat -109px -122px;;
+  width: 27px;
+  height: 27px;
 }
 
 .footerBar .navWrite.active .navIcon {
   display: block;
   margin: 0 auto;
-  background: url('../img/footerSprite.png') no-repeat -143px -32px;
-  width: 26px;
-  height: 26px;
+  background: url('../img/footerSprite_2.png') no-repeat -146px -122px;;
+  width: 27px;
+  height: 27px;
 }
 
 .footerBar .navMyPage .navIcon {
@@ -116,4 +116,8 @@
   background: url('../img/footerSprite.png') no-repeat -67px -124px;
   width: 26px;
   height: 26px;
+}
+
+.freeboard {
+  width: 27px;
 }

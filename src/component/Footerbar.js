@@ -1,64 +1,66 @@
-import React from 'react';
-import { useNavigate, NavLink } from 'react-router-dom';
-import '../css/footerbar.css';
+import React from "react";
+import { useNavigate, NavLink } from "react-router-dom";
+import "../css/footerbar.css";
+import freeboard_color from "../img/자유게시판_컬러.svg";
+import freeboard_black from "../img/자유게시판_흑백.svg";
 
 const Footerbar = () => {
   const navigate = useNavigate();
 
   const goCategory = () => {
-    navigate('/category');
+    navigate("/category");
   };
 
   return (
-    <nav className='footerBox'>
-      <div className='footerBar'>
+    <nav className="footerBox">
+      <div className="footerBar">
         <NavLink
-          to='/category'
+          to="/category"
           className={({ isActive }) =>
-            `navCategory ` + (isActive ? 'active' : undefined)
+            `navCategory ` + (isActive ? "active" : undefined)
           }
         >
-          <span className='navIcon'></span>
+          <span className="navIcon"></span>
           <p>카테고리</p>
         </NavLink>
 
         <NavLink
-          to='/comment'
+          to="/comment"
           className={({ isActive }) =>
-            `navComment ` + (isActive ? 'active' : undefined)
+            `navComment ` + (isActive ? "active" : undefined)
           }
         >
-          <span className='navIcon'></span>
+          <span className="navIcon"></span>
           <p>댓글달기</p>
         </NavLink>
 
         <NavLink
-          to='/'
+          to="/"
           className={({ isActive }) =>
-            `navHome ` + (isActive ? 'active' : undefined)
+            `navHome ` + (isActive ? "active" : undefined)
           }
         >
-          <span className='navIcon'></span>
+          <span className="navIcon"></span>
           <p>홈</p>
         </NavLink>
 
         <NavLink
-          to='/write'
+          to="/board"
           className={({ isActive }) =>
-            `navWrite ` + (isActive ? 'active' : undefined)
+            `navWrite ` + (isActive ? "active" : undefined)
           }
         >
-          <span className='navIcon'></span>
-          <p>글쓰기</p>
+          <span className="navIcon"></span>
+          <p>자유게시판</p>
         </NavLink>
 
         <NavLink
-          to='/mypage'
+          to="/mypage"
           className={({ isActive }) =>
-            `navMyPage ` + (isActive ? 'active' : undefined)
+            `navMyPage ` + (isActive ? "active" : undefined)
           }
         >
-          <span className='navIcon'></span>
+          <span className="navIcon"></span>
           <p>마이페이지</p>
         </NavLink>
       </div>

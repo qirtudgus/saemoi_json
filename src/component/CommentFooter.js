@@ -1,5 +1,5 @@
-import { useCallback, useContext, useRef, useState } from 'react';
-import '../css/commentFooter.css';
+import { useCallback, useContext, useRef, useState } from "react";
+import "../css/commentFooter.css";
 
 const CommentFooter = ({ addComment, setComment, comment }) => {
   const area = useRef();
@@ -8,19 +8,19 @@ const CommentFooter = ({ addComment, setComment, comment }) => {
     if (area === null || area.current === null) {
       return;
     }
-    area.current.style.height = '50px';
-    area.current.style.height = area.current.scrollHeight + 'px';
+    area.current.style.height = "50px";
+    area.current.style.height = area.current.scrollHeight + "px";
   }, []);
 
   return (
     <>
-      <div className='comment_footer_wrap'>
-        <div className='comment_footer_container'>
+      <div className="comment_footer_wrap">
+        <div className="comment_footer_container">
           <textarea
             value={comment}
-            placeholder='댓글을 입력해주세요.'
+            placeholder="댓글을 입력해주세요."
             ref={area}
-            className='comment_footer_input'
+            className="comment_footer_input"
             onChange={(e) => {
               areaResize();
               setComment(e.target.value);

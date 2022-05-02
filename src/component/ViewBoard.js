@@ -14,11 +14,9 @@ const ViewBoard = () => {
   const { userAuth, goBoard, URL, pathname } = useContext(UserInfo);
 
   const navigate = useNavigate();
-  const [page, setPage] = useState([]);
   const [comment, setComment] = useState();
   const [commentList, setCommentList] = useState([]);
-  const [checkLikeUser, setCheckLikeUser] = useState(false);
-  const [checkWriteUser, setCheckWriteUser] = useState(false);
+
   const key = pathname.replace(/[^0-9]/g, "");
 
   const [arr, setArr] = useState({
