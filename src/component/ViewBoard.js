@@ -1,24 +1,17 @@
 import axios from 'axios';
-import { useState, useRef, useEffect, useContext } from 'react';
-import {
-  Route,
-  Routes,
-  useNavigate,
-  useLocation,
-  useParams,
-} from 'react-router-dom';
+import React, { useState, useEffect, useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 import '../css/viewboard.css';
 import backHistory from '../img/뒤로가기_흰색.svg';
 import { addDate } from './addDate';
 // TOAST UI Editor import
 import '@toast-ui/editor/dist/toastui-editor.css';
-import { Editor, Viewer } from '@toast-ui/react-editor';
+import { Viewer } from '@toast-ui/react-editor';
 import { UserInfo } from '../App';
 import CommentFooter from './CommentFooter';
 
-const ViewBoard = (pathname) => {
-  const { userAuth, goLogOut, goBoard, URL, setUserAuth } =
-    useContext(UserInfo);
+const ViewBoard = () => {
+  const { userAuth, goBoard, URL, pathname } = useContext(UserInfo);
 
   const navigate = useNavigate();
   const [page, setPage] = useState([]);
@@ -27,12 +20,8 @@ const ViewBoard = (pathname) => {
   const [checkLikeUser, setCheckLikeUser] = useState(false);
   const [checkWriteUser, setCheckWriteUser] = useState(false);
 
-  const key = pathname.data.replace(/[^0-9]/g, '');
-  console.log(key);
-  const commentRef = useRef();
-  const params = useParams();
-  //필요가 없네..?
-  const profile = page[params.boardnumber];
+  const key = pathname.replace(/[^0-9]/g, '');
+  console.log('안녕');
 
   const goBack = () => {
     navigate(-1);
@@ -43,22 +32,17 @@ const ViewBoard = (pathname) => {
     if (userAuth === writer) {
       setCheckWriteUser(true);
       console.log('글의 작성자입니다.');
+      return;
     } else {
       setCheckWriteUser(false);
       console.log('작성자가 아닙니다.');
+      return;
     }
   }
 
-  useEffect(() => {
-    setUserAuth({
-      ...userAuth,
-      id: userAuth.id,
-      auth: true,
-    });
-  }, []);
-
   //게시판 api 뿌려주기
   useEffect(() => {
+    //게시물
     axios
       .post(`${URL}/api/boardApiData/viewBoard`, { key: key })
       .then((res) => {
@@ -66,10 +50,7 @@ const ViewBoard = (pathname) => {
         setPage([...res.data]);
         checkWriter(userAuth.id, res.data[0].board_writer);
       });
-  }, []);
-
-  //해당 게시물 댓글 api 뿌려주기
-  useEffect(() => {
+    //댓글목록
     axios
       .post(`${URL}/api/boardApiData/comment`, { index: key })
       .then((res) => {
@@ -78,16 +59,16 @@ const ViewBoard = (pathname) => {
       });
   }, []);
 
-  //추천 유무 확인하기
-  useEffect(() => {
-    let id = userAuth.id;
-    axios
-      .post(`${URL}/api/boardApiData/checkLikeUser`, {
-        id: id,
-        index: key,
-      })
-      .then((res) => {});
-  }, []);
+  // 추천 유무 확인하기
+  // useEffect(() => {
+  //   let id = userAuth.id;
+  //   axios
+  //     .post(`${URL}/api/boardApiData/checkLikeUser`, {
+  //       id: id,
+  //       index: key,
+  //     })
+  //     .then((res) => {});
+  // }, []);
 
   const like = (index, id) => {
     axios
@@ -211,4 +192,4 @@ const ViewBoard = (pathname) => {
   );
 };
 
-export default ViewBoard;
+export default React.memo(ViewBoard);

@@ -42,6 +42,8 @@ window.addEventListener('resize', () => {
 });
 
 function App() {
+  const href = useLocation();
+  const navigate = useNavigate();
   const [userAuth, setUserAuth] = useState({
     id: '',
     auth: false,
@@ -65,6 +67,9 @@ function App() {
     navigate('/board');
   };
 
+  const pathname = href.pathname;
+
+  // contextApi 목록
   const userAuthContext = {
     userAuth,
     setUserAuth,
@@ -72,10 +77,8 @@ function App() {
     goLogin,
     goBoard,
     URL,
+    pathname,
   };
-  const href = useLocation();
-  // console.log(href);
-  const navigate = useNavigate();
 
   //useLocation의 path.name을 의존성 배열로 사용
   //주소가 바뀔때마다 토큰을 유무를 확인 후, userAuth 세팅
@@ -127,15 +130,11 @@ function App() {
     localStorage.getItem('token') || undefined
   }`;
   useEffect(() => {
-    console.log(localStorage.getItem('token'));
-
     if (localStorage.getItem('token')) {
       //앞으로 api통신에 토큰이 들어가있음
       const token = localStorage.getItem('token');
-      console.log(token);
 
       const payload = jwtDecode(token);
-      console.log(payload);
       setUserAuth({
         ...userAuth,
         id: payload.userId,
@@ -148,7 +147,6 @@ function App() {
           console.log('헤더가 없습니다..');
           return;
         }
-        console.log(res.data);
         axios.defaults.headers.common['Authorization'] = `${res.data}`;
         localStorage.setItem('token', res.data);
       });
@@ -159,11 +157,9 @@ function App() {
     }
   }, [href.pathname]);
 
-  console.log(href.pathname);
+  //url에 viewboard가 들어가면 footerbar 비렌더링
   const viewBoardRegExp = /viewboard/g;
   const viewBoard = viewBoardRegExp.test(href.pathname);
-
-  console.log(viewBoard);
 
   return (
     <>
@@ -179,10 +175,10 @@ function App() {
             <Route path='/sorry' element={<NotReady />} />
             <Route path='/mypage' element={<MyPage />} />
             <Route path='/write' element={<Write />} />
-            <Route path='/board' element={<Board data={href.pathname} />} />
+            <Route path='/board' element={<Board />} />
             <Route
               path='/board/viewboard/:boardnumber'
-              element={<ViewBoard data={href.pathname} />}
+              element={<ViewBoard />}
             />
             <Route
               path='/board/UpdateWrite/:boardnumber'

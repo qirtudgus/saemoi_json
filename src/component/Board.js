@@ -1,20 +1,13 @@
-import { useState, useRef, useEffect, useContext } from 'react';
-import {
-  Route,
-  Routes,
-  useNavigate,
-  useLocation,
-  Link,
-} from 'react-router-dom';
+import { useState, useEffect, useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 import '../css/board.css';
 import axios from 'axios';
 import '@toast-ui/editor/dist/toastui-editor.css';
-import { Editor, Viewer } from '@toast-ui/react-editor';
+import { Viewer } from '@toast-ui/react-editor';
 import { UserInfo } from '../App';
 import { useInView } from 'react-intersection-observer';
 
 const Board = () => {
-  const boardNumber = useRef();
   const { URL } = useContext(UserInfo);
   const [list, setList] = useState([]);
   const [ref, inView] = useInView();
