@@ -1,21 +1,33 @@
-.viewboard_warp{
-display: flex;
-width: 100%;
-    
+.viewboard_warp {
+  display: flex;
+  width: 100%;
 }
-.viewboard_container{
-margin: 0 auto;
-width: calc(100% - 2rem);
+.viewboard_container {
+  margin: 0 auto;
+  width: calc(100% - 2rem);
+}
 
-    }
-    
+.viewboard_title {
+  font-weight: bold;
 
+  word-wrap: break-word;
+  width: 100%;
+  font-size: 1.1rem;
+  padding: 1rem 0 1rem 0;
+  border-bottom: 1px solid rgb(230, 231, 238);
+}
 .viewboard_view {
-    overflow-y: scroll;
-    display: block;
+  overflow-y: scroll;
+  display: block;
 }
 .viewboard_bottomdiv {
-    position: relative;
-    height: 7rem;
-    width: 100%;
+  position: relative;
+  height: 7rem;
+  width: 100%;
+}
+
+.viewboard_middiv {
+  padding: 1rem 0 1rem 0;
+  display: flex;
+  justify-content: space-between;
 }
