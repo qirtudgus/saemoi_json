@@ -5,13 +5,11 @@ import axios from "axios";
 import "@toast-ui/editor/dist/toastui-editor.css";
 import { Viewer } from "@toast-ui/react-editor";
 import { UserInfo } from "../App";
-import { useInView } from "react-intersection-observer";
 import AddBoard from "../AddBoard";
 
 const Board = () => {
   const { URL } = useContext(UserInfo);
   const [list, setList] = useState([]);
-  const [ref, inView] = useInView();
   useEffect(() => {
     axios
       .post(`${URL}/api/boardApiData/getBoard`)
@@ -44,16 +42,17 @@ const Board = () => {
             key={i.board_index}
             className="board_list"
           >
-            <div className="board_content" ref={ref}>
+            <div className="board_content">
               {/* <span ref={boardNumber}>{i.board_index}</span> */}
-              <p className="board_title">{i.board_title}</p>
+              <div className="board_title">{i.board_title}</div>
               <div className="board_view">
                 <Viewer initialValue={i.board_content}></Viewer>
               </div>
-              <p className="board_writer">작성자 : {i.board_writer}</p>
+              <div className="board_writer">{i.board_writer}</div>
 
               <div className="board_bottom">
                 <span>추천수 : {i.board_like}</span>
+                <span>댓글수 : {i.board_commentCount}</span>
                 <span>{i.board_date}</span>
               </div>
 

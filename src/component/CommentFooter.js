@@ -1,4 +1,4 @@
-import { useCallback, useContext, useRef, useState } from "react";
+import { useCallback, useRef } from "react";
 import "../css/commentFooter.css";
 
 const CommentFooter = ({ addComment, setComment, comment }) => {

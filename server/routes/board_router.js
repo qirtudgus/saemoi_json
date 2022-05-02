@@ -24,13 +24,25 @@ router.post("/addComment", (req, res) => {
   // console.log(board_index);
   // console.log(content);
   //데이터 정상적으로 들어옴
-
+  const countQuery =
+    "UPDATE board_table SET board_commentCount = board_commentCount + 1 WHERE board_index = ?";
   const insertQuery =
     "INSERT INTO comment_table (board_index,comment_content,comment_date,comment_writer) VALUES  ( ?,?,?,?)";
-
   db.query(insertQuery, [board_index, content, date, id]);
+  db.query(countQuery, [board_index]);
 
   res.send("");
+});
+
+//댓글 삭제
+router.post("/removeComment", (req, res) => {
+  console.log(req.body);
+  const { comment_index, board_index } = req.body;
+  const removeQuery = "DELETE FROM comment_table WHERE comment_index = ?";
+  const unCountQuery =
+    "UPDATE board_table SET board_commentCount = board_commentCount - 1 WHERE board_index = ?";
+  db.query(removeQuery, [comment_index]);
+  db.query(unCountQuery, [board_index]);
 });
 
 //추천한 유저인지 확인 후 boolean 값 반환해주기 로직짜기

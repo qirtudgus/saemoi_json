@@ -15,7 +15,6 @@ const ViewBoard = () => {
 
   const navigate = useNavigate();
   const [comment, setComment] = useState();
-  const [commentList, setCommentList] = useState([]);
 
   const key = pathname.replace(/[^0-9]/g, "");
 
@@ -158,6 +157,23 @@ const ViewBoard = () => {
       goBoard();
     }
   };
+  const removeComment = (e) => {
+    if (window.confirm("댓글을 삭제하시겠습니까?")) {
+      let comment_index = "num";
+      let index = e.target.parentNode.parentNode.getAttribute(comment_index);
+      console.log(index);
+      axios.post(`${URL}/api/boardApiData/removeComment`, {
+        comment_index: index,
+        board_index: key,
+      });
+      axios
+        .post(`${URL}/api/boardApiData/comment`, { index: key })
+        .then((res) => {
+          console.log(res.data);
+          setArr({ ...arr, commentList: [...res.data] });
+        });
+    } else return;
+  };
 
   return (
     <>
@@ -165,16 +181,16 @@ const ViewBoard = () => {
         <div key={index} className="viewboard_warp">
           <div className="viewboard_container">
             <div className="viewboard_middiv">
-              <p>작성자 : {i.board_writer}</p>
+              <div> {i.board_writer}</div>
 
-              <p>{i.board_date}</p>
+              <div>{i.board_date}</div>
             </div>
-            <p className="viewboard_title">{i.board_title}</p>
+            <div className="viewboard_title">{i.board_title}</div>
 
             <div className="viewboard_view">
               <Viewer initialValue={i.board_content}></Viewer>
             </div>
-            <p className="viewboard_like">
+            <div className="viewboard_like">
               <div>
                 추천수 : {i.board_like}{" "}
                 <button
@@ -200,22 +216,33 @@ const ViewBoard = () => {
                   </>
                 ) : null}
               </div>
-            </p>
+            </div>
 
             {arr.commentList.map((i, index) => (
-              <div className="comment_wrap" key={i.comment_index}>
+              <div
+                className="comment_wrap"
+                key={i.comment_index}
+                num={i.comment_index}
+              >
                 <div className="comment_middiv">
-                  <p className="comment_writer">{i.comment_writer}</p>
-                  <p className="comment_date">{i.comment_date}</p>
+                  <div className="comment_writer">{i.comment_writer}</div>
+                  <div className="comment_date">{i.comment_date}</div>
                 </div>
+                <div className="comment_bottomdiv">
+                  <div className="comment_content">{i.comment_content}</div>
 
-                <p className="comment_content">{i.comment_content}</p>
+                  {
+                    //접속한 아이디와 동일한 작성자만 삭제 버튼 활성화
+                    userAuth.id === i.comment_writer ? (
+                      <button onClick={removeComment}>삭제</button>
+                    ) : null
+                  }
+                </div>
               </div>
             ))}
 
             <div className="viewboard_bottomdiv"></div>
             <CommentFooter
-              setCommentList={setCommentList}
               key={key}
               addComment={addComment}
               setComment={setComment}

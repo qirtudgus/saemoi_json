@@ -20,7 +20,7 @@
   font-weight: bold;
   display: block;
   font-size: 1.1rem;
-  padding: 1rem 0 1rem 0;
+  padding: 2rem 0 1rem 0;
   border-bottom: 1px solid rgb(230, 231, 238);
   overflow: hidden;
   white-space: no-wrap;
@@ -28,15 +28,14 @@
 }
 
 .board_writer {
-  display: block;
-  font-size: 1.1rem;
-  padding: 1rem 0 1rem 0;
-  border-bottom: 1px solid rgb(230, 231, 238);
+font-weight: bold;
+padding: 1rem 0 1rem 0;
+font-size: 0.8rem;
+
 }
 
 .board_view {
   margin-bottom: 1.2rem;
-  padding: 1rem 0 0rem 0;
   -webkit-line-clamp: 3;
   display: -webkit-box;
   -webkit-box-orient: vertical;
@@ -45,8 +44,10 @@
 
 .board_bottom {
   display: flex;
-  padding: 1rem 0 1rem 0;
+  padding: 1rem 0 2rem 0;
+  border-top: 1px solid rgb(230, 231, 238);
   justify-content: space-between;
+  font-size: 0.8rem;
 }
 
 .board_line {
@@ -60,3 +61,4 @@
   height: 7rem;
   width: 100%;
 }
+

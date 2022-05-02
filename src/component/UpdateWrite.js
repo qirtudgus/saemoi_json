@@ -2,14 +2,13 @@ import axios from "axios";
 import React, { useState, useRef, useEffect, useContext } from "react";
 // TOAST UI Editor import
 import "@toast-ui/editor/dist/toastui-editor.css";
-import { Editor, Viewer } from "@toast-ui/react-editor";
+import { Editor } from "@toast-ui/react-editor";
 import { UserInfo } from "../App";
 import { addDate } from "./addDate";
 import { useNavigate } from "react-router-dom";
 
 const UpdateWrite = (pathname) => {
-  const { userAuth, goLogOut, goBoard, goHome, goLogin, goBack, URL } =
-    useContext(UserInfo);
+  const { userAuth, URL } = useContext(UserInfo);
   const key = pathname.data.replace(/[^0-9]/g, "");
   const [board, setBoard] = useState({
     board_title: "",
@@ -27,7 +26,6 @@ const UpdateWrite = (pathname) => {
   //https://github.com/nhn/tui.editor/issues/1071 인스턴스 오류나는 이유
   //   const editorInstance = editor.current.getInstance();
   //   const editor_content = editorInstance.getHTML();
-  const viewer = useRef();
 
   //기존게시글 데이터 불러오기
   useEffect(() => {

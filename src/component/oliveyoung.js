@@ -1,17 +1,15 @@
-import React, { useState, useEffect, useContext } from 'react';
-import Comment from './comment';
-import EventForm from './eventForm';
-import Axios from 'axios';
-import cheerio from 'cheerio';
-import Loading from './loading';
-import { Route, Routes, useNavigate, useLocation } from 'react-router-dom';
-import { UserInfo } from '../App';
+import React, { useState, useEffect, useContext } from "react";
+import Comment from "./comment";
+import EventForm from "./eventForm";
+import Axios from "axios";
+import cheerio from "cheerio";
+import Loading from "./loading";
+import { UserInfo } from "../App";
 
 const Oliveyoung = () => {
-  const brandName = 'oliveyoung';
+  const brandName = "oliveyoung";
   const [eventData, setEventData] = useState([]);
   const [loading, setLoading] = useState(false);
-  const href = useLocation();
   const { URL } = useContext(UserInfo);
 
   //json데이터를 받아올 api 주소
@@ -31,7 +29,7 @@ const Oliveyoung = () => {
   //올리브영의 새로운 배열을 생성하여 리턴
   async function getNewOliveData() {
     const html = await Axios.get(
-      'https://www.oliveyoung.co.kr/store/main/getEventList.do',
+      "https://www.oliveyoung.co.kr/store/main/getEventList.do",
     );
     let titleList = [];
     let dateList = [];
@@ -39,10 +37,10 @@ const Oliveyoung = () => {
     let linkList = [];
     let eventList = [];
     const $ = cheerio.load(html.data);
-    const title = $('div.event_tab_cont ul.event_thumb_list li p.evt_tit');
-    const date = $('div.event_tab_cont ul.event_thumb_list li p.evt_date');
-    const img = $('ul.event_thumb_list li a').children('img');
-    const link = $('ul.event_thumb_list li input[name=urlInfo]');
+    const title = $("div.event_tab_cont ul.event_thumb_list li p.evt_tit");
+    const date = $("div.event_tab_cont ul.event_thumb_list li p.evt_date");
+    const img = $("ul.event_thumb_list li a").children("img");
+    const link = $("ul.event_thumb_list li input[name=urlInfo]");
     title.each(function (i) {
       titleList[i] = {
         title: $(this).text(),
@@ -55,12 +53,12 @@ const Oliveyoung = () => {
     });
     img.each(function (i) {
       imgList[i] = {
-        img: $(this).attr('data-original'),
+        img: $(this).attr("data-original"),
       };
     });
     link.each(function (i) {
       linkList[i] = {
-        link: 'https://www.oliveyoung.co.kr/store/' + $(this).attr('value'),
+        link: "https://www.oliveyoung.co.kr/store/" + $(this).attr("value"),
       };
     });
     eventList = titleList
@@ -91,7 +89,7 @@ const Oliveyoung = () => {
           console.log(pareTitle);
 
           if (pareTitle.length === 0) {
-            console.log('이벤트가 최신입니다.');
+            console.log("이벤트가 최신입니다.");
             setEventData([...tableData.data]);
           } else {
             // 새로 받아온 이벤트의 타이틀과 compare2의 차집합 배열
