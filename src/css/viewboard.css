@@ -46,7 +46,8 @@
 .comment_wrap{ padding-bottom: 0.8rem;}
 .comment_middiv{ display: flex; justify-content: space-between; align-items: center; padding: 0.5rem 0 0.7rem 0;}
 .comment_date{}
-.comment_content{}
+.comment_content{ word-break:break-all;
+}
 .comment_writer{ font-weight: bold; padding-left: 0.3rem;}
 .comment_bottomdiv {
   display: flex;

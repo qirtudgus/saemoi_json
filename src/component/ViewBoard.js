@@ -160,6 +160,8 @@ const ViewBoard = () => {
   const removeComment = (e) => {
     if (window.confirm("댓글을 삭제하시겠습니까?")) {
       let comment_index = "num";
+      //댓글index에 접근하기위해 임의의 어트리뷰트를 지정한 뒤 값에 접근
+      //https://violetboralee.medium.com/%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8-%EC%86%8D%EC%84%B1-attribute-%EA%B3%BC-%ED%94%84%EB%A1%9C%ED%8D%BC%ED%8B%B0-property-d2f9b772addf
       let index = e.target.parentNode.parentNode.getAttribute(comment_index);
       console.log(index);
       axios.post(`${URL}/api/boardApiData/removeComment`, {

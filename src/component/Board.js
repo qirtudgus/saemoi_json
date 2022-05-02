@@ -2,6 +2,8 @@ import { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import "../css/board.css";
 import axios from "axios";
+import bubble from "../img/말풍선.svg";
+
 import "@toast-ui/editor/dist/toastui-editor.css";
 import { Viewer } from "@toast-ui/react-editor";
 import { UserInfo } from "../App";
@@ -51,9 +53,16 @@ const Board = () => {
               <div className="board_writer">{i.board_writer}</div>
 
               <div className="board_bottom">
-                <span>추천수 : {i.board_like}</span>
-                <span>댓글수 : {i.board_commentCount}</span>
-                <span>{i.board_date}</span>
+                <div className="board_bottom_wrap">
+                  <span>추천수 : {i.board_like}</span>
+                  <div className="board_bottom_bubble">
+                    <img src={bubble} alt="bubble"></img>
+                    <span className="board_count">
+                      댓글 {i.board_commentCount}
+                    </span>
+                  </div>
+                  <span>{i.board_date}</span>
+                </div>
               </div>
 
               {/* <span>조회수 : {i.board_views}</span> */}

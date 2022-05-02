@@ -43,13 +43,29 @@ font-size: 0.8rem;
 }
 
 .board_bottom {
-  display: flex;
+
   padding: 1rem 0 2rem 0;
   border-top: 1px solid rgb(230, 231, 238);
-  justify-content: space-between;
   font-size: 0.8rem;
+
+
+}
+.board_bottom_wrap {
+  justify-content: space-between;
+
+  align-items: center;
+  display: flex;
+  height: 2rem;
+}
+.board_bottom_bubble{
+  display: flex;
+  align-items: center;
 }
 
+.board_bottom img{
+  width: 1.4rem;
+
+}
 .board_line {
   width: 100%;
   height: 0.7rem;
@@ -62,3 +78,6 @@ font-size: 0.8rem;
   width: 100%;
 }
 
+.board_count {
+  padding-left: 0.3rem;
+}
