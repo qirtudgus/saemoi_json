@@ -14,12 +14,21 @@
   width: 100%;
   font-size: 1.1rem;
   padding: 1rem 0 1rem 0;
-  border-bottom: 1px solid rgb(230, 231, 238);
 }
 .viewboard_view {
   overflow-y: scroll;
   display: block;
 }
+
+.viewboard_like{
+  display: flex;
+  align-items: center;
+  padding: 1rem 0 1rem 0;
+  border-top: 1px solid rgb(230, 231, 238);
+  justify-content: space-between;
+  border-bottom: 1px solid rgb(230, 231, 238);
+}
+
 .viewboard_bottomdiv {
   position: relative;
   height: 8rem;
@@ -30,4 +39,12 @@
   padding: 1rem 0 1rem 0;
   display: flex;
   justify-content: space-between;
+  border-bottom: 1px solid rgb(230, 231, 238);
+
 }
+
+.comment_wrap{ padding-bottom: 0.8rem;}
+.comment_middiv{ display: flex; justify-content: space-between; align-items: center; padding: 0.5rem 0 0.7rem 0;}
+.comment_date{}
+.comment_content{}
+.comment_writer{ font-weight: bold; padding-left: 0.3rem;}
