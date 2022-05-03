@@ -9,6 +9,8 @@ import { Viewer } from "@toast-ui/react-editor";
 import { UserInfo } from "../App";
 import AddBoard from "../AddBoard";
 import Loading from "./loading";
+import guest from "../img/비회원.jpg";
+import BottomDiv from "./BottomDiv";
 
 const Board = () => {
   const { URL } = useContext(UserInfo);
@@ -60,7 +62,7 @@ const Board = () => {
                     onLoad={() => {
                       setLoading(true);
                     }}
-                    src={i.profile}
+                    src={i.profile || guest}
                     alt="board_profile"
                   />
                   <p>{i.board_writer}</p>
@@ -88,6 +90,7 @@ const Board = () => {
       ) : (
         <Loading />
       )}
+      <BottomDiv />
       <AddBoard />
     </>
   );

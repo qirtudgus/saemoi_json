@@ -9,7 +9,7 @@ import "@toast-ui/editor/dist/toastui-editor.css";
 import { Viewer } from "@toast-ui/react-editor";
 import { UserInfo } from "../App";
 import CommentFooter from "./CommentFooter";
-import BottomDiv from "../BottomDiv";
+import BottomDiv from "./BottomDiv";
 
 const ViewBoard = () => {
   const { userAuth, goBoard, URL, pathname } = useContext(UserInfo);
@@ -265,6 +265,7 @@ const ViewBoard = () => {
           </div>
         </div>
       ))}
+      <BottomDiv />
     </>
   );
 };

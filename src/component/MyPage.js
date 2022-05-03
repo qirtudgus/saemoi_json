@@ -6,7 +6,9 @@ import { UserInfo } from "../App";
 import "../css/myPage.css";
 import UploadImageToS3WithNativeSdk from "./aws-sdk";
 import Upload from "./aws3s";
+import guest from "../img/비회원.jpg";
 import UploadImageToS3WithReactS3 from "./s3";
+import BottomDiv from "./BottomDiv";
 
 const MyPage = () => {
   const navigate = useNavigate();
@@ -31,11 +33,6 @@ const MyPage = () => {
   //   }
   // }, [setUserAuth]);
 
-  //setState도 context로 받아와서 상태값을 변경시킬 수 있다.
-  const contextSetState = () => {
-    setUserAuth({ ...userAuth, id: "hahaha" });
-  };
-
   const passwordChange = () => {
     navigate("/auth/passwordChange");
   };
@@ -58,15 +55,13 @@ const MyPage = () => {
           <div className="mypage_wrap">
             <div className="mypage_container">
               <div className="profile">
-                <img src={userAuth.profile} alt="profile"></img>
+                <img src={userAuth.profile || guest} alt="profile"></img>
               </div>
 
-              <p className="mypage_title">내 프로필</p>
+              <p className="mypage_title">{userAuth.id}</p>
 
-              <div> {userAuth.id}님</div>
-              <button onClick={contextSetState}>
-                콘텍스트로 받은 세터함수로 변경
-              </button>
+              <div>내 프로필</div>
+
               <button onClick={check_Direct_MiddlewereToken}>
                 서버api 토큰 체크
               </button>
@@ -80,7 +75,10 @@ const MyPage = () => {
         ) : (
           <div className="mypage_wrap">
             <div className="mypage_container">
-              <p className="mypage_title">내 프로필</p>
+              <div className="profile">
+                <img src={guest} alt="profile"></img>
+              </div>
+              <p className="mypage_title">비회원</p>
 
               <p>비회원입니다.</p>
               <button className="loginBtn mainBgColor" onClick={goLogin}>
@@ -96,6 +94,7 @@ const MyPage = () => {
           </div>
         )}
       </div>
+      <BottomDiv />
     </>
   );
 };

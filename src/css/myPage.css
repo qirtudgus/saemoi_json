@@ -56,6 +56,7 @@ height: 100%;
 .profile {
   width: 130px;
   height: 130px;
+  margin-bottom: 0.8rem;
   overflow: hidden;
   border-radius: 130px;
   display: flex;
