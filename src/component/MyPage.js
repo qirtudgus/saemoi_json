@@ -4,6 +4,7 @@ import { useEffect, useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { UserInfo } from '../App';
 import '../css/myPage.css';
+import UploadImageToS3WithNativeSdk from './aws-sdk';
 import Upload from './aws3s';
 import UploadImageToS3WithReactS3 from './s3';
 
@@ -51,11 +52,13 @@ const MyPage = () => {
 
   return (
     <>
+      <UploadImageToS3WithNativeSdk />
       <UploadImageToS3WithReactS3 />
       <Upload />
       {userAuth.auth ? (
         <>
           <div className='mypage_wrap'>
+            <div className='pofile'></div>
             <p className='mypage_title'>내 프로필</p>
             <div className='mypage_container'>
               <div> {userAuth.id}님</div>
