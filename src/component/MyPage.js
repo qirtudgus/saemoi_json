@@ -52,9 +52,9 @@ const MyPage = () => {
 
   return (
     <>
-      <UploadImageToS3WithNativeSdk />
+      {/* <UploadImageToS3WithNativeSdk /> */}
       <UploadImageToS3WithReactS3 />
-      <Upload />
+      {/* <Upload /> */}
       {userAuth.auth ? (
         <>
           <div className='mypage_wrap'>

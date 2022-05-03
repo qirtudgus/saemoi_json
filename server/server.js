@@ -62,6 +62,25 @@ app.post('/api/comment_password_check', (req, res) => {
   });
 });
 
+//프로필 변경api
+app.post('/api/authApiData/changeprofile', (req, res) => {
+  console.log(req.body);
+  const { id, profile } = req.body;
+  console.log(profile);
+  //s3에서 공백을 +로 치환하기때문에 DB에도 치환하여 저장해준다.
+  const removeSpace = profile.replace(' ', '+');
+  const userProfile = removeSpace.replace(
+    'https://saemoi.s3.amazonaws.com',
+    'https://saemoi.s3.ap-northeast-2.amazonaws.com',
+  );
+  console.log(userProfile);
+  const changeQuery = `UPDATE users SET profile = ? WHERE id = ?`;
+  db.query(changeQuery, [userProfile, id]);
+
+  //주소를 응답해준다.
+  res.send(userProfile);
+});
+
 //렌더링때 마다 호출하여 토큰체크 미들웨어를 실행시키고,
 //헤더에 새로운 리프레쉬토큰을 담아서 응답해준다.
 app.post('/api/middlewere', (req, res) => {
