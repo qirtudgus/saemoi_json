@@ -115,7 +115,25 @@ router.post('/removeBoard', (req, res) => {
 //게시판리스트 뿌려주기
 router.post('/getBoard', (req, res) => {
   const sqlQuery = 'SELECT * FROM board_table;';
+
+  // 이상한 5개가 조인됨...차이를 알아보자
+  const joinQuery =
+    'SELECT * FROM users LEFT OUTER JOIN board_table ON users.id = board_table.board_writer;';
+
+  // 게시판은 조인이되지만 계정 password, salt까지 불러와진다..해결하자
+  const joinQuery2 =
+    'SELECT * FROM board_table LEFT OUTER JOIN users ON board_table.board_writer = users.id;';
+
+  // 필요한 컬럼만 선택해서 조회 후 보내준다. (아직까진 제일 적절하다.)
+  const joinQuery3 =
+    'SELECT board_index, board_title, board_content, board_writer, profile, board_views, board_commentCount, board_like, board_date, board_likeList FROM board_table LEFT OUTER JOIN users ON board_table.board_writer = users.id;';
+
   db.query(sqlQuery, (err, result) => {
+    // res.send(result);
+  });
+  db.query(joinQuery3, (err, result) => {
+    console.log(err);
+    console.log(result);
     res.send(result);
   });
 });

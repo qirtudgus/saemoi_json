@@ -28,10 +28,12 @@
 }
 
 .board_writer {
-font-weight: bold;
-padding: 1rem 0 1rem 0;
-font-size: 0.8rem;
-
+  font-weight: bold;
+  padding: 1rem 0 1rem 0;
+  font-size: 0.8rem;
+}
+.board_writer img {
+  width: 30px;
 }
 
 .board_view {
@@ -43,12 +45,9 @@ font-size: 0.8rem;
 }
 
 .board_bottom {
-
   padding: 1rem 0 2rem 0;
   border-top: 1px solid rgb(230, 231, 238);
   font-size: 0.8rem;
-
-
 }
 .board_bottom_wrap {
   justify-content: space-between;
@@ -57,14 +56,13 @@ font-size: 0.8rem;
   display: flex;
   height: 2rem;
 }
-.board_bottom_bubble{
+.board_bottom_bubble {
   display: flex;
   align-items: center;
 }
 
-.board_bottom img{
+.board_bottom img {
   width: 1.4rem;
-
 }
 .board_line {
   width: 100%;

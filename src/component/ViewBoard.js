@@ -157,6 +157,8 @@ const ViewBoard = () => {
       goBoard();
     }
   };
+
+  //댓글 삭제
   const removeComment = (e) => {
     if (window.confirm('댓글을 삭제하시겠습니까?')) {
       let comment_index = 'num';
