@@ -58,7 +58,9 @@ const MyPage = () => {
       {userAuth.auth ? (
         <>
           <div className='mypage_wrap'>
-            <div className='pofile'></div>
+            <div className='profile'>
+              <img src={userAuth.profile} alt='profile'></img>
+            </div>
             <p className='mypage_title'>내 프로필</p>
             <div className='mypage_container'>
               <div> {userAuth.id}님</div>

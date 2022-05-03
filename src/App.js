@@ -44,15 +44,27 @@ window.addEventListener('resize', () => {
 function App() {
   const href = useLocation();
   const navigate = useNavigate();
+
   const [userAuth, setUserAuth] = useState({
     id: '',
     auth: false,
     refreshToken: '',
     profile: '',
+    auth: false,
   });
+
+  console.log(userAuth);
+
   const goLogOut = () => {
     localStorage.removeItem('token');
-    setUserAuth({ ...userAuth, id: '', auth: false, refreshToken: '' });
+    setUserAuth({
+      ...userAuth,
+      id: '',
+      auth: false,
+      refreshToken: '',
+      profile: '',
+      auth: false,
+    });
     goHome();
   };
 

@@ -36,7 +36,7 @@ const tokenCheck = async (req, res, next) => {
     next();
   } else {
     jwt.verify(oldToken, SECRET_TOKEN, (err, decoded) => {
-      const { userId } = jwtDecode(oldToken);
+      const { userId, profile } = jwtDecode(oldToken);
 
       if (err) {
         console.log('만료된 리프레쉬');
@@ -52,12 +52,16 @@ const tokenCheck = async (req, res, next) => {
         jwt.verify(oldAccessToken, SECRET_TOKEN, (err, decoded) => {
           if (err) {
             console.log('만료된 액세스토큰');
-            const accessToken = jwt.sign({ userId: userId }, SECRET_TOKEN, {
-              expiresIn: '10s',
-            });
+            const accessToken = jwt.sign(
+              { userId: userId, profile: profile },
+              SECRET_TOKEN,
+              {
+                expiresIn: '10s',
+              },
+            );
 
             const refreshToken = jwt.sign(
-              { userId: userId, accessToken: accessToken },
+              { userId: userId, profile: profile, accessToken: accessToken },
               SECRET_TOKEN,
               {
                 expiresIn: '1d',
