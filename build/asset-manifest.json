@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.572fac5d.css",
-    "main.js": "/static/js/main.eaa578da.js",
+    "main.css": "/static/css/main.fd5d9c51.css",
+    "main.js": "/static/js/main.d9a47eef.js",
     "static/js/27.d0aca822.chunk.js": "/static/js/27.d0aca822.chunk.js",
     "static/media/views.png": "/static/media/views.f7976d31776a79389a8e.png",
     "static/media/sae.svg": "/static/media/sae.15b3666e87995cf346cc942a085efa37.svg",
@@ -13,14 +13,18 @@
     "static/media/Board.svg": "/static/media/Board.269609570d5b0049d411c68f183ffe91.svg",
     "static/media/login_password.svg": "/static/media/login_password.659e94a439af79fbf527b47756a7fa06.svg",
     "static/media/Store.svg": "/static/media/Store.31c481825541feb0a29531d7dab9ae57.svg",
+    "static/media/자유게시판_컬러.svg": "/static/media/자유게시판_컬러.3a0b5fe14308d7bdbbda48b3f8ec7d2f.svg",
+    "static/media/자유게시판_흑백.svg": "/static/media/자유게시판_흑백.e6fd1c8eaf7229469f67afca3abd987a.svg",
     "static/media/login_id.svg": "/static/media/login_id.f67a0190b977d851bec55fc9c520365a.svg",
     "static/media/cancel_fill.svg": "/static/media/cancel_fill.e805f530f53145b583cc80faed5c655f.svg",
     "static/media/whiteArrow0.svg": "/static/media/whiteArrow0.cc1349898a34da58f41408e0611e2a8d.svg",
     "static/media/Food.svg": "/static/media/Food.7d0c20fcfa0767ac652b322537ec47ae.svg",
-    "static/media/뒤로가기_흰색.svg": "/static/media/뒤로가기_흰색.e51a3e087832a2cd5773a5de00244280.svg"
+    "static/media/말풍선.svg": "/static/media/말풍선.e839b491114259219f9efabe80be832a.svg",
+    "static/media/뒤로가기_흰색.svg": "/static/media/뒤로가기_흰색.e51a3e087832a2cd5773a5de00244280.svg",
+    "static/media/add_white.svg": "/static/media/add_white.a03a90dde4d83c0b22939c6b838b0931.svg"
   },
   "entrypoints": [
-    "static/css/main.572fac5d.css",
-    "static/js/main.eaa578da.js"
+    "static/css/main.fd5d9c51.css",
+    "static/js/main.d9a47eef.js"
   ]
 }

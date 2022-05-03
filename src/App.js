@@ -22,7 +22,6 @@ import Write from './component/Write';
 import UpdateWrite from './component/UpdateWrite';
 import Board from './component/Board';
 import ViewBoard from './component/ViewBoard';
-import CommnetFooter from './component/CommentFooter';
 
 export const UserInfo = React.createContext();
 window.Buffer = window.Buffer || require('buffer').Buffer;

@@ -4,6 +4,8 @@ import { useEffect, useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { UserInfo } from '../App';
 import '../css/myPage.css';
+import Upload from './aws3s';
+import UploadImageToS3WithReactS3 from './s3';
 
 const MyPage = () => {
   const navigate = useNavigate();
@@ -49,6 +51,8 @@ const MyPage = () => {
 
   return (
     <>
+      <UploadImageToS3WithReactS3 />
+      <Upload />
       {userAuth.auth ? (
         <>
           <div className='mypage_wrap'>
