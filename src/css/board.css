@@ -31,8 +31,16 @@
   font-weight: bold;
   padding: 1rem 0 1rem 0;
   font-size: 0.8rem;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
 }
+
+
+
 .board_writer img {
+  margin-right: 8px;
+  border-radius: 30px;
   width: 30px;
 }
 

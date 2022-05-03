@@ -123,7 +123,7 @@ const Oliveyoung = () => {
       )
       .catch((err) => {
         // cors 오류로 인한 첫 렌더링 시 나오는 에러를 새로고침으로 해결..
-        window.location.reload();
+        // window.location.reload();
         console.log(err);
       });
   }, []);

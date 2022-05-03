@@ -22,6 +22,7 @@ import Write from "./component/Write";
 import UpdateWrite from "./component/UpdateWrite";
 import Board from "./component/Board";
 import ViewBoard from "./component/ViewBoard";
+import BottomDiv from "./BottomDiv";
 
 export const UserInfo = React.createContext();
 window.Buffer = window.Buffer || require("buffer").Buffer;
@@ -209,6 +210,7 @@ function App() {
         </Routes>
         {/* <Footer /> */}
         {viewBoard ? null : <Footerbar />}
+        <BottomDiv />
       </UserInfo.Provider>
     </>
   );

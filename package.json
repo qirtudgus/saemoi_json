@@ -9,6 +9,7 @@
     "@toast-ui/react-editor": "^3.1.5",
     "aws-sdk": "^2.1126.0",
     "axios": "^0.26.0",
+    "browser-image-compression": "^2.0.0",
     "buffer": "^6.0.3",
     "cheerio": "^1.0.0-rc.10",
     "chromedriver": "^100.0.0",

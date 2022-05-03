@@ -1,17 +1,22 @@
+.mypage_box{
+  width: 100%;
+height: 100%;
+}
+
+
 .mypage_wrap {
   width: 100%;
-  height: calc(100% - 10rem);
+  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  position: fixed;
   flex-direction: column;
 }
 
 .mypage_container {
   display: flex;
   width: 20rem;
-  height: 20rem;
+  height: 30rem;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -49,10 +54,17 @@
 }
 
 .profile {
-  width: 100px;
-  height: 100px;
+  width: 130px;
+  height: 130px;
   overflow: hidden;
+  border-radius: 130px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+
 }
 .profile img {
+
   width: 100%;
 }
