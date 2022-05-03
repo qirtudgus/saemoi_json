@@ -4,8 +4,7 @@ import { useEffect, useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { UserInfo } from "../App";
 import "../css/myPage.css";
-import UploadImageToS3WithNativeSdk from "./aws-sdk";
-import Upload from "./aws3s";
+
 import guest from "../img/비회원.jpg";
 import UploadImageToS3WithReactS3 from "./s3";
 import BottomDiv from "./BottomDiv";
@@ -14,6 +13,7 @@ const MyPage = () => {
   const navigate = useNavigate();
   const { userAuth, setUserAuth, goLogOut, goLogin, URL } =
     useContext(UserInfo);
+
   const goHome = () => {
     navigate("/");
   };
@@ -62,7 +62,7 @@ const MyPage = () => {
           <div className="mypage_wrap">
             <div className="mypage_container">
               <div className="profile">
-                <img src={userAuth.profile} alt="profile"></img>
+                <img src={userAuth.profile || guest} alt="profile"></img>
               </div>
 
               <p className="mypage_title">{userAuth.id}</p>

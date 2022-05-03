@@ -55,6 +55,8 @@ function App() {
     auth: false,
   });
 
+  const [userProfile, setUserProfile] = useState(null);
+
   console.log(userAuth);
 
   const goLogOut = () => {

@@ -2,16 +2,20 @@ const SECRET_TOKEN = process.env.SECRET_TOKEN;
 const jwt = require("jsonwebtoken");
 const { default: jwtDecode } = require("jwt-decode");
 
-function addAccesccToken(id) {
-  const accesccToken = jwt.sign({ userId: id }, SECRET_TOKEN, {
-    expiresIn: "10s",
-  });
+function addAccesccToken(id, profile) {
+  const accesccToken = jwt.sign(
+    { userId: id, profile: profile },
+    SECRET_TOKEN,
+    {
+      expiresIn: "10s",
+    },
+  );
   return accesccToken;
 }
 
-function addRefreshToken(id, accesccToken) {
+function addRefreshToken(id, profile, accesccToken) {
   const refreshToken = jwt.sign(
-    { userId: id, accesccToken: accesccToken },
+    { userId: id, profile: profile, accesccToken: accesccToken },
     SECRET_TOKEN,
     {
       expiresIn: "1d",
@@ -41,7 +45,11 @@ const tokenCheck = async (req, res, next) => {
 
       if (err) {
         console.log("만료된 리프레쉬");
-        const refreshToken = addRefreshToken(userId, addAccesccToken(userId));
+        const refreshToken = addRefreshToken(
+          userId,
+          profile,
+          addAccesccToken(userId, profile),
+        );
         console.log("새로만든 리프레쉬");
         req.authorization = refreshToken;
         next();
