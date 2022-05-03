@@ -47,6 +47,13 @@ const MyPage = () => {
     });
   };
 
+  const profileChange = () => {
+    navigate("/changeprofile");
+  };
+
+  console.log("유저 프로필 주소");
+  console.log(userAuth.profile);
+
   return (
     <>
       <div className="mypage_box">
@@ -55,7 +62,7 @@ const MyPage = () => {
           <div className="mypage_wrap">
             <div className="mypage_container">
               <div className="profile">
-                <img src={userAuth.profile || guest} alt="profile"></img>
+                <img src={userAuth.profile} alt="profile"></img>
               </div>
 
               <p className="mypage_title">{userAuth.id}</p>
@@ -66,6 +73,7 @@ const MyPage = () => {
                 서버api 토큰 체크
               </button>
               <button onClick={passwordChange}>비밀번호 변경하기</button>
+              <button onClick={profileChange}>프로필 수정</button>
               <button className="logOutBtn" onClick={goLogOut}>
                 로그아웃
               </button>

@@ -23,6 +23,7 @@ import UpdateWrite from "./component/UpdateWrite";
 import Board from "./component/Board";
 import ViewBoard from "./component/ViewBoard";
 import BottomDiv from "./component/BottomDiv";
+import ChangeProfile from "./component/ChangeProfile";
 
 export const UserInfo = React.createContext();
 window.Buffer = window.Buffer || require("buffer").Buffer;
@@ -203,6 +204,7 @@ function App() {
 
             <Route path="/comment" element={<NotReady />} />
           </Route>
+          <Route path="/changeprofile" element={<ChangeProfile />} />
           <Route path="/category" element={<Category />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />

@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useState, useContext } from "react";
 import { uploadFile } from "react-s3";
 import { UserInfo } from "../App";
+import { useNavigate } from "react-router-dom";
 import "../css/s3.css";
 import imageCompression from "browser-image-compression";
 const S3_BUCKET = "saemoi";
@@ -17,6 +18,10 @@ const config = {
 };
 
 const UploadImageToS3WithReactS3 = () => {
+  const navigate = useNavigate();
+  const goBack = () => {
+    navigate("/mypage");
+  };
   const { userAuth, setUserAuth, URL } = useContext(UserInfo);
   const [selectedFile, setSelectedFile] = useState(null);
 
@@ -89,10 +94,17 @@ const UploadImageToS3WithReactS3 = () => {
       })
       .then((res) => {
         //아이디와 이미지주소를 서버에 보내준다.
-        axios.post(`${URL}/api/authApiData/changeprofile`, res).then((res) => {
-          //새로운 프로필의 주소를 받아와 setUserAuth 해준다
-          setUserAuth({ ...userAuth, profile: res.data });
-        });
+        axios
+          .post(`${URL}/api/authApiData/changeprofile`, res)
+          .then((res) => {
+            console.log("변경 후 받아온 주소");
+            console.log(res.data);
+            //새로운 프로필의 주소를 받아와 setUserAuth 해준다
+            setUserAuth({ ...userAuth, profile: res.data });
+          })
+          .then((res) => {
+            goBack();
+          });
       })
       .catch((err) => console.error(err));
   };
