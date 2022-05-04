@@ -54,7 +54,6 @@ function App() {
     auth: false,
     refreshToken: '',
     profile: '',
-    auth: false,
   });
 
   console.log(userAuth);
@@ -66,8 +65,6 @@ function App() {
       id: '',
       auth: false,
       refreshToken: '',
-      profile: '',
-      auth: false,
     });
     goHome();
   };
@@ -111,7 +108,6 @@ function App() {
       setUserAuth({
         ...userAuth,
         id: payload.userId,
-        profile: payload.profile,
         auth: true,
         refreshToken: token,
       });

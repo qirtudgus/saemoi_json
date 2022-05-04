@@ -2,20 +2,16 @@ const SECRET_TOKEN = process.env.SECRET_TOKEN;
 const jwt = require('jsonwebtoken');
 const { default: jwtDecode } = require('jwt-decode');
 
-function addAccesccToken(id, profile) {
-  const accesccToken = jwt.sign(
-    { userId: id, profile: profile },
-    SECRET_TOKEN,
-    {
-      expiresIn: '10s',
-    },
-  );
+function addAccesccToken(id) {
+  const accesccToken = jwt.sign({ userId: id }, SECRET_TOKEN, {
+    expiresIn: '10s',
+  });
   return accesccToken;
 }
 
-function addRefreshToken(id, profile, accesccToken) {
+function addRefreshToken(id, accesccToken) {
   const refreshToken = jwt.sign(
-    { userId: id, profile: profile, accesccToken: accesccToken },
+    { userId: id, accesccToken: accesccToken },
     SECRET_TOKEN,
     {
       expiresIn: '1d',
@@ -40,15 +36,11 @@ const tokenCheck = async (req, res, next) => {
     next();
   } else {
     jwt.verify(oldToken, SECRET_TOKEN, (err, decoded) => {
-      const { userId, profile } = jwtDecode(oldToken);
+      const { userId } = jwtDecode(oldToken);
 
       if (err) {
         console.log('만료된 리프레쉬');
-        const refreshToken = addRefreshToken(
-          userId,
-          profile,
-          addAccesccToken(userId, profile),
-        );
+        const refreshToken = addRefreshToken(userId, addAccesccToken(userId));
         console.log('새로만든 리프레쉬');
         req.authorization = refreshToken;
         next();
@@ -60,16 +52,12 @@ const tokenCheck = async (req, res, next) => {
         jwt.verify(oldAccessToken, SECRET_TOKEN, (err, decoded) => {
           if (err) {
             console.log('만료된 액세스토큰');
-            const accessToken = jwt.sign(
-              { userId: userId, profile: profile },
-              SECRET_TOKEN,
-              {
-                expiresIn: '10s',
-              },
-            );
+            const accessToken = jwt.sign({ userId: userId }, SECRET_TOKEN, {
+              expiresIn: '10s',
+            });
 
             const refreshToken = jwt.sign(
-              { userId: userId, profile: profile, accessToken: accessToken },
+              { userId: userId, accessToken: accessToken },
               SECRET_TOKEN,
               {
                 expiresIn: '1d',
