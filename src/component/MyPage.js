@@ -1,25 +1,29 @@
-import axios from "axios";
-import jwtDecode from "jwt-decode";
-import { useEffect, useState, useContext } from "react";
-import { useNavigate } from "react-router-dom";
-import { UserInfo } from "../App";
-import "../css/myPage.css";
+import axios from 'axios';
+import jwtDecode from 'jwt-decode';
+import { useEffect, useState, useContext } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import { UserInfo } from '../App';
+import '../css/myPage.css';
 
-import guest from "../img/비회원.jpg";
-import UploadImageToS3WithReactS3 from "./s3";
-import BottomDiv from "./BottomDiv";
+import guest from '../img/비회원.jpg';
+import UploadImageToS3WithReactS3 from './s3';
+import BottomDiv from './BottomDiv';
 
 const MyPage = () => {
   const navigate = useNavigate();
-  const { userAuth, setUserAuth, goLogOut, goLogin, URL } =
+  const { userAuth, setUserAuth, goLogOut, goLogin, URL, userProfile } =
     useContext(UserInfo);
 
   const goHome = () => {
-    navigate("/");
+    navigate('/');
   };
   const goRegister = () => {
-    navigate("/register");
+    navigate('/register');
   };
+
+  // const [userProfile, setUserProfile] = useState(null);
+
+  useEffect(() => {}, []);
 
   //토큰이 없으면 아웃,
   // useEffect(() => {
@@ -34,7 +38,7 @@ const MyPage = () => {
   // }, [setUserAuth]);
 
   const passwordChange = () => {
-    navigate("/auth/passwordChange");
+    navigate('/auth/passwordChange');
   };
 
   const check_Direct_MiddlewereToken = () => {
@@ -43,29 +47,29 @@ const MyPage = () => {
       if (res.data === true) return;
       const token = res.data;
       // localStorage.setItem("token", token);
-      axios.defaults.headers.common["Authorization"] = `${token}`; //앞으로 api통신에 토큰이 들어가있음
+      axios.defaults.headers.common['Authorization'] = `${token}`; //앞으로 api통신에 토큰이 들어가있음
     });
   };
 
   const profileChange = () => {
-    navigate("/changeprofile");
+    navigate('/changeprofile');
   };
 
-  console.log("유저 프로필 주소");
+  console.log('유저 프로필 주소');
   console.log(userAuth.profile);
 
   return (
     <>
-      <div className="mypage_box">
+      <div className='mypage_box'>
         <UploadImageToS3WithReactS3 />
         {userAuth.auth ? (
-          <div className="mypage_wrap">
-            <div className="mypage_container">
-              <div className="profile">
-                <img src={userAuth.profile || guest} alt="profile"></img>
+          <div className='mypage_wrap'>
+            <div className='mypage_container'>
+              <div className='profile'>
+                <img src={userProfile || guest} alt='profile'></img>
               </div>
 
-              <p className="mypage_title">{userAuth.id}</p>
+              <p className='mypage_title'>{userAuth.id}</p>
 
               <div>내 프로필</div>
 
@@ -74,27 +78,27 @@ const MyPage = () => {
               </button>
               <button onClick={passwordChange}>비밀번호 변경하기</button>
               <button onClick={profileChange}>프로필 수정</button>
-              <button className="logOutBtn" onClick={goLogOut}>
+              <button className='logOutBtn' onClick={goLogOut}>
                 로그아웃
               </button>
               {/* <p>지금 당신의 토큰은! {userAuth.refreshToken}</p> */}
             </div>
           </div>
         ) : (
-          <div className="mypage_wrap">
-            <div className="mypage_container">
-              <div className="profile">
-                <img src={guest} alt="profile"></img>
+          <div className='mypage_wrap'>
+            <div className='mypage_container'>
+              <div className='profile'>
+                <img src={guest} alt='profile'></img>
               </div>
-              <p className="mypage_title">비회원</p>
+              <p className='mypage_title'>비회원</p>
 
               <p>비회원입니다.</p>
-              <button className="loginBtn mainBgColor" onClick={goLogin}>
+              <button className='loginBtn mainBgColor' onClick={goLogin}>
                 로그인
               </button>
               <p>
-                계정이 없으신가요?{" "}
-                <span className="pt" onClick={goRegister}>
+                계정이 없으신가요?{' '}
+                <span className='pt' onClick={goRegister}>
                   회원가입
                 </span>
               </p>
