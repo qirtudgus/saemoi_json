@@ -9,7 +9,6 @@ body img {
 /* https://moo-you.tistory.com/254 */
 @import url(https://fonts.googleapis.com/earlyaccess/notosanskr.css);
 
-
 @font-face {
   font-family: 'Noto Sans KR';
   font-style: normal;
@@ -82,7 +81,6 @@ body img {
       format('opentype');
 }
 
-
 body,
 talbe,
 th,
@@ -109,7 +107,6 @@ span,
 * {
   font-family: 'Noto Sans KR', sans-serif !important;
 }
-
 
 /* css Reset */
 html,
@@ -259,9 +256,19 @@ a {
   }
 }
 
+@keyframes smoothAppear_decide {
+  from {
+    opacity: 0;
+    transform: translateY(30%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 #root {
   height: calc(var(--vh, 1vh) * 100);
-
 }
 
 body {

@@ -5,7 +5,7 @@
   bottom: 0;
   left: 0px;
   right: 0px;
-  z-index: 10000;
+  z-index: 1000;
 }
 .footerBar {
   display: flex;
@@ -34,7 +34,7 @@
 }
 
 .footerBar p {
-  font-size:0.75rem;
+  font-size: 0.75rem;
   margin-top: 7px;
 }
 
@@ -89,7 +89,7 @@
 .footerBar .navWrite .navIcon {
   display: block;
   margin: 0 auto;
-  background: url('../img/footerSprite_2.png') no-repeat -109px -122px;;
+  background: url('../img/footerSprite_2.png') no-repeat -109px -122px;
   width: 27px;
   height: 27px;
 }
@@ -97,7 +97,7 @@
 .footerBar .navWrite.active .navIcon {
   display: block;
   margin: 0 auto;
-  background: url('../img/footerSprite_2.png') no-repeat -146px -122px;;
+  background: url('../img/footerSprite_2.png') no-repeat -146px -122px;
   width: 27px;
   height: 27px;
 }

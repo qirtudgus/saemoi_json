@@ -1,33 +1,132 @@
 .preview {
-    width: 200px;
-    height: 200px;
-    overflow: hidden;
+  width: 200px;
+  height: 200px;
+  overflow: hidden;
 }
 
 .preview img {
-    width: 100%;
-    overflow: hidden;
+  width: 100%;
+  overflow: hidden;
 }
 
 .s3_title {
-    font-size: 2rem;
-    font-weight: bold;
-    margin-bottom: 1rem;
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
 }
 
-#image_uploads{
-    position: fixed;
-    left: -9999rem;
+#image_uploads {
+  position: fixed;
+  left: -9999rem;
 }
 
-.uploads_label{
-    width: 40px;
-    height: 40px;
-    font-size: 2rem;
-    font-weight: bold;
-    border-radius: 30px;
-    color: #fff;
-    background-color: blue;
-    text-align: center;
-    line-height: 40px;
+.uploads_label {
+  position: absolute;
+  left: 100px;
+  bottom: 10px;
+  width: 40px;
+  height: 40px;
+  font-size: 2rem;
+  font-weight: bold;
+  border-radius: 30px;
+  color: #fff;
+  background-color: #fff;
+  text-align: center;
+  line-height: 40px;
+  z-index: 100;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 1px 1px 10px 2px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+}
+
+.decide_wrap {
+  z-index: 10000;
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0.5);
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+}
+
+.decide_modal {
+  z-index: 9999;
+  width: 100%;
+  height: 200px;
+  background-color: #fff;
+  position: fixed;
+  bottom: 0px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  animation: smoothAppear_decide 0.2s;
+}
+
+.decide_modal button {
+  display: block;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+}
+.decide_cancel {
+  margin-top: 1rem;
+  font-weight: bold;
+  font-size: 1.2rem;
+  color: #3e55ff;
+  background-color: #fff;
+  border: 1.5px solid #3e55ff;
+  border-radius: 5px;
+  width: 285px;
+  height: 40px;
+}
+
+.decide_change:disabled {
+  margin-top: 1rem;
+  font-weight: bold;
+  font-size: 1.2rem;
+  color: rgb(123, 123, 123);
+  background-color: #eee;
+  border: 1.5px solid #d8d8da;
+  border-radius: 5px;
+  width: 285px;
+  height: 40px;
+  cursor: default;
+}
+
+.decide_change {
+  margin-top: 1rem;
+  font-weight: bold;
+  font-size: 1.2rem;
+  color: #fff;
+  background-color: #3e55ff;
+  border: 1.5px solid #3e55ff;
+  cursor: pointer;
+
+  border-radius: 5px;
+  width: 285px;
+  height: 40px;
+}
+
+.profile_decide_box {
+  position: relative;
+}
+.uploads_label img {
+  width: 35px;
+}
+
+.profile_decide {
+  background-color: #fff;
+  width: 130px;
+  height: 130px;
+  margin-bottom: 0.8rem;
+  overflow: hidden;
+  border-radius: 130px;
+  display: flex;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+}
+.profile_decide img {
+  width: 100%;
 }

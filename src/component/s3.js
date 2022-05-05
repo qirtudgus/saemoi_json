@@ -1,12 +1,14 @@
-import axios from "axios";
-import React, { useState, useContext } from "react";
-import { uploadFile } from "react-s3";
-import { UserInfo } from "../App";
-import { useNavigate } from "react-router-dom";
-import "../css/s3.css";
-import imageCompression from "browser-image-compression";
-const S3_BUCKET = "saemoi";
-const REGION = "ap-northeast-2";
+import axios from 'axios';
+import React, { useState, useContext } from 'react';
+import { uploadFile } from 'react-s3';
+import { UserInfo } from '../App';
+import { useNavigate } from 'react-router-dom';
+import '../css/s3.css';
+import imageCompression from 'browser-image-compression';
+import addWhite from '../img/add_white.svg';
+import addBlack from '../img/add.png';
+const S3_BUCKET = 'saemoi';
+const REGION = 'ap-northeast-2';
 const ACCESS_KEY = process.env.REACT_APP_ACCESS_KEY;
 const SECRET_ACCESS_KEY = process.env.REACT_APP_SECRET_ACCESS_KEY;
 
@@ -20,7 +22,7 @@ const config = {
 const UploadImageToS3WithReactS3 = () => {
   const navigate = useNavigate();
   const goBack = () => {
-    navigate("/mypage");
+    navigate('/mypage');
   };
   const { userAuth, setUserAuth, URL, userProfile } = useContext(UserInfo);
   const [selectedFile, setSelectedFile] = useState(null);
@@ -29,10 +31,12 @@ const UploadImageToS3WithReactS3 = () => {
   const [fileSize, setFileSize] = useState(2000);
   const [addFileSize, setAddFileSize] = useState(0);
 
+  const [profileDecide, setProfileDecide] = useState(false);
+
   const [image, setImage] = useState();
 
   const actionImgCompress = async (fileSrc) => {
-    console.log("압축 시작");
+    console.log('압축 시작');
     const options = {
       maxSizeMB: 1, // 0.001 1KB / 0.01 10KB 0.1 100KB 1 1024KB
       maxWidthOrHeight: 500, // 이미지 최대 높이와 넓이
@@ -98,7 +102,7 @@ const UploadImageToS3WithReactS3 = () => {
         axios
           .post(`${URL}/api/authApiData/changeprofile`, res)
           .then((res) => {
-            console.log("변경 후 받아온 주소");
+            console.log('변경 후 받아온 주소');
             console.log(res.data);
             //새로운 프로필의 주소를 받아와 setUserAuth 해준다
             setUserAuth({ ...userAuth, profile: res.data });
@@ -111,30 +115,60 @@ const UploadImageToS3WithReactS3 = () => {
   };
 
   return (
-    <div className="s3_box">
-      <div className="s3_title">프로필 수정</div>
+    <div className='s3_box'>
+      <div className='s3_title'>프로필 수정</div>
 
-      <div className="profile">
-        <img src={image || userProfile} alt="preview" />
+      <div className='profile_decide_box'>
+        <div className='profile_decide'>
+          <img src={image || userProfile} alt='preview' />
+        </div>
+        <label className='uploads_label' htmlFor='image_uploads'>
+          <img src={addBlack} alt='zz' />
+        </label>
       </div>
 
       <input
-        id="image_uploads"
-        name="image_uploads"
-        className="inputFile"
-        type="file"
-        //인풋파일의 확장자 선택하기
-        accept=".png, .jpg, .jpeg, .gif "
+        id='image_uploads'
+        name='image_uploads'
+        className='inputFile'
+        type='file'
+        //인풋파일의 확장자 유도하기
+        accept='.png, .jpg, .jpeg, .gif '
         onChange={handleFileInput}
       />
 
-      <label className="uploads_label" for="image_uploads">
-        +
-      </label>
-
-      <button disabled={!inputFile} onClick={() => handleUpload(selectedFile)}>
+      <button
+        className='decide_change'
+        disabled={!inputFile}
+        onClick={() => {
+          setProfileDecide(true);
+        }}
+      >
         변경하기
       </button>
+
+      {profileDecide ? (
+        <>
+          <div className='decide_wrap'>
+            <div className='decide_modal'>
+              <button
+                className='decide_change'
+                onClick={() => handleUpload(selectedFile)}
+              >
+                변경 한다구요!
+              </button>
+              <button
+                className='decide_cancel'
+                onClick={() => {
+                  setProfileDecide(false);
+                }}
+              >
+                취소
+              </button>
+            </div>
+          </div>
+        </>
+      ) : null}
 
       <p>jpg,jpeg,png,gif 확장자만 가능해요!</p>
       <p>너무 큰 파일은 자동으로 최적화 돼요!</p>

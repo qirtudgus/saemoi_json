@@ -60,52 +60,61 @@ const MyPage = () => {
 
   return (
     <>
-      <div className='mypage_box'>
-        {userAuth.auth ? (
-          <div className='mypage_wrap'>
-            <div className='mypage_container'>
-              <div className='profile'>
-                <img src={userProfile || guest} alt='profile'></img>
+      <div className='mypage_bg'>
+        <div className='mypage_box'>
+          {userAuth.auth ? (
+            <div className='mypage_wrap'>
+              <div className='mypage_container'>
+                <div className='profile'>
+                  <img src={userProfile || guest} alt='profile'></img>
+                </div>
+
+                <p className='mypage_title'>{userAuth.id}</p>
+
+                <div>내 프로필</div>
+                <button className='mypage_btn' onClick={profileChange}>
+                  프로필 수정
+                </button>
+
+                <button className='mypage_btn' onClick={passwordChange}>
+                  비밀번호 변경하기
+                </button>
+                <button
+                  className='mypage_btn'
+                  onClick={check_Direct_MiddlewereToken}
+                >
+                  서버api 토큰 체크
+                </button>
+                <button className='logOutBtn' onClick={goLogOut}>
+                  로그아웃
+                </button>
+                {/* <p>지금 당신의 토큰은! {userAuth.refreshToken}</p> */}
               </div>
-
-              <p className='mypage_title'>{userAuth.id}</p>
-
-              <div>내 프로필</div>
-
-              <button onClick={check_Direct_MiddlewereToken}>
-                서버api 토큰 체크
-              </button>
-              <button onClick={passwordChange}>비밀번호 변경하기</button>
-              <button onClick={profileChange}>프로필 수정</button>
-              <button className='logOutBtn' onClick={goLogOut}>
-                로그아웃
-              </button>
-              {/* <p>지금 당신의 토큰은! {userAuth.refreshToken}</p> */}
             </div>
-          </div>
-        ) : (
-          <div className='mypage_wrap'>
-            <div className='mypage_container'>
-              <div className='profile'>
-                <img src={guest} alt='profile'></img>
+          ) : (
+            <div className='mypage_wrap'>
+              <div className='mypage_container'>
+                <div className='profile'>
+                  <img src={guest} alt='profile'></img>
+                </div>
+                <p className='mypage_title'>비회원</p>
+
+                <p>비회원입니다.</p>
+                <button className='loginBtn mainBgColor' onClick={goLogin}>
+                  로그인
+                </button>
+                <p>
+                  계정이 없으신가요?{' '}
+                  <span className='pt' onClick={goRegister}>
+                    회원가입
+                  </span>
+                </p>
               </div>
-              <p className='mypage_title'>비회원</p>
-
-              <p>비회원입니다.</p>
-              <button className='loginBtn mainBgColor' onClick={goLogin}>
-                로그인
-              </button>
-              <p>
-                계정이 없으신가요?{' '}
-                <span className='pt' onClick={goRegister}>
-                  회원가입
-                </span>
-              </p>
             </div>
-          </div>
-        )}
+          )}
+        </div>
+        {/* <BottomDiv /> */}
       </div>
-      <BottomDiv />
     </>
   );
 };
