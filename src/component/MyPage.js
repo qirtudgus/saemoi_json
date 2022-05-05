@@ -1,13 +1,10 @@
 import axios from 'axios';
-import jwtDecode from 'jwt-decode';
 import { useEffect, useState, useContext } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { UserInfo } from '../App';
 import '../css/myPage.css';
 
 import guest from '../img/비회원.jpg';
-import UploadImageToS3WithReactS3 from './s3';
-import BottomDiv from './BottomDiv';
 
 const MyPage = () => {
   const navigate = useNavigate();
@@ -113,7 +110,6 @@ const MyPage = () => {
             </div>
           )}
         </div>
-        {/* <BottomDiv /> */}
       </div>
     </>
   );

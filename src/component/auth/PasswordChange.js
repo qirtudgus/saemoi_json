@@ -65,7 +65,11 @@ const PasswordChange = () => {
   }, [inputs]);
 
   const passwordChanger = () => {
-    axios.post(`${URL}/api/authApiData/passwordChange`, inputs);
+    axios.post(`${URL}/api/authApiData/passwordChange`, inputs).then((res) => {
+      alert('비밀번호가 변경되었습니다. 다시 로그인해주세요!');
+      localStorage.removeItem('token');
+      window.location.href = '/login';
+    });
   };
 
   return (
