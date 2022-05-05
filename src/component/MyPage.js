@@ -61,7 +61,6 @@ const MyPage = () => {
   return (
     <>
       <div className='mypage_box'>
-        <UploadImageToS3WithReactS3 />
         {userAuth.auth ? (
           <div className='mypage_wrap'>
             <div className='mypage_container'>

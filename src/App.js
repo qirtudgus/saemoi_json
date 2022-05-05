@@ -83,6 +83,18 @@ function App() {
 
   const pathname = href.pathname;
 
+  // 유저 프로필주소 얻어서 상태값에 할당
+  async function goProfile() {
+    const token = localStorage.getItem('token');
+    const payload = jwtDecode(token);
+    console.log(payload.userId);
+    const goProFileLocation = await axios.post(`${URL}/getProfile`, {
+      id: payload.userId,
+    });
+    console.log(goProFileLocation.data[0].profile);
+    setUserProfile(goProFileLocation.data[0].profile);
+  }
+
   // contextApi 목록
   const userAuthContext = {
     userAuth,
@@ -112,17 +124,6 @@ function App() {
         refreshToken: token,
       });
 
-      // 유저 프로필주소 얻어서 상태값에 할당
-      async function goProfile() {
-        const token = localStorage.getItem('token');
-        const payload = jwtDecode(token);
-        console.log(payload.userId);
-        const goProFileLocation = await axios.post(`${URL}/getProfile`, {
-          id: payload.userId,
-        });
-        console.log(goProFileLocation.data[0].profile);
-        setUserProfile(goProFileLocation.data[0].profile);
-      }
       goProfile();
 
       axios.post(`${URL}/api/middlewere`).then((res) => {
