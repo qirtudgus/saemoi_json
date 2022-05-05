@@ -2,6 +2,9 @@ import React, { useState, useContext, useRef, useEffect } from 'react';
 import axios from 'axios';
 import { UserInfo } from '../App';
 const PasswordFind = () => {
+  const emailIdRef = useRef();
+  const userIdRef = useRef();
+  const newPasswordCurrent = useRef();
   const [email, setEmail] = useState({
     id: '',
     case: '@',
@@ -23,8 +26,6 @@ const PasswordFind = () => {
   const [isPassword, setIsPassword] = useState(false);
   const [isPasswordCheck, setIsPasswordCheck] = useState(false);
 
-  const newPasswordCurrent = useRef();
-
   const onChangeInput = (e) => {
     const { name, value } = e.target;
     setInputs({
@@ -41,6 +42,9 @@ const PasswordFind = () => {
       setPasswordMsg('Good! 좋은 비밀번호에요');
       setIsPassword(true);
     }
+  };
+  const inputEmailAuth = (e) => {
+    setEamilAuth(e.target.value);
   };
 
   useEffect(() => {
@@ -74,10 +78,15 @@ const PasswordFind = () => {
   const [emailAuthComplete, setEmailAuthComplete] = useState(false);
   const [emailAuthBtn, setEmailAuthBtn] = useState(true);
 
+  //이메일 입력 시 들어갈 아이디 상태값, 이메일 양식은 select에서 바로 호출
   const onChangeId = (e) => {
     setEmail({ ...email, id: e.target.value });
   };
 
+  //이메일 인증번호 요청 시 호출
+  // 이메일 아이디나 이메일 양식이 빈칸일 경우 return 시킴
+  // 맞을 경우 인증번호가 들어간 이메일을 전송하며 인증번호를 상태값에 저장시켜놓음
+  // 연속적인 전송이 안되도록 전송 시 버튼 비활성화
   const emailAdd = async () => {
     if (email.email === '') {
       alert('메일을 선택해주세요!');
@@ -97,20 +106,17 @@ const PasswordFind = () => {
       randomNum: randomNum,
     });
   };
-  const emailIdRef = useRef();
-  const userIdRef = useRef();
 
-  const inputEmailAuth = (e) => {
-    setEamilAuth(e.target.value);
-  };
-
+  //이메일 인증 완료 시 비밀번호 생성창을 뛰운다.
+  //불린값에 따라 컴포넌트를 바꾸는것이기때문에 이전화면에 유지되어있는 상태값 id와 새로 작성한 비밀번호를 서버에 전송
+  //서버에서 db에 새롭게 비밀번호 UPDATE 해준 후 login화면으로 이동해서 로그인 유도
   const emailAuthGo = () => {
     if (emailAuth === randomNumber) {
-      alert('인증 되었습니다~ㅎㅎ');
+      alert('인증 되었습니다!');
       setEmailAuthComplete(true);
       setInputs({ ...inputs, newPassword: '', newPasswordCheck: '' });
     } else {
-      alert('번호가 틀려요');
+      alert('인증번호가 틀려요~');
       setEmailAuthComplete(false);
     }
   };
@@ -118,7 +124,7 @@ const PasswordFind = () => {
     axios
       .post(`${URL}/api/authApiData/changepasswordfind`, inputs)
       .then((res) => {
-        alert('비밀번호가 변경되었습니다. 다시 로그인해주세요!');
+        alert('비밀번호가 새로 변경되었습니다. 로그인해주세요!');
         goLogin();
       });
   };
