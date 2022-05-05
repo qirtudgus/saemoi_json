@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import "../css/viewboard.css";
 import backHistory from "../img/뒤로가기_흰색.svg";
@@ -22,6 +22,7 @@ const ViewBoard = () => {
   const [arr, setArr] = useState({
     page: [],
     commentList: [],
+    profile: "",
     checkWriteUser: false,
   });
 
@@ -62,11 +63,17 @@ const ViewBoard = () => {
     try {
       axios.all([viewBoardData(), viewBoardCommentData()]).then(
         axios.spread(function (pageData, commentData) {
+          console.log(pageData.profile);
+          console.log(pageData.result);
           setArr({
             ...arr,
-            page: [...pageData],
+            page: [...pageData.result],
             commentList: [...commentData],
-            checkWriteUser: checkWriter(userAuth.id, pageData[0].board_writer),
+            profile: pageData.profile,
+            checkWriteUser: checkWriter(
+              userAuth.id,
+              pageData.result[0].board_writer,
+            ),
           });
         }),
       );
@@ -127,8 +134,7 @@ const ViewBoard = () => {
             key: key,
           })
           .then((res) => {
-            // console.log(res.data);
-            setArr({ ...arr, page: [...res.data] });
+            setArr({ ...arr, page: [...res.data.result] });
           });
       });
   };
@@ -193,9 +199,14 @@ const ViewBoard = () => {
         <div key={index} className="viewboard_warp">
           <div className="viewboard_container">
             <div className="viewboard_middiv">
-              <div> {i.board_writer}</div>
+              <div className="viewboard_writer">
+                <div className="board_writer">
+                  <img src={arr.profile} alt="profile"></img>
+                  {i.board_writer}
+                </div>
 
-              <div>{i.board_date}</div>
+                <div>{i.board_date}</div>
+              </div>
             </div>
             <div className="viewboard_title">{i.board_title}</div>
 

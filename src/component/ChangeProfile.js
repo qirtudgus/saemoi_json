@@ -1,26 +1,26 @@
-import '../css/changeProfile.css';
-import UploadImageToS3WithReactS3 from './s3';
-import React, { useContext } from 'react';
-import { UserInfo } from '../App';
-import { useNavigate } from 'react-router-dom';
-import backHistory from '../img/뒤로가기_흰색.svg';
+import "../css/changeProfile.css";
+import UploadImageToS3WithReactS3 from "./s3";
+import React, { useContext } from "react";
+import { UserInfo } from "../App";
+import { useNavigate } from "react-router-dom";
+import backHistory from "../img/뒤로가기_흰색.svg";
 
 const ChangeProfile = () => {
   const { userAuth, userProfile } = useContext(UserInfo);
   const navigate = useNavigate();
 
   const goBack = () => {
-    navigate('/mypage');
+    navigate("/mypage");
   };
 
   return (
     <>
-      <div className='changeprofile_box'>
-        <div className='changeprofile_wrap'>
+      <div className="changeprofile_box">
+        <div className="changeprofile_wrap">
           <UploadImageToS3WithReactS3 />
 
-          <div className='goBack' onClick={goBack}>
-            <img src={backHistory} alt='뒤로가기' />
+          <div className="goBack" onClick={goBack}>
+            <img src={backHistory} alt="뒤로가기" />
           </div>
         </div>
       </div>

@@ -133,19 +133,50 @@ router.post("/getBoard", (req, res) => {
     // res.send(result);
   });
   db.query(joinQuery3, (err, result) => {
-    console.log(err);
-    console.log(result);
     res.send(result);
   });
 });
 
 //게시물 확인
 router.post("/viewBoard", (req, res) => {
+  //게시물의 번호를 받아온다.
   const num = req.body.key;
+  const board_profile = {};
+  //받아온 번호의 작성자를 받아온다.
+  const writerQuery =
+    "SELECT board_writer FROM board_table WHERE board_index = ?";
+
+  //작성자의 프로필을 받아온다.
+  const profileQuery = "SELECT profile FROM users WHERE id = ?";
+
+  // 필요한 컬럼만 선택해서 조회 후 보내준다. (아직까진 제일 적절하다.)
+  const joinQuery3 =
+    "SELECT board_index, board_title, board_content, board_writer, profile, board_views, board_commentCount, board_like, board_date, board_likeList FROM board_table LEFT OUTER JOIN users ON board_table.board_writer = users.id;";
+
+  db.query(writerQuery, [num], function (err, rows) {
+    console.log("작성자");
+    console.log(rows[0].board_writer);
+    const writer = rows[0].board_writer;
+
+    // 작성자를 이용해 프로필을 받아온다.
+    db.query(profileQuery, [writer], function (err, rows) {
+      console.log("작성자 프로필 주소");
+      console.log(rows[0].profile);
+      board_profile.profile = rows[0].profile;
+      console.log(board_profile);
+
+      //프로필주소와 보드내용이 들어있는것을 응답해준다.
+      res.send(board_profile);
+    });
+  });
+
   const sqlQuery = "SELECT * FROM board_table WHERE board_index = ?;";
   db.query(sqlQuery, [num], (err, result, fields) => {
     // console.log(result);
-    res.send(result);
+    board_profile.result = result;
+    console.log("board_profile");
+    console.log(board_profile);
+    // res.send(result);
   });
 });
 

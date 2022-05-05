@@ -36,9 +36,6 @@
 }
 
 .viewboard_middiv {
-  padding: 1rem 0 1rem 0;
-  display: flex;
-  justify-content: space-between;
   border-bottom: 1px solid rgb(230, 231, 238);
 
 }
@@ -71,4 +68,10 @@
 }
 .addBoard img {
   width: 30px;
+}
+
+.viewboard_writer{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }

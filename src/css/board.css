@@ -24,7 +24,7 @@
   border-bottom: 1px solid rgb(230, 231, 238);
   overflow: hidden;
   white-space: no-wrap;
-  text-overflow: ellipsis;
+  text-overflow: ellipsis ;
 }
 
 .board_writer {
@@ -47,9 +47,14 @@
 .board_view {
   margin-bottom: 1.2rem;
   -webkit-line-clamp: 3;
+  display: -moz-box; 
   display: -webkit-box;
+  display: box;   
   -webkit-box-orient: vertical;
+  -moz-box-orient: vertical;
+  box-orient: vertical;
   overflow: hidden;
+  
 }
 
 .board_bottom {
