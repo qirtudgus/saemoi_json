@@ -39,7 +39,7 @@ const PasswordChange = () => {
       setPasswordMsg('영문,숫자 포함 최소 6글자 최대 15글자입니다.');
       setIsPassword(false);
     } else {
-      setPasswordMsg('올바릅니다.');
+      setPasswordMsg('Good! 좋은 비밀번호에요');
       setIsPassword(true);
     }
   };

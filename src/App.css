@@ -472,3 +472,15 @@ body {
 .loginBtn:disabled {
   background-color: #c5c5c5;
 }
+
+.bold_txt {
+  font-weight: bold;
+}
+
+.ma_b_14 {
+  margin-bottom: 14px;
+}
+
+.ma_t_14 {
+  margin-top: 14px;
+}

@@ -17,6 +17,9 @@ const Login = () => {
   const goHome = () => {
     navigate('/');
   };
+  const goFind = () => {
+    navigate('/auth/passwordfind');
+  };
 
   const { userAuth, setUserAuth, URL } = useContext(UserInfo);
 
@@ -135,11 +138,17 @@ const Login = () => {
               <button className='loginBtn mainBgColor' onClick={login}>
                 로그인
               </button>
-              <p className='register_p'>
-                계정이 없으신가요?
-                <a href='#' onClick={goRegister}>
+              <p className='register_p ma_b_14'>
+                계정이 없으신가요?..
+                <a className='pt bold_txt  ' onClick={goRegister}>
                   회원가입
                 </a>
+              </p>
+              <p>
+                비밀번호를 잊어버리셨나요?..
+                <span className='pt bold_txt' onClick={goFind}>
+                  비밀번호 찾기
+                </span>
               </p>
             </div>
           </div>

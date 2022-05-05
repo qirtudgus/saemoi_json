@@ -103,9 +103,9 @@ const MyPage = () => {
                 <button className='loginBtn mainBgColor' onClick={goLogin}>
                   로그인
                 </button>
-                <p>
+                <p className='ma_t_14'>
                   계정이 없으신가요?{' '}
-                  <span className='pt' onClick={goRegister}>
+                  <span className='pt bold_txt' onClick={goRegister}>
                     회원가입
                   </span>
                 </p>

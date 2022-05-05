@@ -166,7 +166,7 @@ const Register = () => {
                 <input
                   placeholder='비밀번호'
                   type='password'
-                  autocomplete='off'
+                  autoComplete='off'
                   maxLength={15}
                   name='password'
                   onChange={onChangePassword}
@@ -186,7 +186,7 @@ const Register = () => {
                 <input
                   placeholder='비밀번호 확인'
                   type='password'
-                  autocomplete='off'
+                  autoComplete='off'
                   maxLength={15}
                   name='password_check'
                   onChange={onChangePasswordCheck}

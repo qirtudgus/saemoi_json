@@ -25,6 +25,7 @@ import Board from './component/Board';
 import ViewBoard from './component/ViewBoard';
 import BottomDiv from './component/BottomDiv';
 import ChangeProfile from './component/ChangeProfile';
+import PasswordFind from './component/PasswordFind';
 
 export const UserInfo = React.createContext();
 window.Buffer = window.Buffer || require('buffer').Buffer;
@@ -186,6 +187,7 @@ function App() {
           <Route path='/login' element={<Login />} />
           <Route path='/register' element={<Register />} />
           <Route path='/auth/passwordchange' element={<PasswordChange />} />
+          <Route path='/auth/passwordFind' element={<PasswordFind />} />
         </Routes>
         {/* <Footer /> */}
         {viewBoard ? null : <Footerbar />}
