@@ -92,30 +92,33 @@ const UploadImageToS3WithReactS3 = () => {
   //s3 업로드 시 호출 된다.
   const handleUpload = async (file) => {
     console.log(file);
-    uploadFile(file, config)
-      .then((res) => {
-        const changeProfileObj = {
-          id: userAuth.id,
-          profile: res.location,
-        };
-        return changeProfileObj;
-      })
-      .then((res) => {
-        //아이디와 이미지주소를 서버에 보내준다.
-        axios
-          .post(`${URL}/api/authApiData/changeprofile`, res)
-          .then((res) => {
-            console.log('변경 후 받아온 주소');
-            console.log(res.data);
-            //새로운 프로필의 주소를 받아와 setUserAuth 해준다
-            setUserAuth({ ...userAuth, profile: res.data });
-          })
-          .then((res) => {
-            goBack();
-            // setNoti(true);
-          });
-      })
-      .catch((err) => console.error(err));
+    try {
+      uploadFile(file, config)
+        .then((res) => {
+          const changeProfileObj = {
+            id: userAuth.id,
+            profile: res.location,
+          };
+          return changeProfileObj;
+        })
+        .then((res) => {
+          //아이디와 이미지주소를 서버에 보내준다.
+          axios
+            .post(`${URL}/api/authApiData/changeprofile`, res)
+            .then((res) => {
+              console.log('변경 후 받아온 주소');
+              console.log(res.data);
+              //새로운 프로필의 주소를 받아와 setUserAuth 해준다
+              setUserAuth({ ...userAuth, profile: res.data });
+            })
+            .then((res) => {
+              goBack();
+              // setNoti(true);
+            });
+        });
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
