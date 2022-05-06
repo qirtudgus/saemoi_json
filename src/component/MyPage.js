@@ -8,7 +8,7 @@ import guest from '../img/비회원.jpg';
 
 const MyPage = () => {
   const navigate = useNavigate();
-  const { userAuth, setUserAuth, goLogOut, goLogin, URL, userProfile } =
+  const { userAuth, setUserAuth, goLogOut, goLogin, URL, userProfile, noti } =
     useContext(UserInfo);
 
   const goHome = () => {
@@ -111,6 +111,7 @@ const MyPage = () => {
           )}
         </div>
       </div>
+      {noti ? <div className='noti'>변경완료!!</div> : null}
     </>
   );
 };

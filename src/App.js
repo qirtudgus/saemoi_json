@@ -11,7 +11,6 @@ import NotReady from './component/notReady';
 import Aland from './component/aland';
 import Footerbar from './component/Footerbar';
 import Category from './component/Category';
-import Layout from './component/Layout';
 import Login from './component/auth/login';
 import Register from './component/auth/register';
 import React, { useEffect, useState } from 'react';
@@ -23,7 +22,6 @@ import Write from './component/Write';
 import UpdateWrite from './component/UpdateWrite';
 import Board from './component/Board';
 import ViewBoard from './component/ViewBoard';
-import BottomDiv from './component/BottomDiv';
 import ChangeProfile from './component/ChangeProfile';
 import PasswordFind from './component/PasswordFind';
 
@@ -34,7 +32,7 @@ window.Buffer = window.Buffer || require('buffer').Buffer;
 const local = 'http://localhost:3001';
 const server = 'https://sungtt.com';
 // URL 할당에 따른 서버환경 변경! 아주편리하다~
-const URL = local;
+const URL = server;
 
 let vh = window.innerHeight * 0.01;
 document.documentElement.style.setProperty('--vh', `${vh}px`);
@@ -49,6 +47,7 @@ function App() {
   const [userProfile, setUserProfile] = useState(null);
   const href = useLocation();
   const navigate = useNavigate();
+  const [noti, setNoti] = useState(false);
 
   const [userAuth, setUserAuth] = useState({
     id: '',
@@ -111,6 +110,8 @@ function App() {
     URL,
     pathname,
     userProfile,
+    noti,
+    setNoti,
   };
 
   axios.defaults.headers.common['Authorization'] = `${

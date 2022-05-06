@@ -26,7 +26,8 @@ const UploadImageToS3WithReactS3 = () => {
   const goBack = () => {
     navigate('/mypage');
   };
-  const { userAuth, setUserAuth, URL, userProfile } = useContext(UserInfo);
+  const { userAuth, setUserAuth, URL, userProfile, setNoti } =
+    useContext(UserInfo);
   const [selectedFile, setSelectedFile] = useState(null);
   const [inputFile, setInputFile] = useState(false);
 
@@ -111,6 +112,7 @@ const UploadImageToS3WithReactS3 = () => {
           })
           .then((res) => {
             goBack();
+            setNoti(true);
           });
       })
       .catch((err) => console.error(err));
