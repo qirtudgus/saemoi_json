@@ -170,7 +170,9 @@ const ViewBoard = () => {
             <div className='viewboard_middiv'>
               <div className='viewboard_writer'>
                 <div className='board_writer'>
-                  <img src={arr.profile} alt='profile'></img>
+                  <div className='board_writer_profile'>
+                    <img src={arr.profile} alt='profile'></img>
+                  </div>
                   {i.board_writer}
                 </div>
 

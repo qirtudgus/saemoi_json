@@ -24,7 +24,7 @@
   border-bottom: 1px solid rgb(230, 231, 238);
   overflow: hidden;
   white-space: no-wrap;
-  text-overflow: ellipsis ;
+  text-overflow: ellipsis;
 }
 
 .board_writer {
@@ -36,25 +36,33 @@
   justify-content: flex-start;
 }
 
-
-
-.board_writer img {
-  margin-right: 8px;
-  border-radius: 30px;
+.board_writer_profile {
   width: 30px;
+  height: 30px;
+  border-radius: 30px;
+  margin-right: 8px;
+  overflow: hidden;
+  border: 1px solid #ddd;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.board_writer_profile img {
+  max-width: 30px;
+  min-width: 30px;
 }
 
 .board_view {
   margin-bottom: 1.2rem;
   -webkit-line-clamp: 3;
-  display: -moz-box; 
+  display: -moz-box;
   display: -webkit-box;
-  display: box;   
+  display: box;
   -webkit-box-orient: vertical;
   -moz-box-orient: vertical;
   box-orient: vertical;
   overflow: hidden;
-  
 }
 
 .board_bottom {
