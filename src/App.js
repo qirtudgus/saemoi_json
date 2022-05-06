@@ -24,6 +24,7 @@ import Board from './component/Board';
 import ViewBoard from './component/ViewBoard';
 import ChangeProfile from './component/ChangeProfile';
 import PasswordFind from './component/PasswordFind';
+import NewOlive from './component/NewOlive';
 
 export const UserInfo = React.createContext();
 window.Buffer = window.Buffer || require('buffer').Buffer;
@@ -55,8 +56,6 @@ function App() {
     refreshToken: '',
     profile: '',
   });
-
-  console.log(userAuth);
 
   const goLogOut = () => {
     localStorage.removeItem('token');
@@ -91,14 +90,13 @@ function App() {
   async function goProfile() {
     const token = localStorage.getItem('token');
     const payload = jwtDecode(token);
-    console.log(payload.userId);
+    // console.log(payload.userId); //유저아이디전송
     const goProFileLocation = await axios.post(
       `${URL}/api/authApiData/goProfile`,
       {
         id: payload.userId,
       },
     );
-    console.log(goProFileLocation.data[0].profile);
     setUserProfile(goProFileLocation.data[0].profile);
   }
 
@@ -126,7 +124,7 @@ function App() {
       const token = localStorage.getItem('token');
 
       const payload = jwtDecode(token);
-      console.log(payload);
+      // console.log(payload);
       setUserAuth({
         ...userAuth,
         id: payload.userId,
@@ -173,6 +171,7 @@ function App() {
           <Route element={<Header />}>
             <Route path='/' element={<Home />} />
             <Route path='/drugstore/olive' element={<Oliveyoung />} />
+            <Route path='/drugstore/newolive' element={<NewOlive />} />
             <Route path='/clothes/aland' element={<Aland />} />
             <Route path='/clothes/mustit' element={<Mustit />} />
             <Route path='/about' element={<About />} />

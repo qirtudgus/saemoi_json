@@ -27,14 +27,6 @@ const Oliveyoung = () => {
     return Axios.get(`${URL}/api/oliveyoungApiData`);
   }
 
-  async function getOliveHTML() {
-    return await axios.get(
-      'https://www.oliveyoung.co.kr/store/main/getEventList.do',
-    );
-  }
-
-  console.log(getOliveHTML());
-
   //올리브영의 새로운 배열을 생성하여 리턴
   async function getNewOliveData() {
     const html = await Axios.get(
