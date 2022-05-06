@@ -112,7 +112,7 @@ const UploadImageToS3WithReactS3 = () => {
           })
           .then((res) => {
             goBack();
-            setNoti(true);
+            // setNoti(true);
           });
       })
       .catch((err) => console.error(err));
