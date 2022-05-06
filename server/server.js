@@ -86,7 +86,6 @@ app.post('/api/authApiData/goProfile', (req, res) => {
   const profileQuery = 'SELECT profile FROM users WHERE id = ?';
   db.query(profileQuery, [id], function (err, rows) {
     console.log(rows);
-    res.send('프로필사진 주소');
     res.send(rows);
   });
 });
