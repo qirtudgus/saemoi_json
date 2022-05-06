@@ -78,7 +78,7 @@ app.post('/api/authApiData/changeprofile', (req, res) => {
 });
 
 //마이페이지 프로필주소 api
-app.post('/goProfile', (req, res) => {
+app.post('/api/authApiData/goProfile', (req, res) => {
   // console.log(req);
   const { id } = req.body;
   console.log('프로필 넘겨줄 아이디');
