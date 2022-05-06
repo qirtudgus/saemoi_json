@@ -7,10 +7,23 @@ router.post('/comment', (req, res) => {
   const index = req.body.index;
   console.log(index);
   const findQuery = 'SELECT * FROM comment_table WHERE board_index = (?)';
-  db.query(findQuery, [index], function (err, rows, fields) {
+
+  // join문 id값으로 댓글데이터와 프로필주소 불러오기
+  const joinCommentQuery =
+    'SELECT board_index, comment_index, comment_date, comment_writer,  comment_content, profile FROM comment_table LEFT JOIN users ON comment_table.comment_writer = users.id WHERE board_index = (?)';
+
+  db.query(joinCommentQuery, [index], function (err, rows, fields) {
+    console.log('조인쿼리 결과');
     console.log(rows);
     res.send(rows);
+
+    console.log('조인쿼리 결과');
   });
+
+  // db.query(findQuery, [index], function (err, rows, fields) {
+  //   // console.log(rows);
+  //   res.send(rows);
+  // });
 });
 
 //댓글 작성하기 1.게시물index 2.날짜 3.작성자 4.내용

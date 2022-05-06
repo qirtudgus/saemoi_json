@@ -20,7 +20,7 @@
   display: block;
 }
 
-.viewboard_like{
+.viewboard_like {
   display: flex;
   align-items: center;
   padding: 1rem 0 1rem 0;
@@ -37,15 +37,46 @@
 
 .viewboard_middiv {
   border-bottom: 1px solid rgb(230, 231, 238);
-
 }
 
-.comment_wrap{ padding-bottom: 0.8rem;}
-.comment_middiv{ display: flex; justify-content: space-between; align-items: center; padding: 0.5rem 0 0.7rem 0;}
-.comment_date{}
-.comment_content{ word-break:break-all;
+.comment_wrap {
+  padding-bottom: 0.8rem;
 }
-.comment_writer{ font-weight: bold; padding-left: 0.3rem;}
+.comment_middiv {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 0 0.7rem 0;
+}
+.comment_date {
+}
+.comment_content {
+  word-break: break-all;
+}
+.comment_writer {
+  font-weight: bold;
+  padding-left: 0.3rem;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+.comment_writer_profile {
+  width: 30px;
+  height: 30px;
+  border-radius: 30px;
+  margin-right: 8px;
+  overflow: hidden;
+  border: 1px solid #ddd;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.comment_writer img {
+  max-width: 30px;
+  min-width: 30px;
+}
+
 .comment_bottomdiv {
   display: flex;
   justify-content: space-between;
@@ -57,20 +88,19 @@
   height: 50px;
   position: fixed;
   bottom: 5rem;
-  right :1rem;
+  right: 1rem;
   background-color: #3e55ff;
   border-radius: 50px;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 1px 2px 3px rgba(0,0,0, 0.3);
-
+  box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.3);
 }
 .addBoard img {
   width: 30px;
 }
 
-.viewboard_writer{
+.viewboard_writer {
   display: flex;
   align-items: center;
   justify-content: space-between;

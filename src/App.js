@@ -74,6 +74,10 @@ function App() {
     navigate('/');
   };
 
+  const goBack = () => {
+    navigate(-1);
+  };
+
   const goLogin = () => {
     navigate('/login');
   };
@@ -103,6 +107,7 @@ function App() {
     goLogOut,
     goLogin,
     goBoard,
+    goBack,
     URL,
     pathname,
     userProfile,
