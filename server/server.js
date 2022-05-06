@@ -22,11 +22,7 @@ db.connect((err) => {
   console.log('MySQL Connected!!!');
 }); // 오류해결 https://www.inflearn.com/questions/3637
 
-app.use(
-  cors({
-    credentials: true,
-  }),
-);
+app.use(cors());
 app.use(express.json());
 app.use(myLogger);
 app.use(tokenCheck);
@@ -82,7 +78,7 @@ app.post('/api/authApiData/changeprofile', (req, res) => {
 });
 
 //마이페이지 프로필주소 api
-app.post('/getProfile', (req, res) => {
+app.post('/goProfile', (req, res) => {
   // console.log(req);
   const { id } = req.body;
   console.log('프로필 넘겨줄 아이디');
@@ -90,6 +86,7 @@ app.post('/getProfile', (req, res) => {
   const profileQuery = 'SELECT profile FROM users WHERE id = ?';
   db.query(profileQuery, [id], function (err, rows) {
     console.log(rows);
+    res.send('프로필사진 주소');
     res.send(rows);
   });
 });

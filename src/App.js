@@ -92,7 +92,7 @@ function App() {
     const token = localStorage.getItem('token');
     const payload = jwtDecode(token);
     console.log(payload.userId);
-    const goProFileLocation = await axios.post(`${URL}/getProfile`, {
+    const goProFileLocation = await axios.post(`${URL}/goProfile`, {
       id: payload.userId,
     });
     console.log(goProFileLocation.data[0].profile);
