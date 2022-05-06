@@ -7,6 +7,8 @@ import '../css/s3.css';
 import imageCompression from 'browser-image-compression';
 import addWhite from '../img/add_white.svg';
 import addBlack from '../img/add.png';
+import guest from '../img/비회원.jpg';
+
 const S3_BUCKET = 'saemoi';
 const REGION = 'ap-northeast-2';
 const ACCESS_KEY = process.env.REACT_APP_ACCESS_KEY;
@@ -120,7 +122,7 @@ const UploadImageToS3WithReactS3 = () => {
 
       <div className='profile_decide_box'>
         <div className='profile_decide'>
-          <img src={image || userProfile} alt='preview' />
+          <img src={image || userProfile || guest} alt='preview' />
         </div>
         <label className='uploads_label' htmlFor='image_uploads'>
           <img src={addBlack} alt='zz' />

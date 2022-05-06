@@ -88,7 +88,8 @@
 .subMenuList {
   height: 50px;
   line-height: 50px;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
+  font-weight: 500;
 }
 .categoryMapHeader {
   position: relative;
@@ -103,8 +104,7 @@
   justify-content: space-around;
   align-items: center;
 }
-.welcomeMent{
- 
+.welcomeMent {
 }
 .categoryMapHeader span {
   display: block;
