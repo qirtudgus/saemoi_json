@@ -70,23 +70,6 @@ router.post('/comment/post', function (req, res) {
   db.query(sqlQuery, [date, content, password], (err, result) => {});
 });
 
-//올리브영 받은 배열을 마이쿼리 테이블에 전송
-router.post('/get', function (req, res) {
-  req.body.map((i) => {
-    // console.log(i.link);
-    const title = i.title;
-    const date = i.date;
-    const img = i.img;
-    const link = i.link;
-    const sqlQuery =
-      'INSERT INTO oliveyoung_table (title,date,img,link) VALUES (?,?,?,?)';
-    db.query(sqlQuery, [title, date, img, link], (err, result) => {
-      console.log(err);
-    });
-  });
-  res.send('succ');
-});
-
 //올리브영 테이블 api에 뿌려주기
 router.get('', (req, res) => {
   const sqlQuery = 'SELECT * FROM oliveyoung_table;';
