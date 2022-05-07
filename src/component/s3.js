@@ -47,18 +47,14 @@ const UploadImageToS3WithReactS3 = () => {
       maxIteration: 100, // 몇번까지 압축을 시도할건지 기본 10
       initialQuality: 1, // 기본 1의 화질에서 몇까지 깎을건지
     };
-    try {
-      // 압축 결과, 여기에 이미지가 담겨있다.
-      const compressedFile = await imageCompression(fileSrc, options);
+    // 압축 결과, 여기에 이미지가 담겨있다.
+    const compressedFile = await imageCompression(fileSrc, options);
 
-      encodeFileToBase64(compressedFile);
-      console.log(compressedFile);
+    encodeFileToBase64(compressedFile);
+    console.log(compressedFile);
 
-      setSelectedFile(compressedFile);
-      setAddFileSize(compressedFile.size);
-    } catch (error) {
-      console.log(error);
-    }
+    setSelectedFile(compressedFile);
+    setAddFileSize(compressedFile.size);
   };
 
   //이미지 프리뷰 인자로 이미지를 전달하여 호출하면 된다.
