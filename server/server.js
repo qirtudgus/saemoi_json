@@ -110,60 +110,56 @@ app.post('/newolive', (req, res) => {
   let eventList = [];
 
   async function newOlive() {
-    try {
-      const html = await axios.get(`${req.body.url}`);
+    const html = await axios.get(`${req.body.url}`);
 
-      let titleList = [];
-      let dateList = [];
-      let imgList = [];
-      let linkList = [];
+    let titleList = [];
+    let dateList = [];
+    let imgList = [];
+    let linkList = [];
 
-      const $ = cheerio.load(html.data);
-      const title = $('div.event_tab_cont ul.event_thumb_list li p.evt_tit');
-      const date = $('div.event_tab_cont ul.event_thumb_list li p.evt_date');
-      const img = $('ul.event_thumb_list li a').children('img');
-      const link = $('ul.event_thumb_list li input[name=urlInfo]');
+    const $ = cheerio.load(html.data);
+    const title = $('div.event_tab_cont ul.event_thumb_list li p.evt_tit');
+    const date = $('div.event_tab_cont ul.event_thumb_list li p.evt_date');
+    const img = $('ul.event_thumb_list li a').children('img');
+    const link = $('ul.event_thumb_list li input[name=urlInfo]');
 
-      //각각의 배열에 해당 값을 추가한다.
-      title.each(function (i) {
-        titleList[i] = {
-          event_title: $(this).text(),
-        };
-      });
-      date.each(function (i) {
-        dateList[i] = {
-          event_date: $(this).text(),
-        };
-      });
-      img.each(function (i) {
-        imgList[i] = {
-          event_img: $(this).attr('data-original'),
-        };
-      });
-      link.each(function (i) {
-        linkList[i] = {
-          event_link:
-            'https://www.oliveyoung.co.kr/store/' + $(this).attr('value'),
-        };
-      });
-      // eventList = titleList
-      //   .map((item, i) => ({ ...item, ...dateList[i] }))
-      //   .map((item, i) => ({ ...item, ...imgList[i] }))
-      //   .map((item, i) => ({ ...item, ...linkList[i] }));
+    //각각의 배열에 해당 값을 추가한다.
+    title.each(function (i) {
+      titleList[i] = {
+        event_title: $(this).text(),
+      };
+    });
+    date.each(function (i) {
+      dateList[i] = {
+        event_date: $(this).text(),
+      };
+    });
+    img.each(function (i) {
+      imgList[i] = {
+        event_img: $(this).attr('data-original'),
+      };
+    });
+    link.each(function (i) {
+      linkList[i] = {
+        event_link:
+          'https://www.oliveyoung.co.kr/store/' + $(this).attr('value'),
+      };
+    });
+    // eventList = titleList
+    //   .map((item, i) => ({ ...item, ...dateList[i] }))
+    //   .map((item, i) => ({ ...item, ...imgList[i] }))
+    //   .map((item, i) => ({ ...item, ...linkList[i] }));
 
-      eventList = titleList.map((item, i) => ({
-        ...item,
-        ...dateList[i],
-        ...imgList[i],
-        ...linkList[i],
-      }));
-      // return eventList;
-      //eventList에 최신값이 담겨있다.
-      // console.log(eventList);
-      res.send(eventList);
-    } catch (err) {
-      console.log(err);
-    }
+    eventList = titleList.map((item, i) => ({
+      ...item,
+      ...dateList[i],
+      ...imgList[i],
+      ...linkList[i],
+    }));
+    // return eventList;
+    //eventList에 최신값이 담겨있다.
+    // console.log(eventList);
+    res.send(eventList);
   }
 
   // db.query(oliveQuery, function (err, result) {
