@@ -1,7 +1,23 @@
 import React, { useState, useContext, useRef, useEffect } from 'react';
 import axios from 'axios';
 import { UserInfo } from '../App';
+import '../css/passwordFind.css';
 const PasswordFind = () => {
+  const [randomNumber, setRandomNumber] = useState(null);
+
+  const [emailAuth, setEamilAuth] = useState(null);
+
+  const [emailAuthComplete, setEmailAuthComplete] = useState(false);
+  const [emailAuthBtn, setEmailAuthBtn] = useState(true);
+  const [passwordCheckMsg, setPasswordCheckMsg] = useState('');
+  const [isPassword, setIsPassword] = useState(false);
+  const [isPasswordCheck, setIsPasswordCheck] = useState(false);
+  const [passwordMsg, setPasswordMsg] = useState(
+    '영문,숫자 포함 최소 6글자 최대 15글자입니다.',
+  );
+
+  const [authForm, setAuthForm] = useState(false);
+
   const emailIdRef = useRef();
   const userIdRef = useRef();
   const newPasswordCurrent = useRef();
@@ -18,13 +34,6 @@ const PasswordFind = () => {
     newPasswordCheck: '',
   });
   const { id, newPassword, newPasswordCheck } = inputs;
-
-  const [passwordMsg, setPasswordMsg] = useState(
-    '영문,숫자 포함 최소 6글자 최대 15글자입니다.',
-  );
-  const [passwordCheckMsg, setPasswordCheckMsg] = useState('');
-  const [isPassword, setIsPassword] = useState(false);
-  const [isPasswordCheck, setIsPasswordCheck] = useState(false);
 
   const onChangeInput = (e) => {
     const { name, value } = e.target;
@@ -70,13 +79,6 @@ const PasswordFind = () => {
   };
 
   const { URL, goLogin } = useContext(UserInfo);
-
-  const [randomNumber, setRandomNumber] = useState(null);
-
-  const [emailAuth, setEamilAuth] = useState(null);
-
-  const [emailAuthComplete, setEmailAuthComplete] = useState(false);
-  const [emailAuthBtn, setEmailAuthBtn] = useState(true);
 
   //이메일 입력 시 들어갈 아이디 상태값, 이메일 양식은 select에서 바로 호출
   const onChangeId = (e) => {
@@ -169,41 +171,55 @@ const PasswordFind = () => {
         </>
       ) : (
         <>
-          <p>찾으실 아이디를 입력해주세요</p>
-          <input
-            name='id'
-            onChange={onChangeInput}
-            placeholder='아이디'
-            ref={userIdRef}
-          ></input>
-          <p>이메일을 적어주세요!</p>
-          <input
-            onChange={onChangeId}
-            placeholder='이메일'
-            ref={emailIdRef}
-          ></input>
-          <select
-            onChange={(e) => {
-              setEmail({ ...email, email: e.target.value });
-            }}
-            placeholder='이메일'
-          >
-            <option value=''>메일 선택</option>
-            <option value='naver.com'>naver.com</option>
-            <option value='gmail.com'>gmail.com</option>
-            <option value='kakao.com'>kakao.com</option>
-            <option value='daum.net'>daum.net</option>
-          </select>
+          <div className='find_box'>
+            <div className='find_container'>
+              <div className='find_wrap'>
+                <p className='find_title'>비밀번호 찾기</p>
+                <p>찾으실 아이디를 입력해주세요</p>
 
-          <button disabled={!emailAuthBtn} onClick={emailAdd}>
-            인증번호 전송하기
-          </button>
-          {emailAuthBtn ? null : <button>인증번호 재전송</button>}
-          <input
-            onChange={inputEmailAuth}
-            placeholder='인증번호를 입력해주세요!'
-          ></input>
-          <button onClick={emailAuthGo}>인증</button>
+                <input
+                  name='id'
+                  onChange={onChangeInput}
+                  placeholder='아이디'
+                  ref={userIdRef}
+                ></input>
+                <p>이메일을 적어주세요!</p>
+                <div>
+                  <input
+                    onChange={onChangeId}
+                    placeholder='이메일'
+                    ref={emailIdRef}
+                  ></input>
+                  <span>@</span>
+                  <select
+                    onChange={(e) => {
+                      setEmail({ ...email, email: e.target.value });
+                    }}
+                    placeholder='이메일'
+                  >
+                    <option value=''>메일 선택</option>
+                    <option value='naver.com'>naver.com</option>
+                    <option value='gmail.com'>gmail.com</option>
+                    <option value='kakao.com'>kakao.com</option>
+                    <option value='daum.net'>daum.net</option>
+                  </select>
+                </div>
+                <button disabled={!emailAuthBtn} onClick={emailAdd}>
+                  인증번호 전송하기
+                </button>
+                {emailAuthBtn ? null : <button>인증번호 재전송</button>}
+                {authForm ? (
+                  <>
+                    <input
+                      onChange={inputEmailAuth}
+                      placeholder='인증번호를 입력해주세요!'
+                    ></input>
+                    <button onClick={emailAuthGo}>인증</button>
+                  </>
+                ) : null}
+              </div>
+            </div>
+          </div>
         </>
       )}
     </>

@@ -39,7 +39,7 @@
 }
 
 .evtForm_info {
-  padding: 1rem;
+  padding: 1.5rem 1rem 0.5rem 1rem;
   display: flex;
   position: relative;
   justify-content: space-between;
@@ -48,7 +48,7 @@
 .evtForm_date {
   display: flex;
   border-radius: 5px;
-  font-size: 16px;
+  font-size: 13px;
   font-weight: bold;
 }
 
@@ -70,23 +70,37 @@
 .evtForm_title {
   font-size: 1.1rem;
   font-weight: bold;
-  padding: 1rem;
+  padding: 1.5rem 1rem 1rem 1rem;
   height: 2.95rem;
 }
 
 .d_day {
   position: absolute;
-  top: -223px;
+  top: -58px;
   left: 0px;
-  z-index: 100;
-  font-size: 1rem;
-  font-weight: bold;
-  width: 1000px;
+  height: 1.5rem;
+  line-height: 1.5rem;
+  z-index: 2;
+  font-size: 0.9rem;
+  width: 6.3rem;
   overflow: hidden;
-  background-color: #fff;
+  background-color: #3e55ff;
   padding-left: 5px;
   padding-bottom: 5px;
-  color: #3e55ff;
+  border-radius: 0 15px 15px 0;
+  color: #fff;
+}
+.ing_event_box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 2rem;
+  font-size: 1.2rem;
+}
+
+.ing_event {
+  position: relative;
+  font-weight: bold;
 }
 
 @media (max-width: 1919px) {

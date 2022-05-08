@@ -4,16 +4,13 @@ import Axios from 'axios';
 import '../css/eventForm.css';
 
 const EventForm = ({ Data, setData, getApi, getView }) => {
-  const clickView = (e) => {
+  const clickView = async (e) => {
     const idx = e.currentTarget.id;
     console.log(idx);
-    Axios.get(getApi).then((res) => {
-      setData([...res.data]);
-    });
 
-    Axios.post(getView, { idx: idx });
+    await Axios.post(getView, { idx: idx });
 
-    Axios.get(getApi).then((res) => {
+    await Axios.get(getApi).then((res) => {
       setData([...res.data]);
     });
   };

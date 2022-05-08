@@ -37,10 +37,10 @@ const Category_map = ({ subMenu }) => {
 
         {subMenu === 'Food' ? (
           <>
-            {/* <Link to='/sorry'>
+            <Link to='/food/rangkingdak'>
               <li className='subMenuList'>랭킹닭컴</li>
             </Link>
-            <Link to='/sorry'>
+            {/* <Link to='/sorry'>
               <li className='subMenuList'>편의점</li>
             </Link>
             <Link to='/sorry'>

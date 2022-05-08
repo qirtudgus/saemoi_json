@@ -25,6 +25,7 @@ import ViewBoard from './component/ViewBoard';
 import ChangeProfile from './component/ChangeProfile';
 import PasswordFind from './component/PasswordFind';
 import NewOlive from './component/NewOlive';
+import RangkingDak from './component/RangkingDak';
 
 export const UserInfo = React.createContext();
 window.Buffer = window.Buffer || require('buffer').Buffer;
@@ -33,16 +34,16 @@ window.Buffer = window.Buffer || require('buffer').Buffer;
 const local = 'http://localhost:3001';
 const server = 'https://sungtt.com';
 // URL 할당에 따른 서버환경 변경! 아주편리하다~
-const URL = server;
+const URL = local;
 
-let vh = window.innerHeight * 0.01;
-document.documentElement.style.setProperty('--vh', `${vh}px`);
+// let vh = window.innerHeight * 0.01;
+// document.documentElement.style.setProperty('--vh', `${vh}px`);
 
-window.addEventListener('resize', () => {
-  console.log('resize');
-  let vh = window.innerHeight * 0.01;
-  document.documentElement.style.setProperty('--vh', `${vh}px`);
-});
+// window.addEventListener('resize', () => {
+//   console.log('resize');
+//   let vh = window.innerHeight * 0.01;
+//   document.documentElement.style.setProperty('--vh', `${vh}px`);
+// });
 
 function App() {
   const [userProfile, setUserProfile] = useState(null);
@@ -174,6 +175,7 @@ function App() {
             <Route path='/drugstore/newolive' element={<NewOlive />} />
             <Route path='/clothes/aland' element={<Aland />} />
             <Route path='/clothes/mustit' element={<Mustit />} />
+            <Route path='/food/rangkingdak' element={<RangkingDak />} />
             <Route path='/about' element={<About />} />
             <Route path='/sorry' element={<NotReady />} />
             <Route path='/mypage' element={<MyPage />} />
@@ -185,7 +187,7 @@ function App() {
             />
             <Route
               path='/board/UpdateWrite/:boardnumber'
-              element={<UpdateWrite data={href.pathname} />}
+              element={<UpdateWrite />}
             />
 
             <Route path='/comment' element={<NotReady />} />

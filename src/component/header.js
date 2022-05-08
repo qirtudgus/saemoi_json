@@ -159,10 +159,10 @@ const Header = () => {
                     <ul className='pcSubMenu'>
                       <div className='triangle'></div>
                       <img src={triangle} alt='menu'></img>
-                      {/* <Link to="/sorry">
+                      <Link to='/food/rangkingdak'>
                         <li>랭킹닭컴</li>
                       </Link>
-                      <Link to="/sorry">
+                      {/* <Link to="/sorry">
                         {" "}
                         <li>편의점</li>
                       </Link>

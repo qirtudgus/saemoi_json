@@ -22,10 +22,13 @@ const NewEventForm = ({ Data, setData, getApi, viewApi }) => {
   const getDateDiff = (d1, d2) => {
     const date1 = new Date(d1);
     const date2 = new Date(d2);
-
     const diffDate = date1.getTime() - date2.getTime();
-
-    return Math.abs(Math.ceil(diffDate / (1000 * 60 * 60 * 24)));
+    const date = Math.abs(Math.ceil(diffDate / (1000 * 60 * 60 * 24)));
+    //랭킹닭컴은 문자열이 들어가있어서 그에 대한 예외처리
+    if (isNaN(date)) {
+      return '이벤트 종료 시 까지';
+    }
+    return date;
   };
 
   return (
@@ -51,6 +54,8 @@ const NewEventForm = ({ Data, setData, getApi, viewApi }) => {
                     <p className='d_day'>
                       {getDateDiff(
                         today,
+                        // YYYY-MM-DD 의 양식으로 변경해주어 인자에 전달하고,
+                        // DB에선 YY.MM.DD- YY.MM.DD의 양식을 유지한다.
                         '20' + i.event_date.slice(10).replaceAll('.', '-'),
                       )}
                       일 남음
