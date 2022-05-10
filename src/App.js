@@ -26,6 +26,8 @@ import ChangeProfile from "./component/ChangeProfile";
 import PasswordFind from "./component/PasswordFind";
 import NewOlive from "./component/NewOlive";
 import RangkingDak from "./component/RangkingDak";
+import Starfield from "./component/Starfield";
+import Favorites from "./component/Favorites";
 
 export const UserInfo = React.createContext();
 window.Buffer = window.Buffer || require("buffer").Buffer;
@@ -169,6 +171,7 @@ function App() {
       </Modal> */}
 
       {/* <Header /> */}
+
       <UserInfo.Provider value={userAuthContext}>
         <Routes>
           <Route element={<Header />}>
@@ -178,6 +181,7 @@ function App() {
             <Route path="/clothes/aland" element={<Aland />} />
             <Route path="/clothes/mustit" element={<Mustit />} />
             <Route path="/food/rangkingdak" element={<RangkingDak />} />
+            <Route path="/store/starfield" element={<Starfield />} />
             <Route path="/about" element={<About />} />
             <Route path="/sorry" element={<NotReady />} />
             <Route path="/mypage" element={<MyPage />} />
@@ -200,6 +204,7 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/auth/passwordchange" element={<PasswordChange />} />
           <Route path="/auth/passwordFind" element={<PasswordFind />} />
+          <Route path="/favorites" element={<Favorites />} />
         </Routes>
         {/* <Footer /> */}
         {viewBoard ? null : <Footerbar />}

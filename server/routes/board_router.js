@@ -32,11 +32,7 @@ router.post("/addComment", (req, res) => {
   const id = req.body.id;
   const date = req.body.date;
   const content = req.body.content;
-  // console.log(date);
-  // console.log(id);
-  // console.log(board_index);
-  // console.log(content);
-  //데이터 정상적으로 들어옴
+
   const countQuery =
     "UPDATE board_table SET board_commentCount = board_commentCount + 1 WHERE board_index = ?";
   const insertQuery =
@@ -157,16 +153,15 @@ router.post("/viewBoard", (req, res) => {
   //작성자의 프로필을 받아온다.
   const profileQuery = "SELECT profile FROM users WHERE id = ?";
 
-  // 필요한 컬럼만 선택해서 조회 후 보내준다. (아직까진 제일 적절하다.)
-  const joinQuery3 =
-    "SELECT board_index, board_title, board_content, board_writer, profile, board_views, board_commentCount, board_like, board_date, board_likeList FROM board_table LEFT OUTER JOIN users ON board_table.board_writer = users.id;";
-
   db.query(writerQuery, [num], function (err, rows) {
     const writer = rows[0].board_writer;
-
+    console.log(writer);
     // 작성자를 이용해 프로필을 받아온다.
     db.query(profileQuery, [writer], function (err, rows) {
-      board_profile.profile = rows[0].profile;
+      console.log(rows);
+      console.log(rows[0]);
+
+      board_profile.profile = rows[0].profile || null;
       console.log(board_profile);
 
       //프로필주소와 보드내용이 들어있는것을 응답해준다.

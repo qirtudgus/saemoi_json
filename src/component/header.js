@@ -1,8 +1,8 @@
-import React, { useState, useEffect, useRef } from 'react';
-import logoSVG from '../img/saemoiSVG2.svg';
-import { Link, NavLink, Outlet } from 'react-router-dom';
-import '../css/header.css';
-import triangle from '../img/whiteArrow0.svg';
+import React, { useState, useEffect, useRef } from "react";
+import logoSVG from "../img/saemoiSVG2.svg";
+import { Link, NavLink, Outlet } from "react-router-dom";
+import "../css/header.css";
+import triangle from "../img/whiteArrow0.svg";
 
 const throttle = function (callback, waitTime) {
   let timerId = null;
@@ -38,46 +38,46 @@ const Header = () => {
   useEffect(() => {
     // console.log('헤더스크롤');
 
-    documentRef.current.addEventListener('scroll', throttleScroll);
+    documentRef.current.addEventListener("scroll", throttleScroll);
     return () =>
-      documentRef.current.removeEventListener('scroll', throttleScroll);
+      documentRef.current.removeEventListener("scroll", throttleScroll);
   }, [pageY]);
 
   return (
     <>
-      <header className='header'>
-        <div className={hide ? 'headerWrap hide' : 'headerWrap'}>
-          <div className='headerContent'>
-            <div className='logoBtnBox'>
-              <Link to='/'>
-                <div className='logo'>
-                  <img src={logoSVG} alt='logo' />
+      <header className="header">
+        <div className={hide ? "headerWrap hide" : "headerWrap"}>
+          <div className="headerContent">
+            <div className="logoBtnBox">
+              <Link to="/">
+                <div className="logo">
+                  <img src={logoSVG} alt="logo" />
                 </div>
               </Link>
-              <div className='pcMenu'>
-                <ul className='pcMenuBox'>
-                  <li className='pcMainMenu'>
+              <div className="pcMenu">
+                <ul className="pcMenuBox">
+                  <li className="pcMainMenu">
                     <NavLink
-                      to='/drugstore'
+                      to="/drugstore"
                       onClick={(e) => {
                         e.preventDefault();
                       }}
                       className={({ isActive }) =>
-                        isActive ? 'active' : undefined
+                        isActive ? "active" : undefined
                       }
                     >
                       드럭스토어
                     </NavLink>
-                    <ul className='pcSubMenu'>
-                      <div className='triangle'></div>
-                      <img src={triangle} alt='menu'></img>
-
-                      <Link to='/drugstore/olive'>
-                        <li>올리브영</li>
-                      </Link>
-                      <Link to='/drugstore/newolive'>
+                    <ul className="pcSubMenu">
+                      <div className="triangle"></div>
+                      <img src={triangle} alt="menu"></img>
+                      <Link to="/drugstore/newolive">
                         <li>New 올리브영</li>
                       </Link>
+                      <Link to="/drugstore/olive">
+                        <li>올리브영</li>
+                      </Link>
+
                       {/* <Link to="/sorry">
                         {" "}
                         <li>랄라블라</li>
@@ -88,53 +88,53 @@ const Header = () => {
                       </Link> */}
                     </ul>
                   </li>
-                  <li className='pcMainMenu'>
+                  <li className="pcMainMenu">
                     <NavLink
-                      to='/clothes'
+                      to="/clothes"
                       onClick={(e) => {
                         e.preventDefault();
                       }}
                       className={({ isActive }) =>
-                        isActive ? 'active' : undefined
+                        isActive ? "active" : undefined
                       }
                     >
                       의류
                     </NavLink>
-                    <ul className='pcSubMenu'>
-                      <div className='triangle'></div>
-                      <img src={triangle} alt='menu'></img>
-                      <Link to='/clothes/aland'>
-                        {' '}
+                    <ul className="pcSubMenu">
+                      <div className="triangle"></div>
+                      <img src={triangle} alt="menu"></img>
+                      <Link to="/clothes/aland">
+                        {" "}
                         <li>에이랜드</li>
                       </Link>
                       {/* <Link to="/sorry">
                         <li>무신사</li>
                       </Link> */}
-                      <Link to='/clothes/mustit'>
-                        {' '}
+                      <Link to="/clothes/mustit">
+                        {" "}
                         <li>머스트잇</li>
                       </Link>
                     </ul>
                   </li>
-                  <li className='pcMainMenu'>
+                  <li className="pcMainMenu">
                     <NavLink
-                      to='/stores'
+                      to="/stores"
                       onClick={(e) => {
                         e.preventDefault();
                       }}
                       className={({ isActive }) =>
-                        isActive ? 'active' : undefined
+                        isActive ? "active" : undefined
                       }
                     >
                       백화점
                     </NavLink>
-                    <ul className='pcSubMenu'>
-                      <div className='triangle'></div>
-                      <img src={triangle} alt='menu'></img>
-                      {/* <Link to="/store/lotteon">
-                        <li>롯데백화점</li>
+                    <ul className="pcSubMenu">
+                      <div className="triangle"></div>
+                      <img src={triangle} alt="menu"></img>
+                      <Link to="/store/starfield">
+                        <li>스타필드</li>
                       </Link>
-                      <Link to="/sorry">
+                      {/* <Link to="/sorry">
                         {" "}
                         <li>SSG</li>
                       </Link>
@@ -144,22 +144,22 @@ const Header = () => {
                       </Link> */}
                     </ul>
                   </li>
-                  <li className='pcMainMenu'>
+                  <li className="pcMainMenu">
                     <NavLink
-                      to='/food'
+                      to="/food"
                       onClick={(e) => {
                         e.preventDefault();
                       }}
                       className={({ isActive }) =>
-                        isActive ? 'active' : undefined
+                        isActive ? "active" : undefined
                       }
                     >
                       식품
                     </NavLink>
-                    <ul className='pcSubMenu'>
-                      <div className='triangle'></div>
-                      <img src={triangle} alt='menu'></img>
-                      <Link to='/food/rangkingdak'>
+                    <ul className="pcSubMenu">
+                      <div className="triangle"></div>
+                      <img src={triangle} alt="menu"></img>
+                      <Link to="/food/rangkingdak">
                         <li>랭킹닭컴</li>
                       </Link>
                       {/* <Link to="/sorry">
@@ -173,10 +173,10 @@ const Header = () => {
                     </ul>
                   </li>
                   <li>
-                    <Link to='/board'>자유게시판</Link>
+                    <Link to="/board">자유게시판</Link>
                   </li>
                   <li>
-                    <Link to='/about'>어바웃</Link>
+                    <Link to="/about">어바웃</Link>
                   </li>
                 </ul>
               </div>
@@ -294,7 +294,7 @@ const Header = () => {
             </Link>
           </ul>
         </div> */}
-        {visible ? <div className='noneTouchBox'></div> : null}
+        {visible ? <div className="noneTouchBox"></div> : null}
       </header>
       <main>
         <Outlet />
