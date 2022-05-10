@@ -7,9 +7,11 @@ import { UserInfo } from "../App";
 import { addDate } from "./addDate";
 import { useNavigate } from "react-router-dom";
 
-const UpdateWrite = (pathname) => {
+const UpdateWrite = ({ pathname }) => {
   const { userAuth, URL } = useContext(UserInfo);
-  const key = pathname.data.replace(/[^0-9]/g, "");
+  // console.log(pathname);
+  const key = pathname.replace(/[^0-9]/g, "");
+  console.log(key);
   const [board, setBoard] = useState({
     board_title: "",
     board_content: "zzzzzzzzzzzzz",
@@ -32,15 +34,13 @@ const UpdateWrite = (pathname) => {
     axios
       .post(`${URL}/api/boardApiData/viewBoard`, { key: key })
       .then((res) => {
-        console.log(res.data[0].board_title);
-
-        console.log(res.data[0].board_content);
+        console.log(res.data.result[0]);
         //기존의 글 제목 불러오기 성공
         setBoard({
           ...board,
-          board_title: res.data[0].board_title,
+          board_title: res.data.result[0].board_title,
         });
-        setEditText([...res.data]);
+        setEditText([...res.data.result]);
       });
   }, []);
 

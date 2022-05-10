@@ -34,7 +34,7 @@ window.Buffer = window.Buffer || require("buffer").Buffer;
 const local = "http://localhost:3001";
 const server = "https://sungtt.com";
 // URL 할당에 따른 서버환경 변경! 아주편리하다~
-const URL = server;
+const URL = local;
 
 // let vh = window.innerHeight * 0.01;
 // document.documentElement.style.setProperty('--vh', `${vh}px`);
@@ -86,6 +86,8 @@ function App() {
   };
 
   const pathname = href.pathname;
+
+  console.log(pathname);
 
   // 유저 프로필주소 얻어서 상태값에 할당
   async function goProfile() {
@@ -187,7 +189,7 @@ function App() {
             />
             <Route
               path="/board/UpdateWrite/:boardnumber"
-              element={<UpdateWrite />}
+              element={<UpdateWrite pathname={pathname} />}
             />
 
             <Route path="/comment" element={<NotReady />} />
