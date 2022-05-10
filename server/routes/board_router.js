@@ -49,7 +49,6 @@ router.post("/addComment", (req, res) => {
 
 //댓글 삭제
 router.post("/removeComment", (req, res) => {
-  console.log(req.body);
   const { comment_index, board_index } = req.body;
   const removeQuery = "DELETE FROM comment_table WHERE comment_index = ?";
   const unCountQuery =
@@ -81,10 +80,7 @@ router.post("/checkLikeUser", (req, res) => {
 //글 작성하기
 router.post("/write", (req, res) => {
   const token = req.authorization;
-  console.log(token);
   const { board_title, board_content, board_writer, board_date } = req.body;
-
-  console.log(board_title, board_content, board_writer);
 
   const writeQuery =
     "INSERT INTO board_table (board_title,board_content,board_writer, board_date) VALUES (?,?,?,?)";
@@ -99,7 +95,6 @@ router.post("/updatewrite", (req, res) => {
 
   // console.log(board_title, board_content, board_writer);
 
-  console.log(board_index);
   // 'update board_table set board_views = board_views + 1 where board_index = (?)'; //https://blog.serpongs.net/24
 
   const writeQuery =
@@ -119,7 +114,6 @@ router.post("/updatewrite", (req, res) => {
 //글 삭제하기
 router.post("/removeBoard", (req, res) => {
   const index = req.body.key;
-  console.log(index);
   const removeQuery = "DELETE FROM board_table WHERE board_index = ?";
   db.query(removeQuery, [index]);
 
@@ -154,6 +148,7 @@ router.post("/getBoard", (req, res) => {
 router.post("/viewBoard", (req, res) => {
   //게시물의 번호를 받아온다.
   const num = req.body.key;
+  console.log(num);
   const board_profile = {};
   //받아온 번호의 작성자를 받아온다.
   const writerQuery =
@@ -167,15 +162,10 @@ router.post("/viewBoard", (req, res) => {
     "SELECT board_index, board_title, board_content, board_writer, profile, board_views, board_commentCount, board_like, board_date, board_likeList FROM board_table LEFT OUTER JOIN users ON board_table.board_writer = users.id;";
 
   db.query(writerQuery, [num], function (err, rows) {
-    console.log("작성자");
-    console.log(rows[0].board_writer);
     const writer = rows[0].board_writer;
 
     // 작성자를 이용해 프로필을 받아온다.
     db.query(profileQuery, [writer], function (err, rows) {
-      console.log("작성자 프로필 주소");
-      console.log(rows[0].profile);
-      console.log(rows);
       board_profile.profile = rows[0].profile;
       console.log(board_profile);
 
@@ -188,8 +178,6 @@ router.post("/viewBoard", (req, res) => {
   db.query(sqlQuery, [num], (err, result, fields) => {
     // console.log(result);
     board_profile.result = result;
-    console.log("board_profile");
-    console.log(board_profile);
     // res.send(result);
   });
 });
