@@ -294,7 +294,8 @@ const Header = () => {
             </Link>
           </ul>
         </div> */}
-        {visible ? <div className="noneTouchBox"></div> : null}
+
+        {/* {visible ? <div className="noneTouchBox"></div> : null} */}
       </header>
       <main>
         <Outlet />
