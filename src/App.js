@@ -1,38 +1,38 @@
-import './App.css';
-import { Route, Routes, useNavigate, useLocation } from 'react-router-dom';
+import "./App.css";
+import { Route, Routes, useNavigate, useLocation } from "react-router-dom";
 // import Modal from 'react-modal';
 
-import Oliveyoung from './component/oliveyoung';
-import Home from './component/home';
-import Header from './component/header';
-import Mustit from './component/mustit';
-import About from './component/about';
-import NotReady from './component/notReady';
-import Aland from './component/aland';
-import Footerbar from './component/Footerbar';
-import Category from './component/Category';
-import Login from './component/auth/login';
-import Register from './component/auth/register';
-import React, { useEffect, useState } from 'react';
-import jwtDecode from 'jwt-decode';
-import axios from 'axios';
-import MyPage from './component/MyPage';
-import PasswordChange from './component/auth/PasswordChange';
-import Write from './component/Write';
-import UpdateWrite from './component/UpdateWrite';
-import Board from './component/Board';
-import ViewBoard from './component/ViewBoard';
-import ChangeProfile from './component/ChangeProfile';
-import PasswordFind from './component/PasswordFind';
-import NewOlive from './component/NewOlive';
-import RangkingDak from './component/RangkingDak';
+import Oliveyoung from "./component/oliveyoung";
+import Home from "./component/home";
+import Header from "./component/header";
+import Mustit from "./component/mustit";
+import About from "./component/about";
+import NotReady from "./component/notReady";
+import Aland from "./component/aland";
+import Footerbar from "./component/Footerbar";
+import Category from "./component/Category";
+import Login from "./component/auth/login";
+import Register from "./component/auth/register";
+import React, { useEffect, useState } from "react";
+import jwtDecode from "jwt-decode";
+import axios from "axios";
+import MyPage from "./component/MyPage";
+import PasswordChange from "./component/auth/PasswordChange";
+import Write from "./component/Write";
+import UpdateWrite from "./component/UpdateWrite";
+import Board from "./component/Board";
+import ViewBoard from "./component/ViewBoard";
+import ChangeProfile from "./component/ChangeProfile";
+import PasswordFind from "./component/PasswordFind";
+import NewOlive from "./component/NewOlive";
+import RangkingDak from "./component/RangkingDak";
 
 export const UserInfo = React.createContext();
-window.Buffer = window.Buffer || require('buffer').Buffer;
+window.Buffer = window.Buffer || require("buffer").Buffer;
 
 // api통신 시 URL 변경용
-const local = 'http://localhost:3001';
-const server = 'https://sungtt.com';
+const local = "http://localhost:3001";
+const server = "https://sungtt.com";
 // URL 할당에 따른 서버환경 변경! 아주편리하다~
 const URL = server;
 
@@ -52,25 +52,25 @@ function App() {
   const [noti, setNoti] = useState(false);
 
   const [userAuth, setUserAuth] = useState({
-    id: '',
+    id: "",
     auth: false,
-    refreshToken: '',
-    profile: '',
+    refreshToken: "",
+    profile: "",
   });
 
   const goLogOut = () => {
-    localStorage.removeItem('token');
+    localStorage.removeItem("token");
     setUserAuth({
       ...userAuth,
-      id: '',
+      id: "",
       auth: false,
-      refreshToken: '',
+      refreshToken: "",
     });
     goHome();
   };
 
   const goHome = () => {
-    navigate('/');
+    navigate("/");
   };
 
   const goBack = () => {
@@ -78,18 +78,18 @@ function App() {
   };
 
   const goLogin = () => {
-    navigate('/login');
+    navigate("/login");
   };
 
   const goBoard = () => {
-    navigate('/board');
+    navigate("/board");
   };
 
   const pathname = href.pathname;
 
   // 유저 프로필주소 얻어서 상태값에 할당
   async function goProfile() {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem("token");
     const payload = jwtDecode(token);
     // console.log(payload.userId); //유저아이디전송
     const goProFileLocation = await axios.post(
@@ -116,13 +116,13 @@ function App() {
     setNoti,
   };
 
-  axios.defaults.headers.common['Authorization'] = `${
-    localStorage.getItem('token') || undefined
+  axios.defaults.headers.common["Authorization"] = `${
+    localStorage.getItem("token") || undefined
   }`;
   useEffect(() => {
-    if (localStorage.getItem('token')) {
+    if (localStorage.getItem("token")) {
       //앞으로 api통신에 토큰이 들어가있음
-      const token = localStorage.getItem('token');
+      const token = localStorage.getItem("token");
 
       const payload = jwtDecode(token);
       // console.log(payload);
@@ -136,17 +136,17 @@ function App() {
       goProfile();
 
       axios.post(`${URL}/api/middlewere`).then((res) => {
-        if (res.data === '') {
-          console.log('헤더가 없습니다..');
+        if (res.data === "") {
+          console.log("헤더가 없습니다..");
           return;
         }
-        axios.defaults.headers.common['Authorization'] = `${res.data}`;
-        localStorage.setItem('token', res.data);
+        axios.defaults.headers.common["Authorization"] = `${res.data}`;
+        localStorage.setItem("token", res.data);
       });
     }
-    if (localStorage.getItem('token') === null) {
-      console.log('토큰없음');
-      axios.defaults.headers.common['Authorization'] = `${undefined}`;
+    if (localStorage.getItem("token") === null) {
+      console.log("토큰없음");
+      axios.defaults.headers.common["Authorization"] = `${undefined}`;
     }
   }, [href.pathname]);
 
@@ -170,34 +170,34 @@ function App() {
       <UserInfo.Provider value={userAuthContext}>
         <Routes>
           <Route element={<Header />}>
-            <Route path='/' element={<Home />} />
-            <Route path='/drugstore/olive' element={<Oliveyoung />} />
-            <Route path='/drugstore/newolive' element={<NewOlive />} />
-            <Route path='/clothes/aland' element={<Aland />} />
-            <Route path='/clothes/mustit' element={<Mustit />} />
-            <Route path='/food/rangkingdak' element={<RangkingDak />} />
-            <Route path='/about' element={<About />} />
-            <Route path='/sorry' element={<NotReady />} />
-            <Route path='/mypage' element={<MyPage />} />
-            <Route path='/write' element={<Write />} />
-            <Route path='/board' element={<Board />} />
+            <Route path="/" element={<Home />} />
+            <Route path="/drugstore/olive" element={<Oliveyoung />} />
+            <Route path="/drugstore/newolive" element={<NewOlive />} />
+            <Route path="/clothes/aland" element={<Aland />} />
+            <Route path="/clothes/mustit" element={<Mustit />} />
+            <Route path="/food/rangkingdak" element={<RangkingDak />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/sorry" element={<NotReady />} />
+            <Route path="/mypage" element={<MyPage />} />
+            <Route path="/write" element={<Write />} />
+            <Route path="/board" element={<Board />} />
             <Route
-              path='/board/viewboard/:boardnumber'
+              path="/board/viewboard/:boardnumber"
               element={<ViewBoard />}
             />
             <Route
-              path='/board/UpdateWrite/:boardnumber'
+              path="/board/UpdateWrite/:boardnumber"
               element={<UpdateWrite />}
             />
 
-            <Route path='/comment' element={<NotReady />} />
+            <Route path="/comment" element={<NotReady />} />
           </Route>
-          <Route path='/changeprofile' element={<ChangeProfile />} />
-          <Route path='/category' element={<Category />} />
-          <Route path='/login' element={<Login />} />
-          <Route path='/register' element={<Register />} />
-          <Route path='/auth/passwordchange' element={<PasswordChange />} />
-          <Route path='/auth/passwordFind' element={<PasswordFind />} />
+          <Route path="/changeprofile" element={<ChangeProfile />} />
+          <Route path="/category" element={<Category />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/auth/passwordchange" element={<PasswordChange />} />
+          <Route path="/auth/passwordFind" element={<PasswordFind />} />
         </Routes>
         {/* <Footer /> */}
         {viewBoard ? null : <Footerbar />}

@@ -1,16 +1,16 @@
-import axios from 'axios';
-import React, { useState, useEffect, useContext, useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
-import '../css/viewboard.css';
-import backHistory from '../img/뒤로가기_흰색.svg';
-import { addDate } from './addDate';
+import axios from "axios";
+import React, { useState, useEffect, useContext, useRef } from "react";
+import { useNavigate } from "react-router-dom";
+import "../css/viewboard.css";
+import backHistory from "../img/뒤로가기_흰색.svg";
+import { addDate } from "./addDate";
 // TOAST UI Editor import
-import '@toast-ui/editor/dist/toastui-editor.css';
-import { Viewer } from '@toast-ui/react-editor';
-import { UserInfo } from '../App';
-import CommentFooter from './CommentFooter';
-import BottomDiv from './BottomDiv';
-import guest from '../img/비회원.jpg';
+import "@toast-ui/editor/dist/toastui-editor.css";
+import { Viewer } from "@toast-ui/react-editor";
+import { UserInfo } from "../App";
+import CommentFooter from "./CommentFooter";
+import BottomDiv from "./BottomDiv";
+import guest from "../img/비회원.jpg";
 
 const ViewBoard = () => {
   const { userAuth, goBoard, URL, pathname, goBack } = useContext(UserInfo);
@@ -18,24 +18,24 @@ const ViewBoard = () => {
   const navigate = useNavigate();
   const [comment, setComment] = useState();
 
-  const key = pathname.replace(/[^0-9]/g, '');
+  const key = pathname.replace(/[^0-9]/g, "");
 
   const [arr, setArr] = useState({
     page: [],
     commentList: [],
-    profile: '',
+    profile: "",
     checkWriteUser: false,
   });
 
-  console.log('안녕');
+  console.log("안녕");
 
   //토큰의 아이디와 게시판 작성자를 비교하여 게시물 수정 삭제 버튼 생성
   function checkWriter(userAuth, writer) {
     if (userAuth === writer) {
-      console.log('글의 작성자입니다.');
+      console.log("글의 작성자입니다.");
       return true;
     } else {
-      console.log('작성자가 아닙니다.');
+      console.log("작성자가 아닙니다.");
       return false;
     }
   }
@@ -89,12 +89,12 @@ const ViewBoard = () => {
       })
       .then((res) => {
         if (res.data === true) {
-          console.log('추천되었습니다.');
+          console.log("추천되었습니다.");
           return;
         } else if (res.data === false) {
           //추천이 취소되는 기능도 만들어보자..
           //db에서 -1 해주고 리스트에서 아이디를 제거해주면 될거같다.
-          console.log('추천취소!');
+          console.log("추천취소!");
         }
       })
       .then((res) => {
@@ -118,7 +118,7 @@ const ViewBoard = () => {
         content: comment,
       })
       .then((res) => {
-        setComment('');
+        setComment("");
         axios
           .post(`${URL}/api/boardApiData/comment`, { index: key })
           .then((res) => {
@@ -129,7 +129,7 @@ const ViewBoard = () => {
   };
 
   const removeBoard = () => {
-    if (window.confirm('글을 삭제하시겠습니까?')) {
+    if (window.confirm("글을 삭제하시겠습니까?")) {
       console.log(key);
       axios.post(`${URL}/api/boardApiData/removeBoard`, {
         key: key,
@@ -140,8 +140,8 @@ const ViewBoard = () => {
 
   //댓글 삭제
   const removeComment = (e) => {
-    if (window.confirm('댓글을 삭제하시겠습니까?')) {
-      let comment_index = 'num';
+    if (window.confirm("댓글을 삭제하시겠습니까?")) {
+      let comment_index = "num";
       //댓글index에 접근하기위해 임의의 어트리뷰트를 지정한 뒤 값에 접근
       //https://violetboralee.medium.com/%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8-%EC%86%8D%EC%84%B1-attribute-%EA%B3%BC-%ED%94%84%EB%A1%9C%ED%8D%BC%ED%8B%B0-property-d2f9b772addf
       let index = e.target.parentNode.parentNode.getAttribute(comment_index);
@@ -165,13 +165,13 @@ const ViewBoard = () => {
   return (
     <>
       {arr.page.reverse().map((i, index) => (
-        <div key={index} className='viewboard_warp'>
-          <div className='viewboard_container'>
-            <div className='viewboard_middiv'>
-              <div className='viewboard_writer'>
-                <div className='board_writer'>
-                  <div className='board_writer_profile'>
-                    <img src={arr.profile} alt='profile'></img>
+        <div key={index} className="viewboard_warp">
+          <div className="viewboard_container">
+            <div className="viewboard_middiv">
+              <div className="viewboard_writer">
+                <div className="board_writer">
+                  <div className="board_writer_profile">
+                    <img src={arr.profile || guest} alt="profile"></img>
                   </div>
                   {i.board_writer}
                 </div>
@@ -179,16 +179,16 @@ const ViewBoard = () => {
                 <div>{i.board_date}</div>
               </div>
             </div>
-            <div className='viewboard_title'>{i.board_title}</div>
+            <div className="viewboard_title">{i.board_title}</div>
 
-            <div className='viewboard_view'>
+            <div className="viewboard_view">
               <Viewer initialValue={i.board_content}></Viewer>
             </div>
-            <div className='viewboard_like'>
+            <div className="viewboard_like">
               <div>
-                추천수 : {i.board_like}{' '}
+                추천수 : {i.board_like}{" "}
                 <button
-                  className='like'
+                  className="like"
                   onClick={() => {
                     like(i.board_index, userAuth.id);
                   }}
@@ -214,21 +214,21 @@ const ViewBoard = () => {
 
             {arr.commentList.map((i, index) => (
               <div
-                className='comment_wrap'
+                className="comment_wrap"
                 key={i.comment_index}
                 num={i.comment_index}
               >
-                <div className='comment_middiv'>
-                  <div className='comment_writer'>
-                    <div className='comment_writer_profile'>
-                      <img src={i.profile || guest} alt='profile' />
+                <div className="comment_middiv">
+                  <div className="comment_writer">
+                    <div className="comment_writer_profile">
+                      <img src={i.profile || guest} alt="profile" />
                     </div>
                     {i.comment_writer}
                   </div>
-                  <div className='comment_date'>{i.comment_date}</div>
+                  <div className="comment_date">{i.comment_date}</div>
                 </div>
-                <div className='comment_bottomdiv'>
-                  <div className='comment_content'>{i.comment_content}</div>
+                <div className="comment_bottomdiv">
+                  <div className="comment_content">{i.comment_content}</div>
 
                   {
                     //접속한 아이디와 동일한 작성자만 삭제 버튼 활성화
@@ -247,8 +247,8 @@ const ViewBoard = () => {
               comment={comment}
             />
           </div>
-          <div className='goBack' onClick={goBack}>
-            <img src={backHistory} alt='뒤로가기' />
+          <div className="goBack" onClick={goBack}>
+            <img src={backHistory} alt="뒤로가기" />
           </div>
         </div>
       ))}
