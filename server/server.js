@@ -102,7 +102,7 @@ app.post('/tokenCheck', (req, res) => {
 });
 
 //새로운 올리브영
-app.post('/newolive', (req, res) => {
+app.post('/api/newolive', (req, res) => {
   console.log(req.body.url);
 
   const oliveQuery = 'SELECT * FROM newolive_table';
@@ -163,7 +163,7 @@ app.post('/newolive', (req, res) => {
 });
 
 // 올리브영 DB데이터
-app.post('/dbolive', (req, res) => {
+app.post('/api/dbolive', (req, res) => {
   const oliveQuery = 'SELECT * FROM newolive_table';
   db.query(oliveQuery, function (err, result) {
     res.send(result);
@@ -171,7 +171,7 @@ app.post('/dbolive', (req, res) => {
 });
 
 //이벤트 인덱스 번호를 받아와서 DB에서 삭제시키기.
-app.post('/newolive/remove', (req, res) => {
+app.post('/api/newolive/remove', (req, res) => {
   req.body.map((i) => {
     console.log(i.event_index);
     const idx = i.event_index;
@@ -184,7 +184,7 @@ app.post('/newolive/remove', (req, res) => {
 });
 
 //새로운 이벤트 배열을 DB에 저장
-app.post('/newolive/add', function (req, res) {
+app.post('/api/newolive/add', function (req, res) {
   req.body.map((i) => {
     // console.log(i.link);
     const title = i.event_title;
@@ -201,7 +201,7 @@ app.post('/newolive/add', function (req, res) {
 });
 
 //올리브영 조회수
-app.post('/newolive/views', function (req, res) {
+app.post('/api/newolive/views', function (req, res) {
   // console.log(req.body);
   const idx = req.body.idx;
   const sqlQuery =
@@ -213,7 +213,7 @@ app.post('/newolive/views', function (req, res) {
 });
 
 //랭킹닭컴 데이터
-app.post('/rangkingdak', (req, res) => {
+app.post('/api/rangkingdak', (req, res) => {
   let eventList = [];
   let titleList = [];
   let dateList = [];
@@ -279,7 +279,7 @@ app.post('/rangkingdak', (req, res) => {
 });
 
 //랭킹닭컴 DB
-app.post('/dbrangkingdak', (req, res) => {
+app.post('/api/dbrangkingdak', (req, res) => {
   const dakQuery = 'SELECT * FROM rangkingdak_table';
   db.query(dakQuery, function (err, result) {
     res.send(result);
@@ -287,7 +287,7 @@ app.post('/dbrangkingdak', (req, res) => {
 });
 
 //이벤트 인덱스 번호를 받아와서 DB에서 삭제시키기.
-app.post('/rangkingdak/remove', (req, res) => {
+app.post('/api/rangkingdak/remove', (req, res) => {
   req.body.map((i) => {
     console.log(i.event_index);
     const idx = i.event_index;
@@ -300,7 +300,7 @@ app.post('/rangkingdak/remove', (req, res) => {
 });
 
 //새로운 이벤트 배열을 DB에 저장
-app.post('/rangkingdak/add', function (req, res) {
+app.post('/api/rangkingdak/add', function (req, res) {
   req.body.map((i) => {
     // console.log(i.link);
     const title = i.event_title;
@@ -317,7 +317,7 @@ app.post('/rangkingdak/add', function (req, res) {
 });
 
 //랭킹닭컴 조회수
-app.post('/rangkingdak/views', function (req, res) {
+app.post('/api/rangkingdak/views', function (req, res) {
   // console.log(req.body);
   const idx = req.body.idx;
   const sqlQuery =

@@ -19,13 +19,13 @@ const NewOlive = () => {
   console.log('렌더링 횟수 테스트');
 
   //조회수 증가시키는 API
-  const viewApi = `${URL}/newolive/views`;
+  const viewApi = `${URL}/api/newolive/views`;
   //조회수 증가 후 리렌더링을 위한 DB APi
-  const getApi = `${URL}/dbolive`;
+  const getApi = `${URL}/api/dbolive`;
 
   //DB에 들어있는 올리브영 데이터를 가져오는 것
   async function getOliveDB() {
-    return await axios.post(`${URL}/dbolive`).then((res) => {
+    return await axios.post(`${URL}/api/dbolive`).then((res) => {
       return res.data;
     });
   }
@@ -33,7 +33,7 @@ const NewOlive = () => {
   //현재 올리브영이 진행하고있는 데이터를 가져오는 것.
   async function getOliveHTML() {
     return await axios
-      .post(`${URL}/newolive`, {
+      .post(`${URL}/api/newolive`, {
         url: 'https://www.oliveyoung.co.kr/store/main/getEventList.do',
       })
       .then((res) => {
@@ -42,10 +42,10 @@ const NewOlive = () => {
   }
 
   async function addOliveDB(arr) {
-    return await axios.post(`${URL}/newolive/add`, arr);
+    return await axios.post(`${URL}/api/newolive/add`, arr);
   }
   async function removeOliveDB(arr) {
-    return await axios.post(`${URL}/newolive/remove`, arr);
+    return await axios.post(`${URL}/api/newolive/remove`, arr);
   }
 
   useEffect(() => {

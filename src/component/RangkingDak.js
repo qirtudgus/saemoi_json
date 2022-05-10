@@ -14,7 +14,7 @@ const RangkingDak = () => {
 
   //DB에 들어있는 랭킹닭컴 데이터를 가져오는 것
   async function getDakDB() {
-    return await axios.post(`${URL}/dbrangkingdak`).then((res) => {
+    return await axios.post(`${URL}/api/dbrangkingdak`).then((res) => {
       return res.data;
     });
   }
@@ -27,7 +27,7 @@ const RangkingDak = () => {
   //현재 올리브영이 진행하고있는 데이터를 가져오는 것.
   async function getDakHTML() {
     return await axios
-      .post(`${URL}/rangkingdak`, {
+      .post(`${URL}/api/rangkingdak`, {
         url: 'https://www.rankingdak.com/promotion/event/list?nowPageNo=&keywordType=&keyword=&status=200&eventCd=&eventType=',
       })
       .then((res) => {
@@ -36,10 +36,10 @@ const RangkingDak = () => {
   }
 
   async function addDakDB(arr) {
-    return await axios.post(`${URL}/rangkingdak/add`, arr);
+    return await axios.post(`${URL}/api/rangkingdak/add`, arr);
   }
   async function removeDakDB(arr) {
-    return await axios.post(`${URL}/rangkingDak/remove`, arr);
+    return await axios.post(`${URL}/api/rangkingDak/remove`, arr);
   }
 
   useEffect(() => {
