@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/static/css/main.12a25a0b.css",
-    "main.js": "/static/js/main.0cadd1f4.js",
+    "main.js": "/static/js/main.0f8bf99d.js",
     "static/js/27.d0aca822.chunk.js": "/static/js/27.d0aca822.chunk.js",
     "static/media/비회원.jpg": "/static/media/비회원.33650e87c438d95023e7.jpg",
     "static/media/views.png": "/static/media/views.f7976d31776a79389a8e.png",
@@ -29,6 +29,6 @@
   },
   "entrypoints": [
     "static/css/main.12a25a0b.css",
-    "static/js/main.0cadd1f4.js"
+    "static/js/main.0f8bf99d.js"
   ]
 }

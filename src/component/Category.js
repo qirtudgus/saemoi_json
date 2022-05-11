@@ -19,8 +19,7 @@ const Category = () => {
 
   const tabMenu = [
     { name: '드럭스토어', func: 'subMenuClick1', img: drugStore },
-    // 마땅치않아 의류 주석처리
-    // { name: '의류', func: 'subMenuClick2', img: clothes },
+    { name: '의류', func: 'subMenuClick2', img: clothes },
     { name: '식품', func: 'subMenuClick3', img: Food },
     { name: '백화점', func: 'subMenuClick4', img: Store },
     { name: '자유게시판', func: 'subMenuClick1', img: Board },

@@ -29,9 +29,9 @@ const Category_map = ({ subMenu }) => {
             {/* <Link to='/sorry'>
               <li className='subMenuList'>무신사</li>
             </Link> */}
-            <Link to='/clothes/mustit'>
+            {/* <Link to='/clothes/mustit'>
               <li className='subMenuList'>머스트잇</li>
-            </Link>
+            </Link> */}
           </>
         ) : null}
 
