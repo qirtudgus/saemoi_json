@@ -1,19 +1,19 @@
-import axios from "axios";
-import React, { useState, useRef, useEffect, useContext } from "react";
+import axios from 'axios';
+import React, { useState, useRef, useEffect, useContext } from 'react';
 // TOAST UI Editor import
-import "@toast-ui/editor/dist/toastui-editor.css";
-import { Editor } from "@toast-ui/react-editor";
-import { UserInfo } from "../App";
-import { addDate } from "./addDate";
+import '@toast-ui/editor/dist/toastui-editor.css';
+import { Editor } from '@toast-ui/react-editor';
+import { UserInfo } from '../App';
+import { addDate } from './addDate';
 
 const Write = () => {
   const { userAuth, goBoard, goLogin, URL } = useContext(UserInfo);
 
   const [board, setBoard] = useState({
-    board_title: "",
-    board_content: "",
+    board_title: '',
+    board_content: '',
     board_writer: userAuth.id,
-    board_date: "",
+    board_date: '',
   });
 
   const title = useRef();
@@ -28,7 +28,7 @@ const Write = () => {
       return;
     }
     if (!userAuth.auth) {
-      alert("회원만 작성하실 수 있습니다. 로그인 해 주세요!");
+      alert('회원만 작성하실 수 있습니다. 로그인 해 주세요!');
       goLogin();
     }
   }, []);
@@ -60,12 +60,12 @@ const Write = () => {
   return (
     <>
       <input
-        name="title"
-        placeholder="제목을 입력해주세요"
+        name='title'
+        placeholder='제목을 입력해주세요'
         ref={title}
         onChange={title_write}
       ></input>
-      <Editor ref={editor} initialEditType="wysiwyg"></Editor>
+      <Editor ref={editor} initialEditType='wysiwyg'></Editor>
       <button onClick={goWrite}>작성</button>
     </>
   );
