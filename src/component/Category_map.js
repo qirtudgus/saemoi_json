@@ -1,18 +1,18 @@
-import { Link } from "react-router-dom";
-import "../css/Category.css";
+import { Link, useNavigate } from 'react-router-dom';
+import '../css/Category.css';
 
 const Category_map = ({ subMenu }) => {
   return (
     <>
-      <div className="categoryMap">
-        {subMenu === "DrugStore" ? (
+      <div className='categoryMap'>
+        {subMenu === 'DrugStore' ? (
           <>
-            <Link to="/drugstore/newolive">
-              <li className="subMenuList">New 올리브영</li>
+            <Link to='/drugstore/newolive'>
+              <li className='subMenuList'>New 올리브영</li>
             </Link>
-            <Link to="/drugstore/olive">
-              <li className="subMenuList">올리브영</li>
-            </Link>
+            {/* <Link to='/drugstore/olive'>
+              <li className='subMenuList'>올리브영</li>
+            </Link> */}
             {/* <Link to='/sorry'>
               <li className='subMenuList'>랄라블라</li>
             </Link>
@@ -21,24 +21,24 @@ const Category_map = ({ subMenu }) => {
             </Link> */}
           </>
         ) : null}
-        {subMenu === "clothes" ? (
+        {subMenu === 'clothes' ? (
           <>
-            <Link to="/clothes/aland">
-              <li className="subMenuList">에이랜드</li>
-            </Link>
+            {/* <Link to='/clothes/aland'>
+              <li className='subMenuList'>에이랜드</li>
+            </Link> */}
             {/* <Link to='/sorry'>
               <li className='subMenuList'>무신사</li>
             </Link> */}
-            <Link to="/clothes/mustit">
-              <li className="subMenuList">머스트잇</li>
+            <Link to='/clothes/mustit'>
+              <li className='subMenuList'>머스트잇</li>
             </Link>
           </>
         ) : null}
 
-        {subMenu === "Food" ? (
+        {subMenu === 'Food' ? (
           <>
-            <Link to="/food/rangkingdak">
-              <li className="subMenuList">랭킹닭컴</li>
+            <Link to='/food/rangkingdak'>
+              <li className='subMenuList'>랭킹닭컴</li>
             </Link>
             {/* <Link to='/sorry'>
               <li className='subMenuList'>편의점</li>
@@ -49,10 +49,10 @@ const Category_map = ({ subMenu }) => {
           </>
         ) : null}
 
-        {subMenu === "Store" ? (
+        {subMenu === 'Store' ? (
           <>
-            <Link to="/store/starfield">
-              <li className="subMenuList">스타필드</li>
+            <Link to='/store/starfield'>
+              <li className='subMenuList'>스타필드</li>
             </Link>
             {/* <Link to='/sorry'>
               <li className='subMenuList'>SSG</li>

@@ -1,22 +1,20 @@
-import React, { useState, useEffect, useContext } from "react";
-import Comment from "./comment";
-import EventForm from "./eventForm";
-import Axios from "axios";
-import cheerio from "cheerio";
-import Loading from "./loading";
-import { UserInfo } from "../App";
-import axios from "axios";
-import NewEventForm from "./NewEventForm";
-import Footer from "./footer";
-import loading from "./loading";
+import React, { useState, useEffect, useContext } from 'react';
+import Loading from './loading';
+import { UserInfo } from '../App';
+import axios from 'axios';
+import NewEventForm from './NewEventForm';
+import Footer from './footer';
+import fav_before from '../img/fav_ico_before.svg';
+import fav_after from '../img/fav_ico_after.svg';
 
 const NewOlive = () => {
-  const { URL } = useContext(UserInfo);
+  const { URL, userAuth } = useContext(UserInfo);
   const [eventData, setEventData] = useState([]);
   const [ing, setIng] = useState();
   const [isLoading, setIsLoading] = useState(false);
+  const [isFav, setIsFav] = useState(false);
 
-  console.log("렌더링 횟수 테스트");
+  console.log('렌더링 횟수 테스트');
 
   //조회수 증가시키는 API
   const viewApi = `${URL}/api/newolive/views`;
@@ -34,7 +32,7 @@ const NewOlive = () => {
   async function getOliveHTML() {
     return await axios
       .post(`${URL}/api/newolive`, {
-        url: "https://www.oliveyoung.co.kr/store/main/getEventList.do",
+        url: 'https://www.oliveyoung.co.kr/store/main/getEventList.do',
       })
       .then((res) => {
         return res.data;
@@ -79,15 +77,15 @@ const NewOlive = () => {
         });
 
         if (pareTitle2.length === 0) {
-          console.log("이벤트가 최신입니다.");
+          console.log('이벤트가 최신입니다.');
         } else {
-          console.log("새로운 이벤트가 있군요..");
+          console.log('새로운 이벤트가 있군요..');
         }
 
         if (pareTitle.length >= 1) {
-          console.log("종료된 이벤트가 있군요..");
+          console.log('종료된 이벤트가 있군요..');
         } else {
-          console.log("종료된 이벤트는 없습니다.");
+          console.log('종료된 이벤트는 없습니다.');
         }
 
         //마지막으로 이벤트 삭제와 추가를 한번씩 호출하고, 최신값이 들어있는 DB를 호출하여
@@ -106,12 +104,38 @@ const NewOlive = () => {
     );
   }, []);
 
+  //즐겨찾기 버튼
+  //여기서 미리 로컬스토리지에 저장한다.
+  const addFavorites = () => {
+    axios
+      .post(`${URL}/api/favorites/addfavorites`, {
+        id: userAuth.id,
+        favoritesName: 'olive',
+      })
+      .then((res) => {
+        console.log(res.data);
+        localStorage.setItem('fav', res.data);
+      });
+    setIsFav(!isFav);
+  };
+
+  useEffect(() => {
+    const favoritesList = localStorage.getItem('fav');
+    if (favoritesList.includes('olive')) {
+      setIsFav(true);
+    }
+  }, []);
+
   return (
     <>
       {isLoading ? (
         <>
-          <div className="ing_event_box">
-            <p className="ing_event">현재 진행중인 이벤트 {ing}개!</p>
+          <div className='ing_event_box'>
+            <p className='ing_event'>현재 진행중인 이벤트 {ing}개!</p>
+            <div className='fav_box' onClick={addFavorites}>
+              <span className='fav_txt'>즐겨찾기</span>
+              <img src={isFav ? fav_after : fav_before} alt='fav'></img>
+            </div>
           </div>
           <NewEventForm
             Data={eventData}

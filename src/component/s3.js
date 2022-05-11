@@ -9,10 +9,10 @@ import addWhite from '../img/add_white.svg';
 import addBlack from '../img/add.png';
 import guest from '../img/비회원.jpg';
 
-const S3_BUCKET = 'saemoi';
+const S3_BUCKET = 'saemoi2';
 const REGION = 'ap-northeast-2';
-const ACCESS_KEY = process.env.REACT_APP_ACCESS_KEY;
-const SECRET_ACCESS_KEY = process.env.REACT_APP_SECRET_ACCESS_KEY;
+const ACCESS_KEY = process.env.REACT_APP_ACCESS_KEY2;
+const SECRET_ACCESS_KEY = process.env.REACT_APP_SECRET_ACCESS_KEY2;
 
 const config = {
   bucketName: S3_BUCKET,

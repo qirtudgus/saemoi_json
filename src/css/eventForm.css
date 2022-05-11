@@ -36,7 +36,6 @@
 .evtForm_img img {
   width: 100%;
   height: 100%;
-  
 }
 
 .evtForm_info {
@@ -102,6 +101,38 @@
 .ing_event {
   position: relative;
   font-weight: bold;
+}
+
+.ing_event_box {
+  margin: 2rem auto;
+  width: calc(100% - 2rem);
+  max-width: 400px;
+  display: flex;
+  justify-content: space-between;
+  cursor: pointer;
+}
+
+.fav_box {
+  display: flex;
+  align-items: center;
+}
+
+.fav_txt {
+  font-size: 0.7rem;
+  padding-right: 5px;
+}
+
+.ing_event_box img {
+  width: 25px;
+}
+
+.fav_btn {
+}
+
+.fav_bottom_div {
+  width: 100%;
+  height: 8rem;
+  position: relative;
 }
 
 @media (max-width: 1919px) {

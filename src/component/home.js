@@ -16,7 +16,7 @@ const Home = () => {
             놓치지말고 세모이에서 확인하자!
           </p>
           <div className='textGo'>
-            <Link to='/drugstore/olive' className='Link_a'>
+            <Link to='/drugstore/newolive' className='Link_a'>
               보러가기
             </Link>
           </div>
