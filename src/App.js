@@ -36,7 +36,7 @@ window.Buffer = window.Buffer || require('buffer').Buffer;
 const local = 'http://localhost:3001';
 const server = 'https://sungtt.com';
 // URL 할당에 따른 서버환경 변경! 아주편리하다~
-const URL = local;
+const URL = server;
 
 // let vh = window.innerHeight * 0.01;
 // document.documentElement.style.setProperty('--vh', `${vh}px`);

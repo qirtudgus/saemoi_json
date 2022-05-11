@@ -1,17 +1,20 @@
 {
   "files": {
-    "main.css": "/static/css/main.e3a72d96.css",
-    "main.js": "/static/js/main.3e8411bd.js",
+    "main.css": "/static/css/main.45f9ca11.css",
+    "main.js": "/static/js/main.96e67531.js",
     "static/js/27.d0aca822.chunk.js": "/static/js/27.d0aca822.chunk.js",
     "static/media/비회원.jpg": "/static/media/비회원.33650e87c438d95023e7.jpg",
     "static/media/views.png": "/static/media/views.f7976d31776a79389a8e.png",
+    "static/media/fav_skeleton.svg": "/static/media/fav_skeleton.ed5a8704ea1f80aae1c1df3ae12e024d.svg",
     "static/media/sae.svg": "/static/media/sae.15b3666e87995cf346cc942a085efa37.svg",
     "static/media/saemoiSVG2.svg": "/static/media/saemoiSVG2.fead0dd032fa807f36bfeea4abc741ea.svg",
     "static/media/drugStore.svg": "/static/media/drugStore.a2ddefe0deabdec77f45e4ee048f2b17.svg",
     "static/media/About.svg": "/static/media/About.f68737b9cfc406663d85bc29673cfe9c.svg",
     "index.html": "/index.html",
+    "static/media/fav_ico_before.svg": "/static/media/fav_ico_before.7bc0d3d630a01f3e237afc4fb409f686.svg",
     "static/media/clothes.svg": "/static/media/clothes.1b7c689488987cb20413e30fc6dc073a.svg",
     "static/media/Board.svg": "/static/media/Board.269609570d5b0049d411c68f183ffe91.svg",
+    "static/media/fav_ico_after.svg": "/static/media/fav_ico_after.cc4013e36df81edbe83583e0dc054071.svg",
     "static/media/login_password.svg": "/static/media/login_password.659e94a439af79fbf527b47756a7fa06.svg",
     "static/media/Store.svg": "/static/media/Store.31c481825541feb0a29531d7dab9ae57.svg",
     "static/media/자유게시판_컬러.svg": "/static/media/자유게시판_컬러.3a0b5fe14308d7bdbbda48b3f8ec7d2f.svg",
@@ -25,7 +28,7 @@
     "static/media/add_white.svg": "/static/media/add_white.a03a90dde4d83c0b22939c6b838b0931.svg"
   },
   "entrypoints": [
-    "static/css/main.e3a72d96.css",
-    "static/js/main.3e8411bd.js"
+    "static/css/main.45f9ca11.css",
+    "static/js/main.96e67531.js"
   ]
 }
