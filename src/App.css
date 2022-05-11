@@ -489,24 +489,10 @@ body {
   padding: 10px;
 }
 
-.fav_wrap{
-width: calc(100% - 2rem);
-margin: 0 auto;
-}
-
-.fav_title{
- height: 2rem;
- font-size: 1.5rem;
- line-height: 2rem;
- font-weight: bold;
-}
-
-.mySwiper{
-
-
+.mySwiper {
 }
 .mySwiper_content {
   background-color: #3e55ff;
-border-radius: 20px;
-padding: 5px;
+  border-radius: 20px;
+  padding: 5px;
 }
