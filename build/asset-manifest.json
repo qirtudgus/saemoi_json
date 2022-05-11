@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.047a895c.css",
-    "main.js": "/static/js/main.99e39a3e.js",
+    "main.css": "/static/css/main.6c5794af.css",
+    "main.js": "/static/js/main.b72bb1da.js",
     "static/js/27.d0aca822.chunk.js": "/static/js/27.d0aca822.chunk.js",
     "static/media/비회원.jpg": "/static/media/비회원.33650e87c438d95023e7.jpg",
     "static/media/views.png": "/static/media/views.f7976d31776a79389a8e.png",
@@ -28,7 +28,7 @@
     "static/media/add_white.svg": "/static/media/add_white.a03a90dde4d83c0b22939c6b838b0931.svg"
   },
   "entrypoints": [
-    "static/css/main.047a895c.css",
-    "static/js/main.99e39a3e.js"
+    "static/css/main.6c5794af.css",
+    "static/js/main.b72bb1da.js"
   ]
 }

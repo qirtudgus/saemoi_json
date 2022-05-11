@@ -31,6 +31,7 @@ import Favorites from './component/Favorites';
 
 export const UserInfo = React.createContext();
 window.Buffer = window.Buffer || require('buffer').Buffer;
+// axios.defaults.withCredentials = true;
 
 // api통신 시 URL 변경용
 const local = 'http://localhost:3001';
@@ -162,18 +163,6 @@ function App() {
 
   return (
     <>
-      {/* <Modal
-        isOpen={profileDecide}
-        ariaHideApp={false}
-        onRequestClose={() => {
-          setProfileDecide(false);
-        }}
-      >
-        <div className='decide_wrap'></div>
-      </Modal> */}
-
-      {/* <Header /> */}
-
       <UserInfo.Provider value={userAuthContext}>
         <Routes>
           <Route element={<Header />}>
