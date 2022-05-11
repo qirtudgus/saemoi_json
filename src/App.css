@@ -20,10 +20,6 @@ body img {
     url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Thin.otf)
       format('opentype');
 }
-.super {
-  position: fixed;
-  z-index: 111111111;
-}
 
 @font-face {
   font-family: 'Noto Sans KR';

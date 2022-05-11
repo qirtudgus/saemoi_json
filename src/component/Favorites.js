@@ -162,7 +162,8 @@ const Favorites = () => {
                           </p>
                           <p className='evtForm_date'>{i.event_date}</p>
                           <p className='evtForm_views'>
-                            <img src={views} alt='조회수' />0
+                            <img src={views} alt='조회수' />
+                            {i.event_view}
                           </p>
                         </div>
                       </a>
@@ -227,7 +228,8 @@ const Favorites = () => {
                           </p>
                           <p className='evtForm_date'>{i.event_date}</p>
                           <p className='evtForm_views'>
-                            <img src={views} alt='조회수' />0
+                            <img src={views} alt='조회수' />
+                            {i.event_view}
                           </p>
                         </div>
                       </a>
@@ -292,7 +294,8 @@ const Favorites = () => {
                           </p>
                           <p className='evtForm_date'>{i.event_date}</p>
                           <p className='evtForm_views'>
-                            <img src={views} alt='조회수' />0
+                            <img src={views} alt='조회수' />
+                            {i.event_view}
                           </p>
                         </div>
                       </a>
