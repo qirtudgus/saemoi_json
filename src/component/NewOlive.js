@@ -120,9 +120,13 @@ const NewOlive = () => {
   };
 
   useEffect(() => {
-    const favoritesList = localStorage.getItem('fav');
-    if (favoritesList.includes('olive')) {
-      setIsFav(true);
+    if (localStorage.getItem('fav')) {
+      const favoritesList = localStorage.getItem('fav');
+      if (favoritesList.includes('olive')) {
+        setIsFav(true);
+      }
+    } else {
+      return;
     }
   }, []);
 

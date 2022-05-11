@@ -115,10 +115,15 @@ const RangkingDak = () => {
       });
     setIsFav(!isFav);
   };
+
   useEffect(() => {
-    const favoritesList = localStorage.getItem('fav');
-    if (favoritesList.includes('rangkingdak')) {
-      setIsFav(true);
+    if (localStorage.getItem('fav')) {
+      const favoritesList = localStorage.getItem('fav');
+      if (favoritesList.includes('rangkingdak')) {
+        setIsFav(true);
+      }
+    } else {
+      return;
     }
   }, []);
 

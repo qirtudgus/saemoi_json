@@ -115,12 +115,15 @@ const Starfield = () => {
   };
 
   useEffect(() => {
-    const favoritesList = localStorage.getItem('fav');
-    if (favoritesList.includes('starfield')) {
-      setIsFav(true);
+    if (localStorage.getItem('fav')) {
+      const favoritesList = localStorage.getItem('fav');
+      if (favoritesList.includes('starfield')) {
+        setIsFav(true);
+      }
+    } else {
+      return;
     }
   }, []);
-
   return (
     <>
       {isLoading ? (
