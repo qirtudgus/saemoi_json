@@ -57,7 +57,7 @@ app.post('/api/favorites/addfavorites', (req, res) => {
 
   db.query(listQuery, [id], function (err, result) {
     favoritesList = [...result];
-
+    console.log(favoritesList);
     userFavoritesList = favoritesList[0].favorites;
   });
 
