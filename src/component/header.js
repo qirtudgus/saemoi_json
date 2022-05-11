@@ -72,11 +72,11 @@ const Header = () => {
                       <div className='triangle'></div>
                       <img src={triangle} alt='menu'></img>
                       <Link to='/drugstore/newolive'>
-                        <li>New 올리브영</li>
-                      </Link>
-                      <Link to='/drugstore/olive'>
                         <li>올리브영</li>
                       </Link>
+                      {/* <Link to='/drugstore/olive'>
+                        <li>올리브영</li>
+                      </Link> */}
 
                       {/* <Link to="/sorry">
                         {" "}

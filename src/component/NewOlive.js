@@ -8,10 +8,11 @@ import fav_before from '../img/fav_ico_before.svg';
 import fav_after from '../img/fav_ico_after.svg';
 
 const NewOlive = () => {
-  const { URL, userAuth } = useContext(UserInfo);
+  const { URL, userAuth, goLogin } = useContext(UserInfo);
   const [eventData, setEventData] = useState([]);
   const [ing, setIng] = useState();
   const [isLoading, setIsLoading] = useState(false);
+  const [favoritesDecide, setFavoritesDecide] = useState(false);
   const [isFav, setIsFav] = useState(false);
 
   console.log('렌더링 횟수 테스트');
@@ -107,31 +108,47 @@ const NewOlive = () => {
   //즐겨찾기 버튼
   //여기서 미리 로컬스토리지에 저장한다.
   const addFavorites = () => {
-    axios
-      .post(`${URL}/api/favorites/addfavorites`, {
-        id: userAuth.id,
-        favoritesName: 'olive',
-      })
-      .then((res) => {
-        console.log(res.data);
-        localStorage.setItem('fav', res.data);
-      });
-    setIsFav(!isFav);
-  };
-
-  useEffect(() => {
-    if (localStorage.getItem('fav')) {
-      const favoritesList = localStorage.getItem('fav');
-      if (favoritesList.includes('olive')) {
-        setIsFav(true);
-      }
-    } else {
+    if (userAuth.auth) {
+      axios
+        .post(`${URL}/api/favorites/addfavorites`, {
+          id: userAuth.id,
+          favoritesName: 'olive',
+        })
+        .then((res) => {
+          console.log(res.data);
+          localStorage.setItem('fav', res.data);
+        });
+      setIsFav(!isFav);
       return;
     }
-  }, []);
+    if (!userAuth.auth) {
+      setFavoritesDecide(true);
+    }
+  };
 
   return (
     <>
+      {favoritesDecide ? (
+        <>
+          <div className='decide_wrap'>
+            <div className='decide_modal'>
+              <p className='decide_title'>회원이신분만 즐겨찾기가 가능해요!</p>
+              <button className='decide_change' onClick={goLogin}>
+                로그인
+              </button>
+              <button
+                className='decide_cancel'
+                onClick={() => {
+                  setFavoritesDecide(false);
+                }}
+              >
+                그냥 볼래요
+              </button>
+            </div>
+          </div>
+        </>
+      ) : null}
+
       {isLoading ? (
         <>
           <div className='ing_event_box'>

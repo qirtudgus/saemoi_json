@@ -50,6 +50,12 @@
   left: 0;
   top: 0;
 }
+.decide_title {
+  font-size: 1rem;
+  font-weight: bold;
+  margin-top: 1.7rem;
+  padding-bottom: 0.5rem;
+}
 
 .decide_modal {
   z-index: 9999;

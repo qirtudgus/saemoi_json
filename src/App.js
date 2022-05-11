@@ -124,6 +124,7 @@ function App() {
   axios.defaults.headers.common['Authorization'] = `${
     localStorage.getItem('token') || undefined
   }`;
+
   useEffect(() => {
     if (localStorage.getItem('token')) {
       //앞으로 api통신에 토큰이 들어가있음

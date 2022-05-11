@@ -8,7 +8,7 @@ const Category_map = ({ subMenu }) => {
         {subMenu === 'DrugStore' ? (
           <>
             <Link to='/drugstore/newolive'>
-              <li className='subMenuList'>New 올리브영</li>
+              <li className='subMenuList'>올리브영</li>
             </Link>
             {/* <Link to='/drugstore/olive'>
               <li className='subMenuList'>올리브영</li>
