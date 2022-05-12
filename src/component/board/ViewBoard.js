@@ -1,18 +1,18 @@
 import axios from 'axios';
 import React, { useState, useEffect, useContext, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import '../css/viewboard.css';
-import backHistory from '../img/뒤로가기_흰색.svg';
-import { addDate } from './addDate';
+import '../../css/viewboard.css';
+import backHistory from '../../img/뒤로가기_흰색.svg';
+import { addDate } from './../addDate';
 // TOAST UI Editor import
 import '@toast-ui/editor/dist/toastui-editor.css';
 import { Viewer } from '@toast-ui/react-editor';
-import { UserInfo } from '../App';
-import CommentFooter from './CommentFooter';
-import BottomDiv from './BottomDiv';
-import guest from '../img/비회원.jpg';
-import heart from '../img/heart.svg';
-import heart_before from '../img/heart_before.svg';
+import { UserInfo } from '../../App';
+import CommentFooter from './../CommentFooter';
+import BottomDiv from './../BottomDiv';
+import guest from '../../img/비회원.jpg';
+import heart from '../../img/heart.svg';
+import heart_before from '../../img/heart_before.svg';
 
 const ViewBoard = () => {
   const { userAuth, goBoard, URL, pathname, goBack } = useContext(UserInfo);

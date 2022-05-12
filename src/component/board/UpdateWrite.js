@@ -1,22 +1,22 @@
-import axios from "axios";
-import React, { useState, useRef, useEffect, useContext } from "react";
+import axios from 'axios';
+import React, { useState, useRef, useEffect, useContext } from 'react';
 // TOAST UI Editor import
-import "@toast-ui/editor/dist/toastui-editor.css";
-import { Editor } from "@toast-ui/react-editor";
-import { UserInfo } from "../App";
-import { addDate } from "./addDate";
-import { useNavigate } from "react-router-dom";
+import '@toast-ui/editor/dist/toastui-editor.css';
+import { Editor } from '@toast-ui/react-editor';
+import { UserInfo } from '../../App';
+import { addDate } from './../addDate';
+import { useNavigate } from 'react-router-dom';
 
 const UpdateWrite = ({ pathname }) => {
   const { userAuth, URL } = useContext(UserInfo);
   // console.log(pathname);
-  const key = pathname.replace(/[^0-9]/g, "");
+  const key = pathname.replace(/[^0-9]/g, '');
   console.log(key);
   const [board, setBoard] = useState({
-    board_title: "",
-    board_content: "zzzzzzzzzzzzz",
+    board_title: '',
+    board_content: 'zzzzzzzzzzzzz',
     board_writer: userAuth.id,
-    board_date: "",
+    board_date: '',
   });
 
   const navigate = useNavigate();
@@ -72,14 +72,14 @@ const UpdateWrite = ({ pathname }) => {
       {editText.map((i, index) => (
         <>
           <input
-            name="title"
-            placeholder="제목을 입력해주세요"
+            name='title'
+            placeholder='제목을 입력해주세요'
             ref={title}
             onChange={title_write}
             value={i.board_title}
           ></input>
           <Editor
-            initialEditType="wysiwyg"
+            initialEditType='wysiwyg'
             ref={editor}
             initialValue={i.board_content}
           ></Editor>

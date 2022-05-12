@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.6c5794af.css",
-    "main.js": "/static/js/main.b72bb1da.js",
+    "main.css": "/static/css/main.754b45b9.css",
+    "main.js": "/static/js/main.d3729498.js",
     "static/js/27.d0aca822.chunk.js": "/static/js/27.d0aca822.chunk.js",
     "static/media/비회원.jpg": "/static/media/비회원.33650e87c438d95023e7.jpg",
     "static/media/views.png": "/static/media/views.f7976d31776a79389a8e.png",
@@ -11,6 +11,7 @@
     "static/media/drugStore.svg": "/static/media/drugStore.a2ddefe0deabdec77f45e4ee048f2b17.svg",
     "static/media/About.svg": "/static/media/About.f68737b9cfc406663d85bc29673cfe9c.svg",
     "index.html": "/index.html",
+    "static/media/heart_before.svg": "/static/media/heart_before.6b32fc5463eb05180fde15572168377e.svg",
     "static/media/fav_ico_before.svg": "/static/media/fav_ico_before.7bc0d3d630a01f3e237afc4fb409f686.svg",
     "static/media/clothes.svg": "/static/media/clothes.1b7c689488987cb20413e30fc6dc073a.svg",
     "static/media/Board.svg": "/static/media/Board.269609570d5b0049d411c68f183ffe91.svg",
@@ -19,16 +20,18 @@
     "static/media/Store.svg": "/static/media/Store.31c481825541feb0a29531d7dab9ae57.svg",
     "static/media/자유게시판_컬러.svg": "/static/media/자유게시판_컬러.3a0b5fe14308d7bdbbda48b3f8ec7d2f.svg",
     "static/media/자유게시판_흑백.svg": "/static/media/자유게시판_흑백.e6fd1c8eaf7229469f67afca3abd987a.svg",
+    "static/media/heart.svg": "/static/media/heart.a0f70aad9beeec02b0bb856f94fd06ee.svg",
     "static/media/login_id.svg": "/static/media/login_id.f67a0190b977d851bec55fc9c520365a.svg",
     "static/media/cancel_fill.svg": "/static/media/cancel_fill.e805f530f53145b583cc80faed5c655f.svg",
     "static/media/whiteArrow0.svg": "/static/media/whiteArrow0.cc1349898a34da58f41408e0611e2a8d.svg",
     "static/media/Food.svg": "/static/media/Food.7d0c20fcfa0767ac652b322537ec47ae.svg",
     "static/media/말풍선.svg": "/static/media/말풍선.e839b491114259219f9efabe80be832a.svg",
     "static/media/뒤로가기_흰색.svg": "/static/media/뒤로가기_흰색.e51a3e087832a2cd5773a5de00244280.svg",
-    "static/media/add_white.svg": "/static/media/add_white.a03a90dde4d83c0b22939c6b838b0931.svg"
+    "static/media/add_white.svg": "/static/media/add_white.a03a90dde4d83c0b22939c6b838b0931.svg",
+    "static/media/send.svg": "/static/media/send.986b6cb0c4c54ebc8961637b484e6875.svg"
   },
   "entrypoints": [
-    "static/css/main.6c5794af.css",
-    "static/js/main.b72bb1da.js"
+    "static/css/main.754b45b9.css",
+    "static/js/main.d3729498.js"
   ]
 }

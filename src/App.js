@@ -18,15 +18,15 @@ import jwtDecode from 'jwt-decode';
 import axios from 'axios';
 import MyPage from './component/MyPage';
 import PasswordChange from './component/auth/PasswordChange';
-import Write from './component/Write';
-import UpdateWrite from './component/UpdateWrite';
-import Board from './component/Board';
-import ViewBoard from './component/ViewBoard';
+import Write from './component/board/Write';
+import UpdateWrite from './component/board/UpdateWrite';
+import Board from './component/board/Board';
+import ViewBoard from './component/board/ViewBoard';
 import ChangeProfile from './component/ChangeProfile';
 import PasswordFind from './component/PasswordFind';
-import NewOlive from './component/NewOlive';
-import RangkingDak from './component/RangkingDak';
-import Starfield from './component/Starfield';
+import NewOlive from './component/event/NewOlive';
+import RangkingDak from './component/event/RangkingDak';
+import Starfield from './component/event/Starfield';
 import Favorites from './component/Favorites';
 
 export const UserInfo = React.createContext();
@@ -37,7 +37,7 @@ window.Buffer = window.Buffer || require('buffer').Buffer;
 const local = 'http://localhost:3001';
 const server = 'https://sungtt.com';
 // URL 할당에 따른 서버환경 변경! 아주편리하다~
-const URL = local;
+const URL = server;
 
 // let vh = window.innerHeight * 0.01;
 // document.documentElement.style.setProperty('--vh', `${vh}px`);

@@ -1,12 +1,12 @@
 import axios from 'axios';
 import React, { useState, useEffect, useContext } from 'react';
-import { UserInfo } from '../App';
-import Footer from './footer';
-import Loading from './loading';
-import NewEventForm from './NewEventForm';
-import fav_before from '../img/fav_ico_before.svg';
-import fav_after from '../img/fav_ico_after.svg';
-const RangkingDak = () => {
+import { UserInfo } from '../../App';
+import Footer from './../footer';
+import Loading from './../loading';
+import NewEventForm from './../NewEventForm';
+import fav_before from '../../img/fav_ico_before.svg';
+import fav_after from '../../img/fav_ico_after.svg';
+const Starfield = () => {
   const { URL, userAuth, goLogin } = useContext(UserInfo);
   const [eventData, setEventData] = useState([]);
   const [ing, setIng] = useState();
@@ -18,37 +18,33 @@ const RangkingDak = () => {
   console.log('렌더링 횟수 테스트');
 
   //DB에 들어있는 랭킹닭컴 데이터를 가져오는 것
-  async function getDakDB() {
-    return await axios.post(`${URL}/api/dbrangkingdak`).then((res) => {
+  async function getStarfieldDB() {
+    return await axios.post(`${URL}/api/dbstarfield`).then((res) => {
       return res.data;
     });
   }
 
   //조회수 증가시키는 API
-  const viewApi = `${URL}/rangkingdak/views`;
+  const viewApi = `${URL}/starfield/views`;
   //조회수 증가 후 리렌더링을 위한 DB APi
-  const getApi = `${URL}/dbrangkingdak`;
+  const getApi = `${URL}/dbstarfield`;
 
   //현재 올리브영이 진행하고있는 데이터를 가져오는 것.
-  async function getDakHTML() {
-    return await axios
-      .post(`${URL}/api/rangkingdak`, {
-        url: 'https://www.rankingdak.com/promotion/event/list?nowPageNo=&keywordType=&keyword=&status=200&eventCd=&eventType=',
-      })
-      .then((res) => {
-        return res.data;
-      });
+  async function getStarfieldHTML() {
+    return await axios.post(`${URL}/api/starfield`).then((res) => {
+      return res.data;
+    });
   }
 
-  async function addDakDB(arr) {
-    return await axios.post(`${URL}/api/rangkingdak/add`, arr);
+  async function addStarfieldDB(arr) {
+    return await axios.post(`${URL}/api/starfield/add`, arr);
   }
-  async function removeDakDB(arr) {
-    return await axios.post(`${URL}/api/rangkingDak/remove`, arr);
+  async function removeStarfieldDB(arr) {
+    return await axios.post(`${URL}/api/starfield/remove`, arr);
   }
 
   useEffect(() => {
-    axios.all([getDakDB(), getDakHTML()]).then(
+    axios.all([getStarfieldDB(), getStarfieldHTML()]).then(
       axios.spread((dbdata, newdata) => {
         // console.log(dbdata);
         // console.log(newdata);
@@ -92,13 +88,15 @@ const RangkingDak = () => {
 
         //마지막으로 이벤트 삭제와 추가를 한번씩 호출하고, 최신값이 들어있는 DB를 호출하여
         //최신값을 유지합니다.
-        axios.all([addDakDB(pareArr), removeDakDB(pareArr2)]).then((res) => {
-          getDakDB().then((res) => {
-            setEventData([...res]);
-            setIng(res.length);
-            setIsLoading(true);
+        axios
+          .all([addStarfieldDB(pareArr), removeStarfieldDB(pareArr2)])
+          .then((res) => {
+            getStarfieldDB().then((res) => {
+              setEventData([...res]);
+              setIng(res.length);
+              setIsLoading(true);
+            });
           });
-        });
       }),
     );
   }, []);
@@ -110,7 +108,7 @@ const RangkingDak = () => {
       axios
         .post(`${URL}/api/favorites/addfavorites`, {
           id: userAuth.id,
-          favoritesName: 'rangkingdak',
+          favoritesName: 'starfield',
         })
         .then((res) => {
           console.log(res.data);
@@ -127,14 +125,13 @@ const RangkingDak = () => {
   useEffect(() => {
     if (localStorage.getItem('fav')) {
       const favoritesList = localStorage.getItem('fav');
-      if (favoritesList.includes('rangkingdak')) {
+      if (favoritesList.includes('starfield')) {
         setIsFav(true);
       }
     } else {
       return;
     }
   }, []);
-
   return (
     <>
       {favoritesDecide ? (
@@ -181,4 +178,4 @@ const RangkingDak = () => {
   );
 };
 
-export default React.memo(RangkingDak);
+export default React.memo(Starfield);

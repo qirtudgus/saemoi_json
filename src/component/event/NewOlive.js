@@ -1,56 +1,59 @@
-import axios from 'axios';
 import React, { useState, useEffect, useContext } from 'react';
-import { UserInfo } from '../App';
-import Footer from './footer';
-import Loading from './loading';
-import NewEventForm from './NewEventForm';
-import fav_before from '../img/fav_ico_before.svg';
-import fav_after from '../img/fav_ico_after.svg';
-const Starfield = () => {
+import Loading from './../loading';
+import { UserInfo } from '../../App';
+import axios from 'axios';
+import NewEventForm from './../NewEventForm';
+import Footer from './../footer';
+import fav_before from '../../img/fav_ico_before.svg';
+import fav_after from '../../img/fav_ico_after.svg';
+
+const NewOlive = () => {
   const { URL, userAuth, goLogin } = useContext(UserInfo);
   const [eventData, setEventData] = useState([]);
   const [ing, setIng] = useState();
   const [isLoading, setIsLoading] = useState(false);
   const [favoritesDecide, setFavoritesDecide] = useState(false);
-
   const [isFav, setIsFav] = useState(false);
 
   console.log('렌더링 횟수 테스트');
 
-  //DB에 들어있는 랭킹닭컴 데이터를 가져오는 것
-  async function getStarfieldDB() {
-    return await axios.post(`${URL}/api/dbstarfield`).then((res) => {
+  //조회수 증가시키는 API
+  const viewApi = `${URL}/api/newolive/views`;
+  //조회수 증가 후 리렌더링을 위한 DB APi
+  const getApi = `${URL}/api/dbolive`;
+
+  //DB에 들어있는 올리브영 데이터를 가져오는 것
+  async function getOliveDB() {
+    return await axios.post(`${URL}/api/dbolive`).then((res) => {
       return res.data;
     });
   }
-
-  //조회수 증가시키는 API
-  const viewApi = `${URL}/starfield/views`;
-  //조회수 증가 후 리렌더링을 위한 DB APi
-  const getApi = `${URL}/dbstarfield`;
 
   //현재 올리브영이 진행하고있는 데이터를 가져오는 것.
-  async function getStarfieldHTML() {
-    return await axios.post(`${URL}/api/starfield`).then((res) => {
-      return res.data;
-    });
+  async function getOliveHTML() {
+    return await axios
+      .post(`${URL}/api/newolive`, {
+        url: 'https://www.oliveyoung.co.kr/store/main/getEventList.do',
+      })
+      .then((res) => {
+        return res.data;
+      });
   }
 
-  async function addStarfieldDB(arr) {
-    return await axios.post(`${URL}/api/starfield/add`, arr);
+  async function addOliveDB(arr) {
+    return await axios.post(`${URL}/api/newolive/add`, arr);
   }
-  async function removeStarfieldDB(arr) {
-    return await axios.post(`${URL}/api/starfield/remove`, arr);
+  async function removeOliveDB(arr) {
+    return await axios.post(`${URL}/api/newolive/remove`, arr);
   }
 
   useEffect(() => {
-    axios.all([getStarfieldDB(), getStarfieldHTML()]).then(
+    axios.all([getOliveDB(), getOliveHTML()]).then(
       axios.spread((dbdata, newdata) => {
-        // console.log(dbdata);
-        // console.log(newdata);
-        // console.log(dbdata.length); // db데이터 길이
-        // console.log(newdata.length); // new데이터 길이
-
+        console.log(dbdata);
+        console.log(newdata);
+        console.log(dbdata.length); // db데이터 길이
+        console.log(newdata.length); // new데이터 길이
         const dbTitle = dbdata.map((i) => i.event_title); // db데이터 타이틀
         const newTitle = newdata.map((i) => i.event_title); // new데이터 타이틀
 
@@ -89,9 +92,10 @@ const Starfield = () => {
         //마지막으로 이벤트 삭제와 추가를 한번씩 호출하고, 최신값이 들어있는 DB를 호출하여
         //최신값을 유지합니다.
         axios
-          .all([addStarfieldDB(pareArr), removeStarfieldDB(pareArr2)])
+          .all([addOliveDB(pareArr), removeOliveDB(pareArr2)])
           .then((res) => {
-            getStarfieldDB().then((res) => {
+            getOliveDB().then((res) => {
+              console.log(res);
               setEventData([...res]);
               setIng(res.length);
               setIsLoading(true);
@@ -108,7 +112,7 @@ const Starfield = () => {
       axios
         .post(`${URL}/api/favorites/addfavorites`, {
           id: userAuth.id,
-          favoritesName: 'starfield',
+          favoritesName: 'olive',
         })
         .then((res) => {
           console.log(res.data);
@@ -122,16 +126,6 @@ const Starfield = () => {
     }
   };
 
-  useEffect(() => {
-    if (localStorage.getItem('fav')) {
-      const favoritesList = localStorage.getItem('fav');
-      if (favoritesList.includes('starfield')) {
-        setIsFav(true);
-      }
-    } else {
-      return;
-    }
-  }, []);
   return (
     <>
       {favoritesDecide ? (
@@ -154,6 +148,7 @@ const Starfield = () => {
           </div>
         </>
       ) : null}
+
       {isLoading ? (
         <>
           <div className='ing_event_box'>
@@ -177,5 +172,4 @@ const Starfield = () => {
     </>
   );
 };
-
-export default React.memo(Starfield);
+export default React.memo(NewOlive);

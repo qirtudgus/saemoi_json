@@ -110,18 +110,26 @@
   background-color: rgba(0, 0, 0, 0);
   border: none;
   color: #111;
+  cursor: pointer;
 }
 
 .viewboard_btn {
   background-color: rgba(0, 0, 0, 0);
   border: none;
   color: #111;
+  cursor: pointer;
 }
 
 .viewboard_like_box {
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
+  -ms-user-select: none;
+  -moz-user-select: -moz-none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
 }
 
 .viewboard_like_box img {

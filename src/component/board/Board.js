@@ -1,17 +1,17 @@
 import { useState, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import '../css/board.css';
+import '../../css/board.css';
 import axios from 'axios';
-import bubble from '../img/말풍선.svg';
+import bubble from '../../img/말풍선.svg';
 
 import '@toast-ui/editor/dist/toastui-editor.css';
 import { Viewer } from '@toast-ui/react-editor';
-import { UserInfo } from '../App';
-import AddBoard from '../AddBoard';
-import Loading from './loading';
-import guest from '../img/비회원.jpg';
-import BottomDiv from './BottomDiv';
-import heart from '../img/heart.svg';
+import { UserInfo } from '../../App';
+import AddBoard from '../../AddBoard';
+import Loading from '../../component/loading';
+import guest from '../../img/비회원.jpg';
+import BottomDiv from '../../component/BottomDiv';
+import heart from '../../img/heart.svg';
 
 const Board = () => {
   const { URL } = useContext(UserInfo);

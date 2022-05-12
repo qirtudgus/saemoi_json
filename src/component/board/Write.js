@@ -3,8 +3,8 @@ import React, { useState, useRef, useEffect, useContext } from 'react';
 // TOAST UI Editor import
 import '@toast-ui/editor/dist/toastui-editor.css';
 import { Editor } from '@toast-ui/react-editor';
-import { UserInfo } from '../App';
-import { addDate } from './addDate';
+import { UserInfo } from '../../App';
+import { addDate } from '../addDate';
 
 const Write = () => {
   const { userAuth, goBoard, goLogin, URL } = useContext(UserInfo);

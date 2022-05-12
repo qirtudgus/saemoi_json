@@ -1,59 +1,60 @@
-import React, { useState, useEffect, useContext } from 'react';
-import Loading from './loading';
-import { UserInfo } from '../App';
 import axios from 'axios';
-import NewEventForm from './NewEventForm';
-import Footer from './footer';
-import fav_before from '../img/fav_ico_before.svg';
-import fav_after from '../img/fav_ico_after.svg';
-
-const NewOlive = () => {
+import React, { useState, useEffect, useContext } from 'react';
+import { UserInfo } from '../../App';
+import Footer from './../footer';
+import Loading from './../loading';
+import NewEventForm from './../NewEventForm';
+import fav_before from '../../img/fav_ico_before.svg';
+import fav_after from '../../img/fav_ico_after.svg';
+const RangkingDak = () => {
   const { URL, userAuth, goLogin } = useContext(UserInfo);
   const [eventData, setEventData] = useState([]);
   const [ing, setIng] = useState();
   const [isLoading, setIsLoading] = useState(false);
   const [favoritesDecide, setFavoritesDecide] = useState(false);
+
   const [isFav, setIsFav] = useState(false);
 
   console.log('렌더링 횟수 테스트');
 
-  //조회수 증가시키는 API
-  const viewApi = `${URL}/api/newolive/views`;
-  //조회수 증가 후 리렌더링을 위한 DB APi
-  const getApi = `${URL}/api/dbolive`;
-
-  //DB에 들어있는 올리브영 데이터를 가져오는 것
-  async function getOliveDB() {
-    return await axios.post(`${URL}/api/dbolive`).then((res) => {
+  //DB에 들어있는 랭킹닭컴 데이터를 가져오는 것
+  async function getDakDB() {
+    return await axios.post(`${URL}/api/dbrangkingdak`).then((res) => {
       return res.data;
     });
   }
 
+  //조회수 증가시키는 API
+  const viewApi = `${URL}/rangkingdak/views`;
+  //조회수 증가 후 리렌더링을 위한 DB APi
+  const getApi = `${URL}/dbrangkingdak`;
+
   //현재 올리브영이 진행하고있는 데이터를 가져오는 것.
-  async function getOliveHTML() {
+  async function getDakHTML() {
     return await axios
-      .post(`${URL}/api/newolive`, {
-        url: 'https://www.oliveyoung.co.kr/store/main/getEventList.do',
+      .post(`${URL}/api/rangkingdak`, {
+        url: 'https://www.rankingdak.com/promotion/event/list?nowPageNo=&keywordType=&keyword=&status=200&eventCd=&eventType=',
       })
       .then((res) => {
         return res.data;
       });
   }
 
-  async function addOliveDB(arr) {
-    return await axios.post(`${URL}/api/newolive/add`, arr);
+  async function addDakDB(arr) {
+    return await axios.post(`${URL}/api/rangkingdak/add`, arr);
   }
-  async function removeOliveDB(arr) {
-    return await axios.post(`${URL}/api/newolive/remove`, arr);
+  async function removeDakDB(arr) {
+    return await axios.post(`${URL}/api/rangkingDak/remove`, arr);
   }
 
   useEffect(() => {
-    axios.all([getOliveDB(), getOliveHTML()]).then(
+    axios.all([getDakDB(), getDakHTML()]).then(
       axios.spread((dbdata, newdata) => {
-        console.log(dbdata);
-        console.log(newdata);
-        console.log(dbdata.length); // db데이터 길이
-        console.log(newdata.length); // new데이터 길이
+        // console.log(dbdata);
+        // console.log(newdata);
+        // console.log(dbdata.length); // db데이터 길이
+        // console.log(newdata.length); // new데이터 길이
+
         const dbTitle = dbdata.map((i) => i.event_title); // db데이터 타이틀
         const newTitle = newdata.map((i) => i.event_title); // new데이터 타이틀
 
@@ -91,16 +92,13 @@ const NewOlive = () => {
 
         //마지막으로 이벤트 삭제와 추가를 한번씩 호출하고, 최신값이 들어있는 DB를 호출하여
         //최신값을 유지합니다.
-        axios
-          .all([addOliveDB(pareArr), removeOliveDB(pareArr2)])
-          .then((res) => {
-            getOliveDB().then((res) => {
-              console.log(res);
-              setEventData([...res]);
-              setIng(res.length);
-              setIsLoading(true);
-            });
+        axios.all([addDakDB(pareArr), removeDakDB(pareArr2)]).then((res) => {
+          getDakDB().then((res) => {
+            setEventData([...res]);
+            setIng(res.length);
+            setIsLoading(true);
           });
+        });
       }),
     );
   }, []);
@@ -112,7 +110,7 @@ const NewOlive = () => {
       axios
         .post(`${URL}/api/favorites/addfavorites`, {
           id: userAuth.id,
-          favoritesName: 'olive',
+          favoritesName: 'rangkingdak',
         })
         .then((res) => {
           console.log(res.data);
@@ -125,6 +123,17 @@ const NewOlive = () => {
       setFavoritesDecide(true);
     }
   };
+
+  useEffect(() => {
+    if (localStorage.getItem('fav')) {
+      const favoritesList = localStorage.getItem('fav');
+      if (favoritesList.includes('rangkingdak')) {
+        setIsFav(true);
+      }
+    } else {
+      return;
+    }
+  }, []);
 
   return (
     <>
@@ -148,7 +157,6 @@ const NewOlive = () => {
           </div>
         </>
       ) : null}
-
       {isLoading ? (
         <>
           <div className='ing_event_box'>
@@ -172,4 +180,5 @@ const NewOlive = () => {
     </>
   );
 };
-export default React.memo(NewOlive);
+
+export default React.memo(RangkingDak);
