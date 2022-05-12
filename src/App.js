@@ -31,7 +31,13 @@ import Favorites from './component/Favorites';
 
 export const UserInfo = React.createContext();
 window.Buffer = window.Buffer || require('buffer').Buffer;
-// axios.defaults.withCredentials = true;
+// 배포 환경에서 console.log, console.warn 지우기
+if (process.env.REACT_APP_NODE_ENVS === 'production') {
+  console = {};
+  console.log = function no_console() {};
+  console.warn = function no_console() {};
+  console.warn = function () {};
+}
 
 // api통신 시 URL 변경용
 const local = 'http://localhost:3001';
