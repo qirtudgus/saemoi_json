@@ -12,12 +12,14 @@ import CommentFooter from './CommentFooter';
 import BottomDiv from './BottomDiv';
 import guest from '../img/비회원.jpg';
 import heart from '../img/heart.svg';
+import heart_before from '../img/heart_before.svg';
 
 const ViewBoard = () => {
   const { userAuth, goBoard, URL, pathname, goBack } = useContext(UserInfo);
 
   const navigate = useNavigate();
   const [comment, setComment] = useState();
+  const [isLikeUser, setIsLikeUser] = useState(false);
 
   const key = pathname.replace(/[^0-9]/g, '');
 
@@ -105,6 +107,7 @@ const ViewBoard = () => {
           })
           .then((res) => {
             setArr({ ...arr, page: [...res.data.result] });
+            setIsLikeUser(!isLikeUser);
           });
       });
   };
@@ -163,8 +166,48 @@ const ViewBoard = () => {
     } else return;
   };
 
+  const checkLikeUser3 = async () => {
+    return await axios
+      .post(`${URL}/api/boardApiData/checkLikeUser2`, {
+        key: key,
+      })
+      .then((res) => {
+        return res.data;
+      });
+  };
+
   //추천 누른 유저인지 체크
-  const checkLikeUser = () => {};
+  useEffect(() => {
+    // const checkLikeUser = async () => {
+    //   await axios
+    //     .post(`${URL}/api/boardApiData/checkLikeUser2`, { key: key })
+    //     .then((res) => {
+    //       console.log(res.data);
+    //       let likeUserList = res.data.toString();
+
+    //       function reg(userId, flags) {
+    //         return new RegExp(`'${userId}',`, flags);
+    //       }
+    //       console.log(reg(userAuth.id, 'g').test(likeUserList));
+    //     });
+    // };
+    // checkLikeUser();
+    console.log(checkLikeUser3());
+    checkLikeUser3()
+      .then((res) => {
+        console.log(res);
+        let likeUserList = res.toString();
+        return likeUserList;
+      })
+      .then((res) => {
+        function reg(userId, flags) {
+          return new RegExp(`'${userId}',`, flags);
+        }
+        if (reg(userAuth.id, 'g').test(res)) {
+          setIsLikeUser(true);
+        }
+      });
+  }, []);
 
   return (
     <>
@@ -195,7 +238,8 @@ const ViewBoard = () => {
                   like(i.board_index, userAuth.id);
                 }}
               >
-                <img src={heart}></img> {i.board_like}
+                <img src={isLikeUser ? heart : heart_before}></img>{' '}
+                {i.board_like}
                 {/* <button className='like viewboard_btn'>추천</button> */}
               </div>
               <div>
