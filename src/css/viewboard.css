@@ -105,3 +105,27 @@
   align-items: center;
   justify-content: space-between;
 }
+
+.comment_del_btn {
+  background-color: rgba(0, 0, 0, 0);
+  border: none;
+  color: #111;
+}
+
+.viewboard_btn {
+  background-color: rgba(0, 0, 0, 0);
+  border: none;
+  color: #111;
+}
+
+.viewboard_like_box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.viewboard_like_box img {
+  width: 25px;
+  margin-right: 10px;
+  margin-left: 5px;
+}

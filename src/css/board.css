@@ -100,3 +100,12 @@
 .board_count {
   padding-left: 0.3rem;
 }
+
+.board_like_box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.board_like_box img {
+  margin-right: 8px;
+}

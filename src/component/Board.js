@@ -11,6 +11,7 @@ import AddBoard from '../AddBoard';
 import Loading from './loading';
 import guest from '../img/비회원.jpg';
 import BottomDiv from './BottomDiv';
+import heart from '../img/heart.svg';
 
 const Board = () => {
   const { URL } = useContext(UserInfo);
@@ -73,7 +74,9 @@ const Board = () => {
 
                 <div className='board_bottom'>
                   <div className='board_bottom_wrap'>
-                    <span>추천수 : {i.board_like}</span>
+                    <span className='board_like_box'>
+                      <img src={heart}></img> {i.board_like}
+                    </span>
                     <div className='board_bottom_bubble'>
                       <img src={bubble} alt='bubble'></img>
                       <span className='board_count'>
