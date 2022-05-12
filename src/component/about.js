@@ -17,7 +17,7 @@ const About = () => {
       <div className='aboutBox'>
         <img src={sae} alt='saemoi character'></img>
         <h1>
-          누추하신 분이 <br />
+          귀하신 분이 <br />
           누추한 곳에 무슨일로..?
         </h1>
         {/* {apiData.map(i => (
